@@ -11,7 +11,19 @@ var BeerCollection = Backbone.Collections.extend({
   url: 'http://drinkupapp.herokuapp.com/'
 });
 
+
+var BreweryModel = Backbone.Model.extend({
+});
+
+
+var BreweryCollection = Backbone.Collections.extend({
+  model: BreweryModel,
+  url: 'http://drinkupapp.herokuapp.com/breweries'
+});
+
 module.exports = {
   'BeerModel': BeerModel,
-  'BeerCollection': BeerCollection
+  'BeerCollection': BeerCollection,
+  'BreweryModel': BreweryModel,
+  'BreweryCollection': BreweryCollection
 };

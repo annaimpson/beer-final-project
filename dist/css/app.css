@@ -5847,18 +5847,23 @@ img {
   line-height: 29px;
   margin-top: 40px;
   margin-right: -53px;
+  margin-bottom: 75px;
   font-size: 14px;
   font-family: 'helvetica'; }
 
 .users {
-  border-top: 2px solid black;
-  width: 100%;
   margin-top: 100px; }
+
+.footer-border {
+  border-top: 2px solid black;
+  width: 100%; }
 
 .signin,
 .signup {
-  width: 400px;
-  display: inline-block;
+  width: 500px;
+  margin-bottom: 300px;
+  margin-top: 100px;
+  margin-right: 50px;
   border: 1px solid grey;
   border-radius: 7px;
   padding-top: 40px;
@@ -5869,9 +5874,10 @@ img {
 .signin-username {
   margin-bottom: 20px; }
 
-.signin-button {
+.signin-button,
+.submit-button {
   margin-top: 20px;
-  margin-left: 110px; }
+  margin-left: 250px; }
 
 .signup-name,
 .signup-email,
@@ -5879,5 +5885,24 @@ img {
 .signup-password {
   margin-bottom: 20px;
   display: inline-block; }
+
+.search-input {
+  margin-top: 50px;
+  width: 600px;
+  height: 50px;
+  display: inline-block; }
+
+.nav-button {
+  margin-top: 50px;
+  display: inline-block;
+  float: right;
+  border: none; }
+
+.nav-toggle {
+  float: right;
+  background-color: #cdced7;
+  width: 300px;
+  height: 1200px;
+  margin-top: -100px; }
 
 /*# sourceMappingURL=app.css.map */
