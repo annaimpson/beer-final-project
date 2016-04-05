@@ -1,0 +1,99 @@
+
+// Bootstrap Variables
+$icon-font-path: '../../node_modules/bootstrap-sass/assets/fonts/bootstrap/';
+
+// Import Bootstrap
+@import '../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap';
+
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+img {
+  max-width: 100%;
+}
+
+.page-name{
+  text-align: center;
+  margin-top: 200px;
+  position: relative;
+  top: -572px;
+  right:53px;
+  color: white;
+}
+
+.beer-info{
+  text-align: center;
+
+}
+.yeast{
+  margin-left: -11px;
+  margin-right: 126px;
+}
+.hops{
+  margin-right: 126px;
+}
+.yeast-photo,
+.hops-photo,
+.barley-photo{
+  border-radius: 50%;
+  margin-right: -29px;
+}
+.yeast-info,
+.hops-info,
+.barley-info{
+  line-height: 29px;
+  margin-top: 40px;
+  margin-right: -53px;
+  font-size: 14px;
+  font-family: 'helvetica';
+}
+
+
+.users{
+  border-top: 2px solid black;
+  width: 100%;
+  margin-top: 100px;
+}
+.signin,
+.signup{
+  width: 400px;
+  display: inline-block;
+  border: 1px solid grey;
+  border-radius: 7px;
+  padding-top: 40px;
+  padding-bottom: 75px;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+.signin-username{
+  margin-bottom: 20px;
+}
+.signin-button{
+  margin-top: 20px;
+  margin-left: 110px;
+}
+.signup-name,
+.signup-email,
+.signup-username,
+.signup-password{
+  margin-bottom: 20px;
+  display: inline-block;
+}
+// .signin{
+//   margin-top: -10px;
+// }
+// .search-input{
+//   margin-top: 50px;
+//   width: 600px;
+//   height: 50px;
+//   display: inline-block;
+// }
+// .nav-button{
+//   margin-top: 50px;
+//   display: inline-block;
+//   float: right;
+// }
