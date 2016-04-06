@@ -3,11 +3,9 @@ var ReactDOM = require('react-dom');
 var Backbone = require('backbone');
 var $ = require('jquery');
 var Parse = require('parse');
-var Mixin = require('backbone-react-component');
+require('backbone-react-component');
 
-
-var searchAndNav = React.createClass({
-  mixins: [Backbone.React.Component.mixin],
+var ProfilePage = React.createClass({
   handleToggle: function(e){
     e.preventDefault();
     $('.nav-toggle').slideToggle({direction: "right"}, 2000);
@@ -25,24 +23,10 @@ var searchAndNav = React.createClass({
   },
   handleLogout: function(){
     Parse.User.logOut();
-    Backbone.history.navigate('', {trigger: true});
+    Backbone.history.navigate('login', {trigger: true});
   },
 
   render: function(){
-    console.log(this.props.collection)
-    console.log(this.props.collection.models[0].get('data'));
-    var BreweryList = this.props.collection.models[0].get('data').map(function(model){
-      console.log(model.description)
-      return(
-        <NewBreweries
-          description={model.description}
-          name={model.name}
-          key={model.id}
-
-          />
-      )
-    });
-
     return(
       <div>
         <div className="container search-header">
@@ -64,7 +48,6 @@ var searchAndNav = React.createClass({
               </div>
             </div>
           </div>
-
         </div>
         <div className="nav-toggle">
           <button onClick={this.handleProfile} className="nav-button1"><h4 className="profile-toggle">Profile</h4></button>
@@ -72,27 +55,28 @@ var searchAndNav = React.createClass({
           <button onClick={this.handleMap} className="nav-button3"><h4 className="map-toggle">Map</h4></button>
           <button onClick={this.handleLogout} className="nav-button4"><h4 className="logout-toggle">Logout</h4></button>
         </div>
-        {BreweryList}
-      </div>
-    );
-  }
-});
-
-var NewBreweries = React.createClass({
-  render: function(){
-    return(
-      <div>
-        <div className="container brewery-render">
+        <div className="container profile-body">
           <div className="row">
-            <div className="col-md-4">
-              <p>{this.props.name}</p>
-              <p>{this.props.description}</p>
+            <div className="col-md-6">
+              <div className="picture">
+                <img className="empty-profile-pic" src="images/blank-profile.png" alt=""/>
+              </div>
+            </div>
+            <div className="col-md-6">
+              <div className="user-info"></div>
+            </div>
+          </div>
+        </div>
+        <div className="container profile-beers">
+          <div className="row">
+            <div className="col-md-12">
+              <div className="favorites-list"></div>
             </div>
           </div>
         </div>
       </div>
-    );
+    )
   }
 });
 
-module.exports = searchAndNav
+module.exports = ProfilePage;
