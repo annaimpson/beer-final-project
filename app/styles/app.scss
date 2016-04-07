@@ -15,6 +15,7 @@ $icon-font-path: '../../node_modules/bootstrap-sass/assets/fonts/bootstrap/';
 img {
   max-width: 100%;
 }
+// Begin the work on the landing page
 
 .page-name{
   text-align: center;
@@ -52,8 +53,6 @@ img {
   font-size: 14px;
   font-family: 'helvetica';
 }
-
-
 .users{
   margin-top: 100px;
 }
@@ -89,6 +88,14 @@ img {
   margin-bottom: 20px;
   display: inline-block;
 }
+
+// End of work on the landing page
+
+
+
+
+// The search bar and nav for all the pages
+
 .search-input{
   margin-top: 50px;
   width: 600px;
@@ -101,7 +108,6 @@ img {
   float: right;
   border: none;
 }
-
 .nav-toggle{
   background-color: rgba(205, 206, 215, 1);
   width: 300px;
@@ -126,6 +132,12 @@ img {
   margin-left: 60px;
 }
 
+// End search and nav styling
+
+
+
+
+// Work on the profile page
 
 .empty-profile-pic,
 .empty-beer-pic{
@@ -134,3 +146,30 @@ img {
   border-radius: 50%;
   margin-top: 100px;
 }
+.user-info{
+  margin-top: 200px;
+}
+.username{
+  font-size: 50px;
+  font-weight: lighter;
+}
+.email{
+  font-size: 15px;
+}
+
+// The end of the profile page
+
+
+
+
+// The search page that lists breweries based on how recent
+
+.latest-breweries-list{
+  margin-top: 100px;
+}
+.pagination-buttons{
+  margin-top: 50px;
+  margin-left: 380px;
+}
+
+// End search page with breweries based on how recent

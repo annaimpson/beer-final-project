@@ -5,7 +5,8 @@ var Backbone = require('backbone');
 var Parse = require('parse');
 
 var Login = require('./components/landing-page.jsx');
-var HomePage = require('./components/search-page.jsx');
+var HomePage = require('./components/home-page.jsx');
+var FoundSearch = require('./components/search.jsx');
 var ClickedBrewery = require('./components/brewery.jsx');
 var BreweryCollection = require('./models/models.js').BreweryCollection;
 var Profile = require('./components/profile.jsx');
@@ -23,6 +24,7 @@ var LoginRouter = Backbone.Router.extend({
     '': 'login',
     'homePage': 'homePage',
     'brewery': 'brewery',
+    'searchResults': 'searchResults',
     'profile': 'profile',
     'map': 'map'
   },
@@ -47,6 +49,12 @@ var LoginRouter = Backbone.Router.extend({
     ReactDOM.unmountComponentAtNode(appContainer);
     ReactDOM.render(
       React.createElement(ClickedBrewery), document.getElementById('app')
+    );
+  },
+  brewery: function(){
+    ReactDOM.unmountComponentAtNode(appContainer);
+    ReactDOM.render(
+      React.createElement(FoundSearch), document.getElementById('app')
     );
   },
   profile: function(){

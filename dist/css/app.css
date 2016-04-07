@@ -5928,4 +5928,21 @@ img {
   border-radius: 50%;
   margin-top: 100px; }
 
+.user-info {
+  margin-top: 200px; }
+
+.username {
+  font-size: 50px;
+  font-weight: lighter; }
+
+.email {
+  font-size: 15px; }
+
+.latest-breweries-list {
+  margin-top: 100px; }
+
+.pagination-buttons {
+  margin-top: 50px;
+  margin-left: 380px; }
+
 /*# sourceMappingURL=app.css.map */

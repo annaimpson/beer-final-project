@@ -23,7 +23,7 @@ var MapPage = React.createClass({
   },
   handleLogout: function(){
     Parse.User.logOut();
-    Backbone.history.navigate('login', {trigger: true});
+    Backbone.history.navigate('', {trigger: true});
   },
 
   render: function(){

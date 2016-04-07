@@ -23,10 +23,14 @@ var ProfilePage = React.createClass({
   },
   handleLogout: function(){
     Parse.User.logOut();
-    Backbone.history.navigate('login', {trigger: true});
+    Backbone.history.navigate('', {trigger: true});
   },
 
   render: function(){
+    console.log(Parse.User.current());
+    var Username = Parse.User.current().getUsername();
+    var Email = Parse.User.current().getEmail();
+    console.log(Username);
     return(
       <div>
         <div className="container search-header">
@@ -63,7 +67,10 @@ var ProfilePage = React.createClass({
               </div>
             </div>
             <div className="col-md-6">
-              <div className="user-info"></div>
+              <div className="user-info">
+                <div className="username">{Username}</div>
+                <div className="email">{Email}</div>
+              </div>
             </div>
           </div>
         </div>
@@ -76,6 +83,17 @@ var ProfilePage = React.createClass({
         </div>
       </div>
     )
+  }
+});
+
+var UserInfo = React.createClass({
+  render: function(){
+    return(
+      <div className="col-md-4">
+        <h4 className="users-name">{this.props.Username}</h4>
+        <h4 className="users-emal">{this.props.Email}</h4>
+      </div>
+    );
   }
 });
 
