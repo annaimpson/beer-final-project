@@ -102,6 +102,11 @@ img {
   height: 50px;
   display: inline-block;
 }
+.submit-button-homepage{
+  display: inline-block;
+  margin-left: 618px;
+  margin-top: -74px;
+}
 .nav-button{
   margin-top: 50px;
   display: inline-block;
@@ -173,3 +178,41 @@ img {
 }
 
 // End search page with breweries based on how recent
+
+
+
+//Home page render of breweries
+
+.latest-brewery-info{
+  border: 1px solid rgba(202, 207, 210, 1);
+  border-radius: 5px;
+  padding-top: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-bottom: 25px;
+  width: 350px;
+  height: 300px;
+  margin-right: 25px;
+  margin-bottom: 30px;
+}
+.brewery-icon{
+  width: 100px;
+  height: 100px;
+  margin-top: 50px;
+  margin-bottom: 25px;
+  margin-left: 108px;
+}
+.latest-brewery-name{
+  font-size: 15px;
+  color: navy;
+  letter-spacing: 3px;
+  text-align: center;
+}
+.latest-brewery-established{
+  font-size: 12px;
+  color: navy;
+  letter-spacing: 1.5px;
+  text-align: center;
+}
+
+//End of home page render of breweries

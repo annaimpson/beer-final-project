@@ -5,6 +5,19 @@ var $ = require('jquery');
 var Parse = require('parse');
 var Mixin = require('backbone-react-component');
 
+var PageLink= React.createClass({
+  getNewPage: function(e){
+    e.preventDefault();
+    this.props.getNewPage(this.props.index);
+  },
+  render: function(){
+    return (
+      <li>
+        <a href="#" onClick={this.getNewPage}>{this.props.index}</a>
+      </li>
+    );
+  }
+});
 
 var searchAndNav = React.createClass({
   mixins: [Backbone.React.Component.mixin],
@@ -36,7 +49,14 @@ var searchAndNav = React.createClass({
     Parse.User.logOut();
     Backbone.history.navigate('', {trigger: true});
   },
-
+  handleSpecificBrew: function(){
+    Backbone.history.navigate('brewery', {trigger: true});
+    console.log('clicked!');
+  },
+  getNewPage: function(pageNum){
+    var breweries = this.props.collection;
+    breweries.getPage(pageNum);
+  },
   render: function(){
     console.log(this.props.collection.models[0].get('data'));
     var BreweryList = this.props.collection.models[0].get('data').map(function(model){
@@ -61,6 +81,12 @@ var searchAndNav = React.createClass({
         />
       )
     });
+    var pageLinks = [];
+    var numpages = 5;
+    for(var i=0;i<numpages;i++){
+      pageLinks.push(<PageLink index={i} key={i} getNewPage={this.getNewPage}/>)
+    }
+
 
     return(
       <div>
@@ -72,7 +98,7 @@ var searchAndNav = React.createClass({
                   <form>
                    <input type="text" className="form-control search-input" placeholder="Search"/>
                   </form>
-                  <button onClick={this.handleSearch} type="button" className="btn btn-primary">Submit</button>
+                  <button onClick={this.handleSearch} type="button" className="btn btn-primary submit-button-homepage">Submit</button>
                 </div>
                 <div className="col-md-4">
                   <div className="mainNavDropDown clearfix">
@@ -104,11 +130,7 @@ var searchAndNav = React.createClass({
                     <span aria-hidden="true">&laquo;</span>
                   </a>
                 </li>
-                <li><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
+                {pageLinks}
                 <li>
                   <a href="#" aria-label="Next">
                     <span aria-hidden="true">&raquo;</span>
@@ -126,8 +148,8 @@ var searchAndNav = React.createClass({
 var NewBreweries = React.createClass({
   render: function(){
     return(
-      <div className="col-md-4">
-        <img src={this.props.image} alt="beer is good!!"/>
+      <div className="col-md-4 latest-brewery-info">
+        <img className="brewery-icon" src={this.props.image} alt="beer is good!!"/>
         <p className="latest-brewery-name">{this.props.name}</p>
         <p className="latest-brewery-established">{this.props.established}</p>
       </div>
@@ -136,4 +158,4 @@ var NewBreweries = React.createClass({
 });
 
 
-module.exports = searchAndNav
+module.exports = searchAndNav;

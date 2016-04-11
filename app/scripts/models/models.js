@@ -19,7 +19,16 @@ var BreweryModel = Backbone.Model.extend({
 
 var BreweryCollection = Backbone.Collection.extend({
   model: BreweryModel,
-  url: 'http://finalprojectbeer.herokuapp.com/breweries'
+  url: 'http://finalprojectbeer.herokuapp.com/breweries',
+  getPage: function(pageNum){
+    this.url = this.url + '?p=' + pageNum;
+    this.fetch().then(function(data){
+      console.log(data);
+    }, function(error){
+      console.log(error);
+    });
+    return this;
+  }
 });
 
 module.exports = {
