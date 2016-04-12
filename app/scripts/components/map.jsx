@@ -6,6 +6,16 @@ var Parse = require('parse');
 require('backbone-react-component');
 
 var MapPage = React.createClass({
+  mixins: [Backbone.React.Component.mixin],
+  handleSearch: function(){
+    var searchBeer = $('.search-input').val();
+    var searchLocation = $('.search-input').val();
+    Backbone.history.navigate('searchResults', {trigger: true});
+    this.props.collection.create({
+      beer: searchBeer,
+      zipcode: searchLocation
+    });
+  },
   handleToggle: function(e){
     e.preventDefault();
     $('.nav-toggle').slideToggle({direction: "right"}, 2000);
@@ -35,8 +45,9 @@ var MapPage = React.createClass({
               <div className="row">
                 <div className="col-md-8">
                   <form>
-                   <input type="text" className="form-control search-input" placeholder="Search"/>
+                    <input type="text" className="form-control search-input" placeholder="Search"/>
                   </form>
+                  <button onClick={this.handleSearch} type="button" className="btn btn-primary submit-button-homepage">Submit</button>
                 </div>
                 <div className="col-md-4">
                   <div className="mainNavDropDown clearfix">

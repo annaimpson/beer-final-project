@@ -1,16 +1,6 @@
 var Backbone = require('backbone');
 var $ = require('jquery');
 var Parse = require('parse');
-//
-// var BeerModel = Parse.Object.extend({
-//   className: 'BeerList'
-// });
-//
-//
-// var BeerCollection = Backbone.Collections.extend({
-//   model: BeerModel,
-//   url: 'http://drinkupapp.herokuapp.com/'
-// });
 
 
 var BreweryModel = Backbone.Model.extend({
@@ -19,9 +9,38 @@ var BreweryModel = Backbone.Model.extend({
 
 var BreweryCollection = Backbone.Collection.extend({
   model: BreweryModel,
-  url: 'http://finalprojectbeer.herokuapp.com/breweries',
+  url: function(){
+    var url = 'http://finalprojectbeer.herokuapp.com/breweries/';
+    return url + '?' + $.param({p: this.pageNum});
+  },
   getPage: function(pageNum){
-    this.url = this.url + '?p=' + pageNum;
+    this.pageNum = pageNum;
+
+    this.fetch().then(function(data){
+      console.log(data);
+    }, function(error){
+      console.log(error);
+    });
+    return this;
+  }
+});
+
+
+
+
+
+var SearchModel = Backbone.Model.extend({
+});
+
+var SearchCollection = Backbone.Collection.extend({
+  model: SearchModel,
+  searchUrl: function(){
+    var searchUrl = 'http://finalprojectbeer.herokuapp.com/search/';
+    return searchUrl + '?' + $.param({type: this.breweryPage});
+  },
+  getNewBreweryPage: function(breweryPage){
+    this.searchUrl = searchUrl;
+
     this.fetch().then(function(data){
       console.log(data);
     }, function(error){
@@ -32,8 +51,8 @@ var BreweryCollection = Backbone.Collection.extend({
 });
 
 module.exports = {
-  // 'BeerModel': BeerModel,
-  // 'BeerCollection': BeerCollection,
   'BreweryModel': BreweryModel,
-  'BreweryCollection': BreweryCollection
+  'BreweryCollection': BreweryCollection,
+  'SearchModel': SearchModel,
+  'SearchCollection': SearchCollection
 };

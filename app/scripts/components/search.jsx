@@ -5,11 +5,21 @@ var $ = require('jquery');
 var Parse = require('parse');
 var Mixin = require('backbone-react-component');
 
-{/*var SearchBrewsListing = React.createClass({
+var SearchBrewsListing = React.createClass({
+  mixins: [Backbone.React.Component.mixin],
+  getNewBreweryPage: function(breweryPage){
+    var searchBreweries = this.props.collection;
+    searchBreweries.getNewBreweryPage(breweryPage);
+  },
   render: function(){
     var BrewList = this.props.collection.map(function(model){
       return (
-        <SearchBrews model = {model} key={model.get('name')} />
+        <SearchBrews
+          established={model.established}
+          name={model.name}
+          key={model.id}
+          image={image}
+        />
       )
     });
     return (
@@ -18,19 +28,23 @@ var Mixin = require('backbone-react-component');
       </div>
     );
   }
-});*/}
+});
 
-{/*var SearchBrews = React.createClass({
+var SearchBrews = React.createClass({
   mixins: [Backbone.React.Component.mixin],
   render: function(){
     console.log(this.props.model);
     return(
       <div>
         <div className = "col-md-4">
-          <p>{this.props.model.get('searchBeer')} alt="beer is good!!"</p>
-          <p>{this.props.model.get('zipcode')}</p>
+          <p>{this.props.established} alt="beer is good!!"</p>
+          <p>{this.props.model.name}</p>
         </div>
       </div>
     );
   }
-});*/}
+});
+
+
+
+module.exports = SearchBrewsListing;

@@ -9,11 +9,12 @@ var PageLink= React.createClass({
   getNewPage: function(e){
     e.preventDefault();
     this.props.getNewPage(this.props.index);
+    console.log(this.props.index);
   },
   render: function(){
     return (
       <li>
-        <a href="#" onClick={this.getNewPage}>{this.props.index}</a>
+        <a href={this.props.index} onClick={this.getNewPage}>{this.props.index}</a>
       </li>
     );
   }
@@ -22,14 +23,15 @@ var PageLink= React.createClass({
 var searchAndNav = React.createClass({
   mixins: [Backbone.React.Component.mixin],
   handleSearch: function(){
-    console.log('this button works');
     var searchBeer = $('.search-input').val();
     var searchLocation = $('.search-input').val();
+    Backbone.history.navigate('searchResults', {trigger: true});
     this.props.collection.create({
       beer: searchBeer,
       zipcode: searchLocation
     });
   },
+
   handleToggle: function(e){
     e.preventDefault();
     $('.nav-toggle').slideToggle({direction: "right"}, 2000);
@@ -49,20 +51,16 @@ var searchAndNav = React.createClass({
     Parse.User.logOut();
     Backbone.history.navigate('', {trigger: true});
   },
-  handleSpecificBrew: function(){
-    Backbone.history.navigate('brewery', {trigger: true});
-    console.log('clicked!');
-  },
   getNewPage: function(pageNum){
     var breweries = this.props.collection;
     breweries.getPage(pageNum);
+    console.log("this working", pageNum);
   },
   render: function(){
-    console.log(this.props.collection.models[0].get('data'));
+
     var BreweryList = this.props.collection.models[0].get('data').map(function(model){
     var image;
     if(!model.images){
-      console.log('images')
       image = "././images/beer-icon.png";
     }else{
       if (!model.images.icon){
@@ -83,10 +81,15 @@ var searchAndNav = React.createClass({
     });
     var pageLinks = [];
     var numpages = 5;
-    for(var i=0;i<numpages;i++){
-      pageLinks.push(<PageLink index={i} key={i} getNewPage={this.getNewPage}/>)
+    for (var i=1; i<numpages; i++){
+      pageLinks.push(
+        <PageLink
+          index={i}
+          key={i}
+          getNewPage={this.getNewPage}
+        />
+      )
     }
-
 
     return(
       <div>
@@ -146,12 +149,18 @@ var searchAndNav = React.createClass({
 });
 
 var NewBreweries = React.createClass({
+  handleSpecificBrew: function(){
+    Backbone.history.navigate('brewery', {trigger: true});
+  },
+
   render: function(){
     return(
       <div className="col-md-4 latest-brewery-info">
-        <img className="brewery-icon" src={this.props.image} alt="beer is good!!"/>
-        <p className="latest-brewery-name">{this.props.name}</p>
-        <p className="latest-brewery-established">{this.props.established}</p>
+        <button className="brewery-button" onClick={this.handleSpecificBrew}>
+          <img className="brewery-icon" src={this.props.image} alt="beer is good!!"/>
+          <p className="latest-brewery-name">{this.props.name}</p>
+          <p className="latest-brewery-established">{this.props.established}</p>
+        </button>
       </div>
     );
   }

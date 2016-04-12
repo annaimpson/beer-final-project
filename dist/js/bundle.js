@@ -8,6 +8,16 @@ var Parse = require('parse');
 require('backbone-react-component');
 
 var Brewery = React.createClass({displayName: "Brewery",
+  mixins: [Backbone.React.Component.mixin],
+  handleSearch: function(){
+    var searchBeer = $('.search-input').val();
+    var searchLocation = $('.search-input').val();
+    Backbone.history.navigate('searchResults', {trigger: true});
+    this.props.collection.create({
+      beer: searchBeer,
+      zipcode: searchLocation
+    });
+  },
   handleToggle: function(e){
     e.preventDefault();
     $('.nav-toggle').slideToggle({direction: "right"}, 2000);
@@ -36,8 +46,9 @@ var Brewery = React.createClass({displayName: "Brewery",
               React.createElement("div", {className: "row"}, 
                 React.createElement("div", {className: "col-md-8"}, 
                   React.createElement("form", null, 
-                   React.createElement("input", {type: "text", className: "form-control search-input", placeholder: "Search"})
-                  )
+                    React.createElement("input", {type: "text", className: "form-control search-input", placeholder: "Search"})
+                  ), 
+                  React.createElement("button", {onClick: this.handleSearch, type: "button", className: "btn btn-primary submit-button-homepage"}, "Submit")
                 ), 
                 React.createElement("div", {className: "col-md-4"}, 
                   React.createElement("div", {className: "mainNavDropDown clearfix"}, 
@@ -64,7 +75,9 @@ var Brewery = React.createClass({displayName: "Brewery",
               )
             ), 
             React.createElement("div", {className: "col-md-6"}, 
-              React.createElement("div", {className: "brewery-info"})
+              React.createElement("div", {className: "brewery-info"}, 
+                React.createElement("div", {className: "brewery-name-page"}, this.props.name)
+              )
             )
           )
         ), 
@@ -95,11 +108,12 @@ var PageLink= React.createClass({displayName: "PageLink",
   getNewPage: function(e){
     e.preventDefault();
     this.props.getNewPage(this.props.index);
+    console.log(this.props.index);
   },
   render: function(){
     return (
       React.createElement("li", null, 
-        React.createElement("a", {href: "#", onClick: this.getNewPage}, this.props.index)
+        React.createElement("a", {href: this.props.index, onClick: this.getNewPage}, this.props.index)
       )
     );
   }
@@ -108,14 +122,15 @@ var PageLink= React.createClass({displayName: "PageLink",
 var searchAndNav = React.createClass({displayName: "searchAndNav",
   mixins: [Backbone.React.Component.mixin],
   handleSearch: function(){
-    console.log('this button works');
     var searchBeer = $('.search-input').val();
     var searchLocation = $('.search-input').val();
+    Backbone.history.navigate('searchResults', {trigger: true});
     this.props.collection.create({
       beer: searchBeer,
       zipcode: searchLocation
     });
   },
+
   handleToggle: function(e){
     e.preventDefault();
     $('.nav-toggle').slideToggle({direction: "right"}, 2000);
@@ -135,20 +150,16 @@ var searchAndNav = React.createClass({displayName: "searchAndNav",
     Parse.User.logOut();
     Backbone.history.navigate('', {trigger: true});
   },
-  handleSpecificBrew: function(){
-    Backbone.history.navigate('brewery', {trigger: true});
-    console.log('clicked!');
-  },
   getNewPage: function(pageNum){
     var breweries = this.props.collection;
     breweries.getPage(pageNum);
+    console.log("this working", pageNum);
   },
   render: function(){
-    console.log(this.props.collection.models[0].get('data'));
+
     var BreweryList = this.props.collection.models[0].get('data').map(function(model){
     var image;
     if(!model.images){
-      console.log('images')
       image = "././images/beer-icon.png";
     }else{
       if (!model.images.icon){
@@ -169,10 +180,15 @@ var searchAndNav = React.createClass({displayName: "searchAndNav",
     });
     var pageLinks = [];
     var numpages = 5;
-    for(var i=0;i<numpages;i++){
-      pageLinks.push(React.createElement(PageLink, {index: i, key: i, getNewPage: this.getNewPage}))
+    for (var i=1; i<numpages; i++){
+      pageLinks.push(
+        React.createElement(PageLink, {
+          index: i, 
+          key: i, 
+          getNewPage: this.getNewPage}
+        )
+      )
     }
-
 
     return(
       React.createElement("div", null, 
@@ -232,12 +248,18 @@ var searchAndNav = React.createClass({displayName: "searchAndNav",
 });
 
 var NewBreweries = React.createClass({displayName: "NewBreweries",
+  handleSpecificBrew: function(){
+    Backbone.history.navigate('brewery', {trigger: true});
+  },
+
   render: function(){
     return(
       React.createElement("div", {className: "col-md-4 latest-brewery-info"}, 
-        React.createElement("img", {className: "brewery-icon", src: this.props.image, alt: "beer is good!!"}), 
-        React.createElement("p", {className: "latest-brewery-name"}, this.props.name), 
-        React.createElement("p", {className: "latest-brewery-established"}, this.props.established)
+        React.createElement("button", {className: "brewery-button", onClick: this.handleSpecificBrew}, 
+          React.createElement("img", {className: "brewery-icon", src: this.props.image, alt: "beer is good!!"}), 
+          React.createElement("p", {className: "latest-brewery-name"}, this.props.name), 
+          React.createElement("p", {className: "latest-brewery-established"}, this.props.established)
+        )
       )
     );
   }
@@ -359,6 +381,16 @@ var Parse = require('parse');
 require('backbone-react-component');
 
 var MapPage = React.createClass({displayName: "MapPage",
+  mixins: [Backbone.React.Component.mixin],
+  handleSearch: function(){
+    var searchBeer = $('.search-input').val();
+    var searchLocation = $('.search-input').val();
+    Backbone.history.navigate('searchResults', {trigger: true});
+    this.props.collection.create({
+      beer: searchBeer,
+      zipcode: searchLocation
+    });
+  },
   handleToggle: function(e){
     e.preventDefault();
     $('.nav-toggle').slideToggle({direction: "right"}, 2000);
@@ -388,8 +420,9 @@ var MapPage = React.createClass({displayName: "MapPage",
               React.createElement("div", {className: "row"}, 
                 React.createElement("div", {className: "col-md-8"}, 
                   React.createElement("form", null, 
-                   React.createElement("input", {type: "text", className: "form-control search-input", placeholder: "Search"})
-                  )
+                    React.createElement("input", {type: "text", className: "form-control search-input", placeholder: "Search"})
+                  ), 
+                  React.createElement("button", {onClick: this.handleSearch, type: "button", className: "btn btn-primary submit-button-homepage"}, "Submit")
                 ), 
                 React.createElement("div", {className: "col-md-4"}, 
                   React.createElement("div", {className: "mainNavDropDown clearfix"}, 
@@ -430,6 +463,16 @@ var Parse = require('parse');
 require('backbone-react-component');
 
 var ProfilePage = React.createClass({displayName: "ProfilePage",
+  mixins: [Backbone.React.Component.mixin],
+  handleSearch: function(){
+    var searchBeer = $('.search-input').val();
+    var searchLocation = $('.search-input').val();
+    Backbone.history.navigate('searchResults', {trigger: true});
+    this.props.collection.create({
+      beer: searchBeer,
+      zipcode: searchLocation
+    });
+  },
   handleToggle: function(e){
     e.preventDefault();
     $('.nav-toggle').slideToggle({direction: "right"}, 2000);
@@ -463,8 +506,9 @@ var ProfilePage = React.createClass({displayName: "ProfilePage",
               React.createElement("div", {className: "row"}, 
                 React.createElement("div", {className: "col-md-8"}, 
                   React.createElement("form", null, 
-                   React.createElement("input", {type: "text", className: "form-control search-input", placeholder: "Search"})
-                  )
+                    React.createElement("input", {type: "text", className: "form-control search-input", placeholder: "Search"})
+                  ), 
+                  React.createElement("button", {onClick: this.handleSearch, type: "button", className: "btn btn-primary submit-button-homepage"}, "Submit")
                 ), 
                 React.createElement("div", {className: "col-md-4"}, 
                   React.createElement("div", {className: "mainNavDropDown clearfix"}, 
@@ -532,35 +576,49 @@ var $ = require('jquery');
 var Parse = require('parse');
 var Mixin = require('backbone-react-component');
 
-{/*var SearchBrewsListing = React.createClass({
+var SearchBrewsListing = React.createClass({displayName: "SearchBrewsListing",
+  mixins: [Backbone.React.Component.mixin],
+  getNewBreweryPage: function(breweryPage){
+    var searchBreweries = this.props.collection;
+    searchBreweries.getNewBreweryPage(breweryPage);
+  },
   render: function(){
     var BrewList = this.props.collection.map(function(model){
       return (
-        <SearchBrews model = {model} key={model.get('name')} />
+        React.createElement(SearchBrews, {
+          established: model.established, 
+          name: model.name, 
+          key: model.id, 
+          image: image}
+        )
       )
     });
     return (
-      <div className="row">
-        {BrewList}
-      </div>
+      React.createElement("div", {className: "row"}, 
+        BrewList
+      )
     );
   }
-});*/}
+});
 
-{/*var SearchBrews = React.createClass({
+var SearchBrews = React.createClass({displayName: "SearchBrews",
   mixins: [Backbone.React.Component.mixin],
   render: function(){
     console.log(this.props.model);
     return(
-      <div>
-        <div className = "col-md-4">
-          <p>{this.props.model.get('searchBeer')} alt="beer is good!!"</p>
-          <p>{this.props.model.get('zipcode')}</p>
-        </div>
-      </div>
+      React.createElement("div", null, 
+        React.createElement("div", {className: "col-md-4"}, 
+          React.createElement("p", null, this.props.established, " alt=\"beer is good!!\""), 
+          React.createElement("p", null, this.props.model.name)
+        )
+      )
     );
   }
-});*/}
+});
+
+
+
+module.exports = SearchBrewsListing;
 
 },{"backbone":26,"backbone-react-component":25,"jquery":125,"parse":126,"react":298,"react-dom":169}],7:[function(require,module,exports){
 "use strict";
@@ -579,16 +637,6 @@ $(function(){
 var Backbone = require('backbone');
 var $ = require('jquery');
 var Parse = require('parse');
-//
-// var BeerModel = Parse.Object.extend({
-//   className: 'BeerList'
-// });
-//
-//
-// var BeerCollection = Backbone.Collections.extend({
-//   model: BeerModel,
-//   url: 'http://drinkupapp.herokuapp.com/'
-// });
 
 
 var BreweryModel = Backbone.Model.extend({
@@ -597,9 +645,38 @@ var BreweryModel = Backbone.Model.extend({
 
 var BreweryCollection = Backbone.Collection.extend({
   model: BreweryModel,
-  url: 'http://finalprojectbeer.herokuapp.com/breweries',
+  url: function(){
+    var url = 'http://finalprojectbeer.herokuapp.com/breweries/';
+    return url + '?' + $.param({p: this.pageNum});
+  },
   getPage: function(pageNum){
-    this.url = this.url + '?p=' + pageNum;
+    this.pageNum = pageNum;
+
+    this.fetch().then(function(data){
+      console.log(data);
+    }, function(error){
+      console.log(error);
+    });
+    return this;
+  }
+});
+
+
+
+
+
+var SearchModel = Backbone.Model.extend({
+});
+
+var SearchCollection = Backbone.Collection.extend({
+  model: SearchModel,
+  searchUrl: function(){
+    var searchUrl = 'http://finalprojectbeer.herokuapp.com/search/';
+    return searchUrl + '?' + $.param({type: this.breweryPage});
+  },
+  getNewBreweryPage: function(breweryPage){
+    this.searchUrl = searchUrl;
+
     this.fetch().then(function(data){
       console.log(data);
     }, function(error){
@@ -610,10 +687,10 @@ var BreweryCollection = Backbone.Collection.extend({
 });
 
 module.exports = {
-  // 'BeerModel': BeerModel,
-  // 'BeerCollection': BeerCollection,
   'BreweryModel': BreweryModel,
-  'BreweryCollection': BreweryCollection
+  'BreweryCollection': BreweryCollection,
+  'SearchModel': SearchModel,
+  'SearchCollection': SearchCollection
 };
 
 },{"backbone":26,"jquery":125,"parse":126}],9:[function(require,module,exports){
@@ -673,9 +750,11 @@ var LoginRouter = Backbone.Router.extend({
   },
   searchResults: function(){
     ReactDOM.unmountComponentAtNode(appContainer);
-    ReactDOM.render(
-      React.createElement(FoundSearch), document.getElementById('app')
-    );
+    searchBreweries.fetch().then(function(){
+      ReactDOM.render(
+        React.createElement(FoundSearch), document.getElementById('app')
+      );
+    });
   },
   profile: function(){
     ReactDOM.unmountComponentAtNode(appContainer);

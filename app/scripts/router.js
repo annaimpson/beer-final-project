@@ -53,9 +53,11 @@ var LoginRouter = Backbone.Router.extend({
   },
   searchResults: function(){
     ReactDOM.unmountComponentAtNode(appContainer);
-    ReactDOM.render(
-      React.createElement(FoundSearch), document.getElementById('app')
-    );
+    searchBreweries.fetch().then(function(){
+      ReactDOM.render(
+        React.createElement(FoundSearch), document.getElementById('app')
+      );
+    });
   },
   profile: function(){
     ReactDOM.unmountComponentAtNode(appContainer);

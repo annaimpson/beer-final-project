@@ -5967,7 +5967,7 @@ img {
   height: 100px;
   margin-top: 50px;
   margin-bottom: 25px;
-  margin-left: 108px; }
+  margin-left: 8px; }
 
 .latest-brewery-name {
   font-size: 15px;
@@ -5980,5 +5980,13 @@ img {
   color: navy;
   letter-spacing: 1.5px;
   text-align: center; }
+
+.brewery-button {
+  width: 330px;
+  height: 280px;
+  margin-left: -5px;
+  margin-top: -7px;
+  background-color: white;
+  border: none; }
 
 /*# sourceMappingURL=app.css.map */
