@@ -117,7 +117,7 @@ img {
   background-color: rgba(205, 206, 215, 1);
   width: 300px;
   height: 1200px;
-  margin-top: -100px;
+  margin-top: -120px;
   position: fixed;
   right: 0;
 }
@@ -200,7 +200,7 @@ img {
   height: 100px;
   margin-top: 50px;
   margin-bottom: 25px;
-  margin-left: 8px;
+  margin-left: 107px;
 }
 .latest-brewery-name{
   font-size: 15px;
@@ -214,13 +214,67 @@ img {
   letter-spacing: 1.5px;
   text-align: center;
 }
-.brewery-button{
-  width: 330px;
-  height: 280px;
-  margin-left: -5px;
-  margin-top: -7px;
-  background-color: white;
-  border: none;
-}
 
 //End of home page render of breweries
+
+
+//Detail view of selected brewery
+.brewery-icon-detail-page{
+  width: 200px;
+  height: 200px;
+  margin-top: 200px;
+}
+.brewery-info{
+  margin-top: 200px;
+  margin-bottom: 300px;
+}
+.brewery-name-page{
+  font-size: 50px;
+  font-weight: lighter;
+}
+.brewery-established-page{
+  font-size: 17px;
+}
+.brewery-description-page{
+  font-size: 14px;
+  letter-spacing: .5px;
+  margin-top: 25px;
+}
+.beer-info-detail-page{
+  border: 1px solid rgba(202, 207, 210, 1);
+  border-radius: 5px;
+  padding-top: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-bottom: 25px;
+  text-align: center;
+  margin-bottom: 25px;
+}
+.beer-label{
+  width: 100px;
+  height: 100px;
+  margin-bottom: 30px;
+}
+.beer-name{
+  font-size: 30px;
+  font-weight: lighter;
+  margin-right: 20px;
+  text-align: center;
+}
+.beer-label{
+  margin-top: 25px;
+  text-align: center;
+}
+.beer-description{
+  margin-top: 25px;
+  margin-right: 70px;
+  margin-bottom: 50px;
+  letter-spacing: .5px;
+  font-size: 10px;
+  line-height: 21px;
+}
+.drinkup-button{
+  margin-bottom: 25px;
+}
+
+//End of detail view

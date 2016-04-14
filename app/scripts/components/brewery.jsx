@@ -3,87 +3,87 @@ var ReactDOM = require('react-dom');
 var Backbone = require('backbone');
 var $ = require('jquery');
 var Parse = require('parse');
+var Header = require('./header.jsx');
 require('backbone-react-component');
 
-var Brewery = React.createClass({
-  mixins: [Backbone.React.Component.mixin],
-  handleSearch: function(){
-    var searchBeer = $('.search-input').val();
-    var searchLocation = $('.search-input').val();
-    Backbone.history.navigate('searchResults', {trigger: true});
-    this.props.collection.create({
-      beer: searchBeer,
-      zipcode: searchLocation
-    });
-  },
-  handleToggle: function(e){
+var BreweryDetail = React.createClass({
+  handleDrinkUp: function(e){
     e.preventDefault();
-    $('.nav-toggle').slideToggle({direction: "right"}, 2000);
-  },
-  handleProfile: function(){
-    Backbone.history.navigate('profile', {trigger: true});
-  },
-
-  handleHomePage: function(){
-    Backbone.history.navigate('homePage', {trigger: true});
-  },
-
-  handleMap: function(){
-    Backbone.history.navigate('map', {trigger: true});
-  },
-  handleLogout: function(){
-    Parse.User.logOut();
-    Backbone.history.navigate('', {trigger: true});
+    console.log("I was clicked!");
   },
   render: function(){
-    return(
-      <div>
-        <div className="container search-header">
+    var that = this;
+    var beerList = this.props.beerList.models.map(function(beer){
+      console.log(beer);
+      var beerDescription;
+      if(!beer.get("style")){
+        beerDescription = "";
+      }else{
+        if (!beer.get("style").description){
+          beerDescription = "";
+        }
+        else {
+          beerDescription = beer.get("style").description
+        }
+      };
+
+      var beerLabel;
+      if(!beer.get("labels")){
+        beerLabel = "././images/beer-icon.png";
+      }else{
+        if (!beer.get("labels").icon){
+          beerLabel = "././images/beer-icon.png";
+        }
+        else {
+          beerLabel = beer.get("labels").icon
+        }
+      };
+
+      return (
+        <div className="beer-info-detail-page" key={beer.id}>
           <div className="row">
-            <div className="search-bar">
-              <div className="row">
-                <div className="col-md-8">
-                  <form>
-                    <input type="text" className="form-control search-input" placeholder="Search"/>
-                  </form>
-                  <button onClick={this.handleSearch} type="button" className="btn btn-primary submit-button-homepage">Submit</button>
-                </div>
-                <div className="col-md-4">
-                  <div className="mainNavDropDown clearfix">
-                    <button onClick={this.handleToggle} type="button" className="btn btn-default btn-lg nav-button">
-                      <span className="glyphicon glyphicon-align-justify hamburger" aria-hidden="true"></span>
-                    </button>
-                  </div>
-                </div>
-              </div>
+            <div className="col-md-6">
+              <img className="beer-label" src={beerLabel} alt="beer is good!!"/>
+              <h1 className="beer-name">{beer.get("name")}</h1>
+            </div>
+            <div className="col-md-6">
+              <p className="truncate beer-description">{beerDescription}</p>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-md-12">
+              <button type="button" onClick={that.handleDrinkUp} className="btn btn-default drinkup-button">Drink Up</button>
             </div>
           </div>
         </div>
-        <div className="nav-toggle">
-          <button onClick={this.handleProfile} className="nav-button1"><h4 className="profile-toggle">Profile</h4></button>
-          <button onClick={this.handleHomePage} className="nav-button2"><h4 className="home-toggle">Home Page</h4></button>
-          <button onClick={this.handleMap} className="nav-button3"><h4 className="map-toggle">Map</h4></button>
-          <button onClick={this.handleLogout} className="nav-button4"><h4 className="logout-toggle">Logout</h4></button>
+      )
+    });
+    return(
+      <div>
+        <div className="container-fluid header">
+          <div className="row">
+            <div className="col-md-12">
+              <Header/>
+            </div>
+          </div>
         </div>
         <div className="container brewery-body">
           <div className="row">
             <div className="col-md-6">
-              <div className="brewery-picture">
-                <img className="empty-beer-pic" src="images/beer-icon.png" alt=""/>
-              </div>
+              <img className="brewery-icon-detail-page" src={localStorage.getItem('image')} alt="beer is good!!"/>
             </div>
             <div className="col-md-6">
               <div className="brewery-info">
-                <div className="brewery-name-page">{this.props.name}</div>
+                <div className="brewery-name-page">{this.props.model.get("name")}</div>
+                <div className="brewery-established-page">{this.props.model.get("established")}</div>
+                <p className="brewery-description-page">{this.props.model.get("description")}</p>
               </div>
             </div>
           </div>
         </div>
         <div className="container brewery-beers">
           <div className="row">
-            <div className="col-md-12">
-              <div className="beer-list"></div>
-            </div>
+              {beerList}
           </div>
         </div>
       </div>
@@ -91,4 +91,4 @@ var Brewery = React.createClass({
   }
 });
 
-module.exports = Brewery;
+module.exports = BreweryDetail;

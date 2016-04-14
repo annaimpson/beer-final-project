@@ -7,11 +7,13 @@ var Parse = require('parse');
 var Login = require('./components/landing-page.jsx');
 var HomePage = require('./components/home-page.jsx');
 var FoundSearch = require('./components/search.jsx');
-var ClickedBrewery = require('./components/brewery.jsx');
+var Brewery = require('./components/brewery.jsx');
+var BreweryModel = require('./models/models.js').BreweryModel;
 var BreweryCollection = require('./models/models.js').BreweryCollection;
+var BeerCollection = require('./models/models.js').BeerCollection;
 var Profile = require('./components/profile.jsx');
 var Map = require('./components/map.jsx');
-var breweries = new BreweryCollection();
+
 var appContainer = document.getElementById('app');
 
 var apiHomePage = function(){
@@ -23,7 +25,7 @@ var LoginRouter = Backbone.Router.extend({
   routes: {
     '': 'login',
     'homePage': 'homePage',
-    'brewery': 'brewery',
+    'brewery/:id': 'brewery',
     'searchResults': 'searchResults',
     'profile': 'profile',
     'map': 'map'
@@ -39,25 +41,30 @@ var LoginRouter = Backbone.Router.extend({
   homePage: function(){
     ReactDOM.unmountComponentAtNode(appContainer);
     apiHomePage();
+    var breweries = new BreweryCollection();
     breweries.fetch().then(function(){
       ReactDOM.render(
         React.createElement(HomePage, {collection: breweries}), document.getElementById('app')
       );
     });
   },
-  brewery: function(){
+  brewery: function(id){
     ReactDOM.unmountComponentAtNode(appContainer);
-    ReactDOM.render(
-      React.createElement(ClickedBrewery), document.getElementById('app')
-    );
+    var beerCollection = new BeerCollection([], {breweryId: id});
+    var selectedBrewery = new BreweryModel({id: id});
+    selectedBrewery.fetch().then(function(){
+      beerCollection.fetch().then(function(){
+        ReactDOM.render(
+          React.createElement(Brewery, {model: selectedBrewery, beerList: beerCollection}), document.getElementById('app')
+        );
+      });
+    });
   },
   searchResults: function(){
     ReactDOM.unmountComponentAtNode(appContainer);
-    searchBreweries.fetch().then(function(){
-      ReactDOM.render(
-        React.createElement(FoundSearch), document.getElementById('app')
-      );
-    });
+    ReactDOM.render(
+      React.createElement(FoundSearch), document.getElementById('app')
+    );
   },
   profile: function(){
     ReactDOM.unmountComponentAtNode(appContainer);

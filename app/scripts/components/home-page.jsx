@@ -4,6 +4,8 @@ var Backbone = require('backbone');
 var $ = require('jquery');
 var Parse = require('parse');
 var Mixin = require('backbone-react-component');
+var Header = require('./header.jsx');
+
 
 var PageLink= React.createClass({
   getNewPage: function(e){
@@ -21,57 +23,22 @@ var PageLink= React.createClass({
 });
 
 var searchAndNav = React.createClass({
-  mixins: [Backbone.React.Component.mixin],
-  handleSearch: function(){
-    var searchBeer = $('.search-input').val();
-    var searchLocation = $('.search-input').val();
-    Backbone.history.navigate('searchResults', {trigger: true});
-    this.props.collection.create({
-      beer: searchBeer,
-      zipcode: searchLocation
-    });
-  },
-
-  handleToggle: function(e){
-    e.preventDefault();
-    $('.nav-toggle').slideToggle({direction: "right"}, 2000);
-  },
-  handleProfile: function(){
-    Backbone.history.navigate('profile', {trigger: true});
-  },
-
-  handleHomePage: function(){
-    Backbone.history.navigate('homePage', {trigger: true});
-  },
-
-  handleMap: function(){
-    Backbone.history.navigate('map', {trigger: true});
-  },
-  handleLogout: function(){
-    Parse.User.logOut();
-    Backbone.history.navigate('', {trigger: true});
-  },
-  getNewPage: function(pageNum){
-    var breweries = this.props.collection;
-    breweries.getPage(pageNum);
-    console.log("this working", pageNum);
-  },
   render: function(){
-
-    var BreweryList = this.props.collection.models[0].get('data').map(function(model){
+    var BreweryList = this.props.collection.map(function(model){
     var image;
-    if(!model.images){
+    if(!model.get("images")){
       image = "././images/beer-icon.png";
     }else{
-      if (!model.images.icon){
+      if (!model.get("images").icon){
         image = "././images/beer-icon.png";
       }
       else {
-        image = model.images.icon
+        image = model.get("images").icon
       }
     };
       return(
         <NewBreweries
+          model={model}
           established={model.established}
           name={model.name}
           key={model.id}
@@ -93,33 +60,12 @@ var searchAndNav = React.createClass({
 
     return(
       <div>
-        <div className="container search-header">
+        <div className="container-fluid header">
           <div className="row">
-            <div className="search-bar">
-              <div className="row">
-                <div className="col-md-8">
-                  <form>
-                   <input type="text" className="form-control search-input" placeholder="Search"/>
-                  </form>
-                  <button onClick={this.handleSearch} type="button" className="btn btn-primary submit-button-homepage">Submit</button>
-                </div>
-                <div className="col-md-4">
-                  <div className="mainNavDropDown clearfix">
-                    <button onClick={this.handleToggle} type="button" className="btn btn-default btn-lg nav-button">
-                      <span className="glyphicon glyphicon-align-justify hamburger" aria-hidden="true"></span>
-                    </button>
-                  </div>
-                </div>
-              </div>
+            <div className="col-md-12">
+              <Header/>
             </div>
           </div>
-
-        </div>
-        <div className="nav-toggle">
-          <button onClick={this.handleProfile} className="nav-button1"><h4 className="profile-toggle">Profile</h4></button>
-          <button onClick={this.handleHomePage} className="nav-button2"><h4 className="home-toggle">Home Page</h4></button>
-          <button onClick={this.handleMap} className="nav-button3"><h4 className="map-toggle">Map</h4></button>
-          <button onClick={this.handleLogout} className="nav-button4"><h4 className="logout-toggle">Logout</h4></button>
         </div>
         <div className="container latest-breweries-list">
           <div className="row">
@@ -149,18 +95,24 @@ var searchAndNav = React.createClass({
 });
 
 var NewBreweries = React.createClass({
-  handleSpecificBrew: function(){
-    Backbone.history.navigate('brewery', {trigger: true});
+  handleSpecificBrew: function(model){
+    var selectedBrewery = new SelectedBrewery();
+    selectedBrewery.set('model', model);
+    Backbone.history.navigate('brewery', {trigger: true})
+  },
+
+  setImage: function(){
+    localStorage.setItem('image', this.props.image)
   },
 
   render: function(){
     return(
       <div className="col-md-4 latest-brewery-info">
-        <button className="brewery-button" onClick={this.handleSpecificBrew}>
+        <a className="brewery-button" onClick={this.setImage} href={"#brewery/" + this.props.model.id}>
           <img className="brewery-icon" src={this.props.image} alt="beer is good!!"/>
-          <p className="latest-brewery-name">{this.props.name}</p>
-          <p className="latest-brewery-established">{this.props.established}</p>
-        </button>
+          <p className="latest-brewery-name">{this.props.model.get("name")}</p>
+          <p className="latest-brewery-established">{this.props.model.get("established")}</p>
+        </a>
       </div>
     );
   }

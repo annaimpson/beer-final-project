@@ -2,6 +2,7 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 var Backbone = require('backbone');
 var $ = require('jquery');
+var Header = require('./header.jsx');
 var Parse = require('parse');
 var Mixin = require('backbone-react-component');
 
