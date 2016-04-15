@@ -4,9 +4,6 @@ var Parse = require('parse');
 var Host = 'http://finalprojectbeer.herokuapp.com';
 var Host = 'http://localhost:3000';
 
-var SelectedBreweryModel = Backbone.Model.extend({
-
-});
 
 // var SelectedBreweryCollection = Backbone.Collection.extend({
 //   model: SelectedBreweryModel,
@@ -16,11 +13,18 @@ var SelectedBreweryModel = Backbone.Model.extend({
 //   }
 // });
 
+var ProfilePicModel = Backbone.Model.extend('ProfilePicModel');
+
+var ProfilePicCollection = Backbone.Collection.extend({
+  model: ProfilePicModel,
+  url: Host,
+  parse: function(data){
+    return data;
+  }
+});
+
 var BreweryModel = Backbone.Model.extend({
   urlRoot: Host + '/brewery/',
-  // url: function(){
-  //   return this.urlRoot + this.id + '/beers';
-  // },
   parse: function(data){
     return data.data;
   }
@@ -86,9 +90,9 @@ var SearchCollection = Backbone.Collection.extend({
 });
 
 module.exports = {
+  'ProfilePicModel': ProfilePicModel,
+  'ProfilePicCollection': ProfilePicCollection,
   'BreweryModel': BreweryModel,
-  'SelectedBreweryModel': SelectedBreweryModel,
-  // 'SelectedBreweryCollection': SelectedBreweryCollection,
   'BreweryCollection': BreweryCollection,
   'SearchModel': SearchModel,
   'SearchCollection': SearchCollection,

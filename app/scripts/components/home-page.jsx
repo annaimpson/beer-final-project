@@ -11,7 +11,7 @@ var PageLink= React.createClass({
   getNewPage: function(e){
     e.preventDefault();
     this.props.getNewPage(this.props.index);
-    console.log(this.props.index);
+    console.log(this);
   },
   render: function(){
     return (

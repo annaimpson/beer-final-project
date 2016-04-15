@@ -13,7 +13,8 @@ var SearchBrewsListing = React.createClass({
     searchBreweries.getNewBreweryPage(breweryPage);
   },
   render: function(){
-    var BrewList = this.props.collection.map(function(model){
+    console.log(this);
+    var BrewList = this.props.BrewList.collection.map(function(model){
       return (
         <SearchBrews
           established={model.established}
@@ -38,8 +39,8 @@ var SearchBrews = React.createClass({
     return(
       <div>
         <div className = "col-md-4">
-          <p>{this.props.established} alt="beer is good!!"</p>
-          <p>{this.props.model.name}</p>
+          <p>{this.props.model.get("established")} alt="beer is good!!"</p>
+          <p>{this.props.model.get("name")}</p>
         </div>
       </div>
     );
