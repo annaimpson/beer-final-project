@@ -3,6 +3,7 @@ var ReactDOM = require('react-dom');
 var Backbone = require('backbone');
 var $ = require('jquery');
 var Parse = require('parse');
+var Carousel = require('react-bootstrap').Carousel;
 require('backbone-react-component');
 
 Parse.initialize('beer-app');
@@ -46,7 +47,17 @@ var LandingPageBody = React.createClass({
           <div className="row">
             <div className="col-md-12">
               <div className='carousel-spot'>
-                <img className="header-photo" src="http://unsplash.it/2100/1000" alt=''/>
+                <Carousel>
+                  <Carousel.Item>
+                    <img width={2100} height={1000} alt="" src="http://unsplash.it/2100/1000"/>
+                    </Carousel.Item>
+                  <Carousel.Item>
+                    <img width={2100} height={1000} alt="" src="http://unsplash.it/2100/1000"/>
+                    </Carousel.Item>
+                  <Carousel.Item>
+                    <img width={2100} height={1000} alt="" src="http://unsplash.it/2100/1000"/>
+                  </Carousel.Item>
+                </Carousel>
                 <h1 className='page-name'>My Title</h1>
               </div>
             </div>
