@@ -69,13 +69,17 @@ var BreweryCollection = Backbone.Collection.extend({
 
 
 var SearchModel = Backbone.Model.extend({
+  searchUrl: Host + '/search/',
+  parse: function(data){
+    return data.data;
+  }
 });
 
 var SearchCollection = Backbone.Collection.extend({
   model: SearchModel,
   searchUrl: function(){
     var searchUrl = Host + '/search/';
-    return searchUrl + '?' + $.param({type: this.breweryPage});
+    return searchUrl + '?' + $.param({type: this.searchBreweriesS});
   },
   getNewBreweryPage: function(breweryPage){
     this.searchUrl = searchUrl;

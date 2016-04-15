@@ -11,6 +11,7 @@ var Brewery = require('./components/brewery.jsx');
 var BreweryModel = require('./models/models.js').BreweryModel;
 var BreweryCollection = require('./models/models.js').BreweryCollection;
 var BeerCollection = require('./models/models.js').BeerCollection;
+var SearchCollection = require('./models/models.js').SearchCollection;
 var Profile = require('./components/profile.jsx');
 var Map = require('./components/map.jsx');
 
@@ -60,11 +61,14 @@ var LoginRouter = Backbone.Router.extend({
       });
     });
   },
-  searchResults: function(){
+  searchResults: function(id){
     ReactDOM.unmountComponentAtNode(appContainer);
-    ReactDOM.render(
-      React.createElement(FoundSearch), document.getElementById('app')
-    );
+    var searchedBeer = new SearchCollection({id: id});
+    searchedBeer.fetch().then(function(){
+      ReactDOM.render(
+        React.createElement(FoundSearch, {collection: searchedBeer}), document.getElementById('app')
+      );
+    });
   },
   profile: function(){
     ReactDOM.unmountComponentAtNode(appContainer);

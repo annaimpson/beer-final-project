@@ -628,8 +628,8 @@ var Mixin = require('backbone-react-component');
 var SearchBrewsListing = React.createClass({displayName: "SearchBrewsListing",
   mixins: [Backbone.React.Component.mixin],
   getNewBreweryPage: function(breweryPage){
-    var searchBreweries = this.props.collection;
-    searchBreweries.getNewBreweryPage(breweryPage);
+    searchedBeer.set('breweryPage', breweryPage);
+    Backbone.history.navigate('searchResults', {trigger: true})
   },
   render: function(){
     console.log(this);
@@ -755,13 +755,17 @@ var BreweryCollection = Backbone.Collection.extend({
 
 
 var SearchModel = Backbone.Model.extend({
+  searchUrl: Host + '/search/',
+  parse: function(data){
+    return data.data;
+  }
 });
 
 var SearchCollection = Backbone.Collection.extend({
   model: SearchModel,
   searchUrl: function(){
     var searchUrl = Host + '/search/';
-    return searchUrl + '?' + $.param({type: this.breweryPage});
+    return searchUrl + '?' + $.param({type: this.searchBreweriesS});
   },
   getNewBreweryPage: function(breweryPage){
     this.searchUrl = searchUrl;
@@ -800,6 +804,7 @@ var Brewery = require('./components/brewery.jsx');
 var BreweryModel = require('./models/models.js').BreweryModel;
 var BreweryCollection = require('./models/models.js').BreweryCollection;
 var BeerCollection = require('./models/models.js').BeerCollection;
+var SearchCollection = require('./models/models.js').SearchCollection;
 var Profile = require('./components/profile.jsx');
 var Map = require('./components/map.jsx');
 
@@ -849,11 +854,14 @@ var LoginRouter = Backbone.Router.extend({
       });
     });
   },
-  searchResults: function(){
+  searchResults: function(id){
     ReactDOM.unmountComponentAtNode(appContainer);
-    ReactDOM.render(
-      React.createElement(FoundSearch), document.getElementById('app')
-    );
+    var searchedBeer = new SearchCollection({id: id});
+    searchedBeer.fetch().then(function(){
+      ReactDOM.render(
+        React.createElement(FoundSearch, {collection: searchedBeer}), document.getElementById('app')
+      );
+    });
   },
   profile: function(){
     ReactDOM.unmountComponentAtNode(appContainer);

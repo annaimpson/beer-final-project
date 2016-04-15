@@ -9,8 +9,8 @@ var Mixin = require('backbone-react-component');
 var SearchBrewsListing = React.createClass({
   mixins: [Backbone.React.Component.mixin],
   getNewBreweryPage: function(breweryPage){
-    var searchBreweries = this.props.collection;
-    searchBreweries.getNewBreweryPage(breweryPage);
+    searchedBeer.set('breweryPage', breweryPage);
+    Backbone.history.navigate('searchResults', {trigger: true})
   },
   render: function(){
     console.log(this);
