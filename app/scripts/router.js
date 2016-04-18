@@ -11,7 +11,7 @@ var Brewery = require('./components/brewery.jsx');
 var BreweryModel = require('./models/models.js').BreweryModel;
 var BreweryCollection = require('./models/models.js').BreweryCollection;
 var BeerCollection = require('./models/models.js').BeerCollection;
-var SearchModel = require('./models/models.js').SearchModel;
+var SearchCollection = require('./models/models.js').SearchCollection;
 var Profile = require('./components/profile.jsx');
 
 var appContainer = document.getElementById('app');
@@ -26,7 +26,7 @@ var LoginRouter = Backbone.Router.extend({
     '': 'login',
     'homePage': 'homePage',
     'brewery/:id': 'brewery',
-    'searchResults': 'searchResults',
+    'searchResults/:searchTerm': 'searchResults',
     'profile': 'profile',
   },
   login: function(){
@@ -59,12 +59,12 @@ var LoginRouter = Backbone.Router.extend({
       });
     });
   },
-  searchResults: function(id){
+  searchResults: function(searchTerm, id){
     ReactDOM.unmountComponentAtNode(appContainer);
-    var searchedBeer = new SearchModel([], {breweryId: id});
+    var searchedBeer = new SearchCollection([], {searchTerm: searchTerm});
     searchedBeer.fetch().then(function(){
       ReactDOM.render(
-        React.createElement(Search, {model: searchedBeer}), document.getElementById('app')
+        React.createElement(Search, {collection: searchedBeer}), document.getElementById('app')
       );
     });
   },

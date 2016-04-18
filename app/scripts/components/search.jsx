@@ -1,4 +1,5 @@
 var React = require('react');
+var _ = require('underscore');
 var ReactDOM = require('react-dom');
 var Backbone = require('backbone');
 var $ = require('jquery');
@@ -7,15 +8,38 @@ var Parse = require('parse');
 var Mixin = require('backbone-react-component');
 
 var Search = React.createClass({
+  mixins: [Backbone.React.Component.Mixin],
   render: function(){
-    console.log(localStorage.getItem('searchUrl'));
-    var BrewSearchList = this.props.BrewSearchList.models.map(function(beerSearch){
+    console.log(this.props.collection);
+    var BrewSearchList = this.props.collection.map(function(beerSearch){
+      var name;
+      if(!beerSearch.get("style")){
+        name = "";
+      }else{
+        if (!beerSearch.get("style").name){
+          name = "";
+        }
+        else {
+          name = beerSearch.get("style").name
+        }
+      };
+      var description;
+      if(!beerSearch.get("attributes")){
+        description = "";
+      }else{
+        if (!beerSearch.get("attributes").description){
+          description = "";
+        }
+        else {
+          description = beerSearch.get("attributes").description
+        }
+      };
       return (
-        <div>
-          <p>{beerSearch.established}</p>
-          <p>{beerSearch.name}</p>
+        <div key={beerSearch.id}>
+          {description}
+          {name}
         </div>
-      );
+      ) ;
     });
     return (
       <div>
@@ -28,8 +52,7 @@ var Search = React.createClass({
         </div>
         <div className="row">
           <div className = "col-md-4">
-            <p>{this.props.model.get("established")}</p>
-            <p>{this.props.model.get("name")}</p>
+            {BrewSearchList}
           </div>
         </div>
       </div>

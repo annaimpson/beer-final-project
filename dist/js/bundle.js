@@ -11,11 +11,13 @@ require('backbone-react-component');
 
 var BeerDetail = React.createClass({displayName: "BeerDetail",
   getInitialState(){
+    console.log(this.props.beer.attributes);
     return {label:'Drink Up!'}
   },
   setImage: function(){
     localStorage.setItem('labels', this.props.labels)
   },
+
   handleDrinkUp(beer, e){
     e.preventDefault();
     console.log();
@@ -128,23 +130,25 @@ var BreweryDetail = React.createClass({displayName: "BreweryDetail",
             )
           )
         ), 
-        React.createElement("div", {className: "container brewery-body"}, 
-          React.createElement("div", {className: "row"}, 
-            React.createElement("div", {className: "col-md-6"}, 
-              React.createElement("img", {className: "brewery-icon-detail-page", src: localStorage.getItem('image'), alt: "beer is good!!"})
-            ), 
-            React.createElement("div", {className: "col-md-6"}, 
-              React.createElement("div", {className: "brewery-info"}, 
-                React.createElement("div", {className: "brewery-name-page"}, this.props.model.get("name")), 
-                React.createElement("div", {className: "brewery-established-page"}, this.props.model.get("established")), 
-                React.createElement("p", {className: "brewery-description-page"}, this.props.model.get("description"))
+        React.createElement("div", {className: "brewery-body"}, 
+          React.createElement("div", {className: "container"}, 
+            React.createElement("div", {className: "row"}, 
+              React.createElement("div", {className: "col-md-12"}, 
+                React.createElement("div", {className: "brewery-info"}, 
+                  React.createElement("div", {className: "brewery-name-page"}, this.props.model.get("name")), 
+                  React.createElement("div", {className: "brewery-established-page"}, this.props.model.get("established")), 
+                  React.createElement("p", {className: "brewery-description-page"}, this.props.model.get("description"))
+                ), 
+                React.createElement("img", {className: "brewery-icon-detail-page", src: localStorage.getItem('image'), alt: "beer is good!!"})
               )
             )
           )
         ), 
-        React.createElement("div", {className: "container brewery-beers"}, 
-          React.createElement("div", {className: "row"}, 
-            beerList
+        React.createElement("div", {className: "beers-background"}, 
+          React.createElement("div", {className: "container"}, 
+            React.createElement("div", {className: "row"}, 
+              beerList
+            )
           )
         )
       )
@@ -170,14 +174,14 @@ var Header = React.createClass({displayName: "Header",
     var searchBeer = $('.search-input').val();
     var url = 'http://api.brewerydb.com/v2/search'
 
+
     url += '/?key=9b561e70ba317f8d99aaa277053fe0fd';
     url += "&q="+searchBeer;
     url += '&type=beer&withLocations=Y';
-
+    console.log(url);
 
     localStorage.setItem('searchUrl', url);
-
-    Backbone.history.navigate('searchResults', {trigger: true});
+    Backbone.history.navigate('searchResults/' + searchBeer, {trigger: true});
 
   },
   handleToggle: function(e){
@@ -191,10 +195,6 @@ var Header = React.createClass({displayName: "Header",
   handleHomePage: function(){
     Backbone.history.navigate('homePage', {trigger: true});
   },
-
-  handleMap: function(){
-    Backbone.history.navigate('map', {trigger: true});
-  },
   handleLogout: function(){
     Parse.User.logOut();
     Backbone.history.navigate('', {trigger: true});
@@ -202,13 +202,13 @@ var Header = React.createClass({displayName: "Header",
   render: function(){
     return(
       React.createElement("div", null, 
-        React.createElement("div", {className: "container search-header"}, 
+        React.createElement("div", {className: "container-fluid search-header"}, 
           React.createElement("div", {className: "row"}, 
             React.createElement("div", {className: "search-bar"}, 
               React.createElement("div", {className: "row"}, 
                 React.createElement("div", {className: "col-md-8"}, 
                   React.createElement("form", null, 
-                    React.createElement("input", {type: "text", className: "form-control search-input", placeholder: "Search", value: this.filterText})
+                    React.createElement("input", {id: "searched-item", type: "text", className: "form-control search-input", placeholder: "Search", value: this.filterText})
                   ), 
                   React.createElement("button", {onClick: this.handleSearch, type: "button", className: "btn btn-primary submit-button-homepage"}, "Submit")
                 ), 
@@ -226,7 +226,6 @@ var Header = React.createClass({displayName: "Header",
         React.createElement("div", {className: "nav-toggle", style: {"display": "none"}}, 
             React.createElement("button", {onClick: this.handleProfile, className: "nav-button1"}, React.createElement("h4", {className: "profile-toggle"}, "Profile")), 
             React.createElement("button", {onClick: this.handleHomePage, className: "nav-button2"}, React.createElement("h4", {className: "home-toggle"}, "Home Page")), 
-            React.createElement("button", {onClick: this.handleMap, className: "nav-button3"}, React.createElement("h4", {className: "map-toggle"}, "Map")), 
             React.createElement("button", {onClick: this.handleLogout, className: "nav-button4"}, React.createElement("h4", {className: "logout-toggle"}, "Logout"))
         )
       )
@@ -322,22 +321,24 @@ var searchAndNav = React.createClass({displayName: "searchAndNav",
             )
           )
         ), 
-        React.createElement("div", {className: "container latest-breweries-list"}, 
-          React.createElement("div", {className: "row"}, 
-            BreweryList
-          ), 
-          React.createElement("div", {className: "row"}, 
-            React.createElement("nav", null, 
-              React.createElement("ul", {className: "pagination pagination-buttons"}, 
-                React.createElement("li", null, 
-                  React.createElement("a", {href: "#", "aria-label": "Previous"}, 
-                    React.createElement("span", {"aria-hidden": "true"}, "«")
-                  )
-                ), 
-                pageLinks, 
-                React.createElement("li", null, 
-                  React.createElement("a", {href: "#", "aria-label": "Next"}, 
-                    React.createElement("span", {"aria-hidden": "true"}, "»")
+        React.createElement("div", {className: "home-page-background"}, 
+          React.createElement("div", {className: "container latest-breweries-list"}, 
+            React.createElement("div", {className: "row"}, 
+              BreweryList
+            ), 
+            React.createElement("div", {className: "row"}, 
+              React.createElement("nav", null, 
+                React.createElement("ul", {className: "pagination pagination-buttons"}, 
+                  React.createElement("li", null, 
+                    React.createElement("a", {href: "#", "aria-label": "Previous"}, 
+                      React.createElement("span", {"aria-hidden": "true"}, "«")
+                    )
+                  ), 
+                  pageLinks, 
+                  React.createElement("li", null, 
+                    React.createElement("a", {href: "#", "aria-label": "Next"}, 
+                      React.createElement("span", {"aria-hidden": "true"}, "»")
+                    )
                   )
                 )
               )
@@ -593,37 +594,10 @@ var ProfilePage = React.createClass({displayName: "ProfilePage",
       icon: ['icon'],
       name: 'name',
       description: 'description',
-      abvMin: 'abvMin'
+      abvMin: 'abvMin',
+      file: '',
+      images: null,
     };
-  },
-
-  handleFile: function(e) {
-   var file = e.target.files[0];
-   var images = this.state.images;
-   images.push(new Parse.File(file.name, file));
-   this.setState({'images': images});
- },
-
- handleSubmit: function(e){
-    e.preventDefault();
-    var self = this;
-    var router = this.props.router;
-    var parseImages = this.state.images.map(function(image){
-      image.save();
-      return image;
-    });
-  var userProfile = new model.ProfilePicModel();
-    userProfile.set({
-      'images': parseImages
-    });
-    userProfile.save(null, {
-      success: function(userProfile) {
-        alert('New product created');
-      },
-      error: function(error) {
-        console.log(error);
-      }
-    });
   },
 
   handleFavorite: function(){
@@ -645,6 +619,28 @@ var ProfilePage = React.createClass({displayName: "ProfilePage",
           console.log(error);
         }
       });
+    var profilePicture = Parse.User.current().get('Images').toJSON().url;
+      this.setState({
+        images: profilePicture,
+    });
+  },
+
+  handleUploadProfilePicture: function(e){
+    var self = this;
+    var file = e.target.files[0];
+    this.setState({'Images': file});
+    console.log('file', file);
+    var name = file.name;
+    var parseFile = new Parse.File(name, file);
+    parseFile.save().then(function(result){
+      var user = Parse.User.current();
+      user.set('Images', result);
+      user.save();
+    });
+  },
+
+  handleSubmit: function(e){
+    e.preventDefault();
   },
   render: function(){
     var Username = Parse.User.current().getUsername();
@@ -655,12 +651,23 @@ var ProfilePage = React.createClass({displayName: "ProfilePage",
       favoritesList = "";
     }else{
       var favoritesList = this.state.favorites.map(function(eachbeer){
+        var image;
+        if(!eachbeer.get("labels")){
+          image = "././images/pint.png";
+        }else{
+          if (!eachbeer.get("labels").icon){
+            image = "././images/pint.png";
+          }
+          else {
+            image = eachbeer.get("labels").icon
+          }
+        };
         var beer = eachbeer.attributes;
         return(
           React.createElement("div", {className: "favorite-beer-info"}, 
             React.createElement("div", {className: "row"}, 
               React.createElement("div", {className: "col-md-6"}, 
-                React.createElement("img", {className: "brewery-icon-detail-page", src: localStorage.getItem('labels'), alt: "beer is good!!"}), 
+                React.createElement("img", {className: "brewery-icon-detail-page", src: image, alt: "beer is good!!"}), 
                 React.createElement("p", {className: "favorite-beer-name"}, beer.name), 
                 React.createElement("h6", {className: "favorite-beer-abvMin"}, beer.abvMin)
               ), 
@@ -672,9 +679,6 @@ var ProfilePage = React.createClass({displayName: "ProfilePage",
         )
       });
     };
-
-
-
     return(
       React.createElement("div", null, 
         React.createElement("div", {className: "container-fluid header"}, 
@@ -688,8 +692,8 @@ var ProfilePage = React.createClass({displayName: "ProfilePage",
           React.createElement("div", {className: "row"}, 
             React.createElement("div", {className: "col-md-6"}, 
               React.createElement("div", {className: "picture"}, 
-                React.createElement("img", {className: "empty-profile-pic", src: "images/blank-profile.png", alt: ""}), 
-                  React.createElement("input", {type: "file", onChange: this.handleFile, className: "btn btn-default add-button"}), 
+                React.createElement("img", {className: "empty-profile-pic", src: this.state.images, alt: ""}), 
+                  React.createElement("input", {type: "file", onChange: this.handleUploadProfilePicture, className: "btn btn-default add-button"}), 
                   React.createElement("button", {type: "button", onClick: this.handleSubmit, type: "submit", className: "btn btn-default submit-picture-button"}, React.createElement("a", {href: "#createproduct"}, "Submit"))
               )
             ), 
@@ -732,6 +736,7 @@ module.exports = ProfilePage;
 },{"../models/models.js":9,"./header.jsx":3,"backbone":30,"backbone-react-component":29,"jquery":163,"parse":234,"react":524,"react-dom":368,"react/lib/LinkedStateMixin":413}],7:[function(require,module,exports){
 "use strict";
 var React = require('react');
+var _ = require('underscore');
 var ReactDOM = require('react-dom');
 var Backbone = require('backbone');
 var $ = require('jquery');
@@ -740,15 +745,38 @@ var Parse = require('parse');
 var Mixin = require('backbone-react-component');
 
 var Search = React.createClass({displayName: "Search",
+  mixins: [Backbone.React.Component.Mixin],
   render: function(){
-    console.log(localStorage.getItem('searchUrl'));
-    var BrewSearchList = this.props.BrewSearchList.models.map(function(beerSearch){
+    console.log(this.props.collection);
+    var BrewSearchList = this.props.collection.map(function(beerSearch){
+      var name;
+      if(!beerSearch.get("style")){
+        name = "";
+      }else{
+        if (!beerSearch.get("style").name){
+          name = "";
+        }
+        else {
+          name = beerSearch.get("style").name
+        }
+      };
+      var description;
+      if(!beerSearch.get("attributes")){
+        description = "";
+      }else{
+        if (!beerSearch.get("attributes").description){
+          description = "";
+        }
+        else {
+          description = beerSearch.get("attributes").description
+        }
+      };
       return (
-        React.createElement("div", null, 
-          React.createElement("p", null, beerSearch.established), 
-          React.createElement("p", null, beerSearch.name)
+        React.createElement("div", {key: beerSearch.id}, 
+          description, 
+          name
         )
-      );
+      ) ;
     });
     return (
       React.createElement("div", null, 
@@ -761,8 +789,7 @@ var Search = React.createClass({displayName: "Search",
         ), 
         React.createElement("div", {className: "row"}, 
           React.createElement("div", {className: "col-md-4"}, 
-            React.createElement("p", null, this.props.model.get("established")), 
-            React.createElement("p", null, this.props.model.get("name"))
+            BrewSearchList
           )
         )
       )
@@ -772,7 +799,7 @@ var Search = React.createClass({displayName: "Search",
 
 module.exports = Search;
 
-},{"./header.jsx":3,"backbone":30,"backbone-react-component":29,"jquery":163,"parse":234,"react":524,"react-dom":368}],8:[function(require,module,exports){
+},{"./header.jsx":3,"backbone":30,"backbone-react-component":29,"jquery":163,"parse":234,"react":524,"react-dom":368,"underscore":528}],8:[function(require,module,exports){
 "use strict";
 var Backbone = require('backbone');
 var $ = require('jquery');
@@ -804,16 +831,14 @@ var FavoriteBeer = Parse.Object.extend('FavoriteBeer', {
 
 });
 
-var ProfilePicModel = Backbone.Model.extend('ProfilePicModel');
-
-var ProfilePicCollection = Backbone.Collection.extend({
-  model: ProfilePicModel,
+var User = Parse.Object.extend('User');
+var UserCollection = Backbone.Collection.extend({
+  model: User,
   url: Host,
   parse: function(data){
     return data;
   }
 });
-
 
 var BeerCollection = Backbone.Collection.extend({
   urlRoot: Host + '/brewery/',
@@ -859,7 +884,6 @@ var BreweryCollection = Backbone.Collection.extend({
   }
 });
 
-
 var SearchModel = Backbone.Model.extend({
   url: Host + '/search/',
   parse: function(data){
@@ -869,9 +893,13 @@ var SearchModel = Backbone.Model.extend({
 
 var SearchCollection = Backbone.Collection.extend({
   model: Backbone.Model.extend({}),
+  initialize: function(something, opts){
+    this.searchTerm = opts.searchTerm;
+  },
   url: function(){
-    var searchUrl = Host + '/search/';
-    return searchUrl + '?' + $.param({type: this.breweryPage});
+    var searchedItem = this.searchTerm;
+    var searchUrl = `${Host}/search/?q=${searchedItem}`;
+    return searchUrl;
   },
   getNewBreweryPage: function(breweryPage){
     this.breweryPage = breweryPage;
@@ -891,9 +919,9 @@ var SearchCollection = Backbone.Collection.extend({
 });
 
 module.exports = {
+  'User': User,
+  'UserCollection': UserCollection,
   'FavoriteBeer': FavoriteBeer,
-  'ProfilePicModel': ProfilePicModel,
-  'ProfilePicCollection': ProfilePicCollection,
   'BreweryModel': BreweryModel,
   'BreweryCollection': BreweryCollection,
   'SearchModel': SearchModel,
@@ -916,7 +944,7 @@ var Brewery = require('./components/brewery.jsx');
 var BreweryModel = require('./models/models.js').BreweryModel;
 var BreweryCollection = require('./models/models.js').BreweryCollection;
 var BeerCollection = require('./models/models.js').BeerCollection;
-var SearchModel = require('./models/models.js').SearchModel;
+var SearchCollection = require('./models/models.js').SearchCollection;
 var Profile = require('./components/profile.jsx');
 
 var appContainer = document.getElementById('app');
@@ -931,7 +959,7 @@ var LoginRouter = Backbone.Router.extend({
     '': 'login',
     'homePage': 'homePage',
     'brewery/:id': 'brewery',
-    'searchResults': 'searchResults',
+    'searchResults/:searchTerm': 'searchResults',
     'profile': 'profile',
   },
   login: function(){
@@ -964,12 +992,12 @@ var LoginRouter = Backbone.Router.extend({
       });
     });
   },
-  searchResults: function(id){
+  searchResults: function(searchTerm, id){
     ReactDOM.unmountComponentAtNode(appContainer);
-    var searchedBeer = new SearchModel([], {breweryId: id});
+    var searchedBeer = new SearchCollection([], {searchTerm: searchTerm});
     searchedBeer.fetch().then(function(){
       ReactDOM.render(
-        React.createElement(Search, {model: searchedBeer}), document.getElementById('app')
+        React.createElement(Search, {collection: searchedBeer}), document.getElementById('app')
       );
     });
   },

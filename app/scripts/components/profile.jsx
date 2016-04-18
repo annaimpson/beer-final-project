@@ -16,37 +16,10 @@ var ProfilePage = React.createClass({
       icon: ['icon'],
       name: 'name',
       description: 'description',
-      abvMin: 'abvMin'
+      abvMin: 'abvMin',
+      file: '',
+      images: null,
     };
-  },
-
-  handleFile: function(e) {
-   var file = e.target.files[0];
-   var images = this.state.images;
-   images.push(new Parse.File(file.name, file));
-   this.setState({'images': images});
- },
-
- handleSubmit: function(e){
-    e.preventDefault();
-    var self = this;
-    var router = this.props.router;
-    var parseImages = this.state.images.map(function(image){
-      image.save();
-      return image;
-    });
-  var userProfile = new model.ProfilePicModel();
-    userProfile.set({
-      'images': parseImages
-    });
-    userProfile.save(null, {
-      success: function(userProfile) {
-        alert('New product created');
-      },
-      error: function(error) {
-        console.log(error);
-      }
-    });
   },
 
   handleFavorite: function(){
@@ -68,6 +41,28 @@ var ProfilePage = React.createClass({
           console.log(error);
         }
       });
+    var profilePicture = Parse.User.current().get('Images').toJSON().url;
+      this.setState({
+        images: profilePicture,
+    });
+  },
+
+  handleUploadProfilePicture: function(e){
+    var self = this;
+    var file = e.target.files[0];
+    this.setState({'Images': file});
+    console.log('file', file);
+    var name = file.name;
+    var parseFile = new Parse.File(name, file);
+    parseFile.save().then(function(result){
+      var user = Parse.User.current();
+      user.set('Images', result);
+      user.save();
+    });
+  },
+
+  handleSubmit: function(e){
+    e.preventDefault();
   },
   render: function(){
     var Username = Parse.User.current().getUsername();
@@ -78,12 +73,23 @@ var ProfilePage = React.createClass({
       favoritesList = "";
     }else{
       var favoritesList = this.state.favorites.map(function(eachbeer){
+        var image;
+        if(!eachbeer.get("labels")){
+          image = "././images/pint.png";
+        }else{
+          if (!eachbeer.get("labels").icon){
+            image = "././images/pint.png";
+          }
+          else {
+            image = eachbeer.get("labels").icon
+          }
+        };
         var beer = eachbeer.attributes;
         return(
           <div className="favorite-beer-info">
             <div className="row">
               <div className="col-md-6">
-                <img className="brewery-icon-detail-page" src={localStorage.getItem('labels')} alt="beer is good!!"/>
+                <img className="brewery-icon-detail-page" src={image} alt="beer is good!!"/>
                 <p className="favorite-beer-name">{beer.name}</p>
                 <h6 className="favorite-beer-abvMin">{beer.abvMin}</h6>
               </div>
@@ -95,9 +101,6 @@ var ProfilePage = React.createClass({
         )
       });
     };
-
-
-
     return(
       <div>
         <div className="container-fluid header">
@@ -111,8 +114,8 @@ var ProfilePage = React.createClass({
           <div className="row">
             <div className="col-md-6">
               <div className="picture">
-                <img className="empty-profile-pic" src="images/blank-profile.png" alt=""/>
-                  <input type="file" onChange={this.handleFile} className="btn btn-default add-button"/>
+                <img className="empty-profile-pic" src={this.state.images} alt=""/>
+                  <input type="file" onChange={this.handleUploadProfilePicture} className="btn btn-default add-button"/>
                   <button type="button" onClick={this.handleSubmit} type="submit" className="btn btn-default submit-picture-button"><a href="#createproduct">Submit</a></button>
               </div>
             </div>

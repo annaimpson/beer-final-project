@@ -83,26 +83,28 @@ var searchAndNav = React.createClass({
             </div>
           </div>
         </div>
-        <div className="container latest-breweries-list">
-          <div className="row">
-            {BreweryList}
-          </div>
-          <div className="row">
-            <nav>
-              <ul className="pagination pagination-buttons">
-                <li>
-                  <a href="#" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                  </a>
-                </li>
-                {pageLinks}
-                <li>
-                  <a href="#" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                  </a>
-                </li>
-              </ul>
-            </nav>
+        <div className="home-page-background">
+          <div className="container latest-breweries-list">
+            <div className="row">
+              {BreweryList}
+            </div>
+            <div className="row">
+              <nav>
+                <ul className="pagination pagination-buttons">
+                  <li>
+                    <a href="#" aria-label="Previous">
+                      <span aria-hidden="true">&laquo;</span>
+                    </a>
+                  </li>
+                  {pageLinks}
+                  <li>
+                    <a href="#" aria-label="Next">
+                      <span aria-hidden="true">&raquo;</span>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
           </div>
         </div>
       </div>

@@ -12,14 +12,14 @@ var Header = React.createClass({
     var searchBeer = $('.search-input').val();
     var url = 'http://api.brewerydb.com/v2/search'
 
+
     url += '/?key=9b561e70ba317f8d99aaa277053fe0fd';
     url += "&q="+searchBeer;
     url += '&type=beer&withLocations=Y';
-
+    console.log(url);
 
     localStorage.setItem('searchUrl', url);
-
-    Backbone.history.navigate('searchResults', {trigger: true});
+    Backbone.history.navigate('searchResults/' + searchBeer, {trigger: true});
 
   },
   handleToggle: function(e){
@@ -33,10 +33,6 @@ var Header = React.createClass({
   handleHomePage: function(){
     Backbone.history.navigate('homePage', {trigger: true});
   },
-
-  handleMap: function(){
-    Backbone.history.navigate('map', {trigger: true});
-  },
   handleLogout: function(){
     Parse.User.logOut();
     Backbone.history.navigate('', {trigger: true});
@@ -44,13 +40,13 @@ var Header = React.createClass({
   render: function(){
     return(
       <div>
-        <div className="container search-header">
+        <div className="container-fluid search-header">
           <div className="row">
             <div className="search-bar">
               <div className="row">
                 <div className="col-md-8">
                   <form>
-                    <input type="text" className="form-control search-input" placeholder="Search" value={this.filterText}/>
+                    <input id="searched-item" type="text" className="form-control search-input" placeholder="Search" value={this.filterText}/>
                   </form>
                   <button onClick={this.handleSearch} type="button" className="btn btn-primary submit-button-homepage">Submit</button>
                 </div>
@@ -68,7 +64,6 @@ var Header = React.createClass({
         <div className="nav-toggle" style={{"display": "none"}}>
             <button onClick={this.handleProfile} className="nav-button1"><h4 className="profile-toggle">Profile</h4></button>
             <button onClick={this.handleHomePage} className="nav-button2"><h4 className="home-toggle">Home Page</h4></button>
-            <button onClick={this.handleMap} className="nav-button3"><h4 className="map-toggle">Map</h4></button>
             <button onClick={this.handleLogout} className="nav-button4"><h4 className="logout-toggle">Logout</h4></button>
         </div>
       </div>

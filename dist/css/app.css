@@ -5964,6 +5964,7 @@ img {
   font-family: "Montserrat";
   font-weight: bold;
   font-size: 25px;
+  color: #665e57;
   letter-spacing: 5px; }
 
 .signin-username {
@@ -5997,25 +5998,44 @@ img {
 .signup-password {
   margin-left: 20px; }
 
+.header {
+  background-color: #ffefb6; }
+
 .search-input {
-  margin-top: 50px;
-  width: 600px;
+  margin-top: 25px;
+  margin-left: 110px;
+  width: 300px;
   height: 50px;
-  display: inline-block; }
+  display: inline-block;
+  border: none;
+  background-color: #ffefb6;
+  font-family: "Montserrat";
+  letter-spacing: 2px;
+  font-size: 15px;
+  color: #c6db8b;
+  font-weight: bold; }
 
 .submit-button-homepage {
   display: inline-block;
-  margin-left: 618px;
-  margin-top: -74px; }
+  margin-left: 430px;
+  margin-top: -72px;
+  background-color: #ccc8c4;
+  border: none;
+  font-family: "Montserrat";
+  font-weight: lighter;
+  text-transform: uppercase; }
 
 .nav-button {
-  margin-top: 50px;
+  margin-top: 30px;
+  margin-right: 300px;
+  color: #665e57;
+  background-color: #ffefb6;
   display: inline-block;
   float: right;
   border: none; }
 
 .nav-toggle {
-  background-color: #cdced7;
+  background-color: #ccc8c4;
   width: 300px;
   height: 1200px;
   margin-top: -120px;
@@ -6024,16 +6044,21 @@ img {
 
 .profile-toggle,
 .home-toggle,
-.map-toggle,
 .logout-toggle {
-  margin-top: 100px; }
+  margin-top: 150px;
+  color: #665e57;
+  font-family: "Montserrat";
+  font-weight: bold;
+  text-transform: uppercase;
+  border-bottom: 1px solid #ffaa62;
+  padding-bottom: 75px; }
 
 .nav-button1,
 .nav-button2,
 .nav-button3,
 .nav-button4 {
   border: none;
-  background-color: #cdced7;
+  background-color: #ccc8c4;
   width: 200px;
   margin-left: 60px; }
 
@@ -6071,9 +6096,13 @@ img {
   margin-top: 50px;
   margin-left: 380px; }
 
+.home-page-background {
+  background-color: #ffefb6;
+  margin-top: -200px; }
+
 .latest-brewery-info {
-  border: 1px solid #cacfd2;
-  border-radius: 5px;
+  border-radius: 7px;
+  background-color: #ffaa62;
   padding-top: 15px;
   padding-left: 15px;
   padding-right: 15px;
@@ -6081,9 +6110,11 @@ img {
   width: 350px;
   height: 300px;
   margin-right: 25px;
-  margin-bottom: 30px; }
+  margin-bottom: 17px;
+  margin-top: 20px; }
 
 .brewery-icon {
+  border-radius: 50%;
   width: 100px;
   height: 100px;
   margin-top: 50px;
@@ -6091,54 +6122,73 @@ img {
   margin-left: 107px; }
 
 .latest-brewery-name {
+  font-family: "Montserrat";
+  font-weight: bold;
+  color: #665e57;
   font-size: 15px;
-  color: navy;
-  letter-spacing: 3px;
+  letter-spacing: 2px;
   text-align: center; }
 
 .latest-brewery-established {
+  font-family: "Montserrat";
   font-size: 12px;
-  color: navy;
+  color: #665e57;
   letter-spacing: 1.5px;
   text-align: center; }
 
 .brewery-icon-detail-page {
-  width: 200px;
-  height: 200px;
-  margin-top: 200px; }
+  width: 80px;
+  height: 80px;
+  margin-top: -600px;
+  margin-left: 520px; }
 
 .brewery-info {
   margin-top: 200px;
-  margin-bottom: 300px; }
+  margin-bottom: 400px; }
 
 .brewery-name-page {
   font-size: 50px;
-  font-weight: lighter; }
+  font-family: "Montserrat";
+  font-weight: bold;
+  letter-spacing: 7px;
+  text-transform: uppercase;
+  text-align: center; }
 
 .brewery-established-page {
-  font-size: 17px; }
+  font-family: "Montserrat";
+  font-size: 17px;
+  text-align: center;
+  margin-top: 30px; }
 
 .brewery-description-page {
+  font-family: "Montserrat";
   font-size: 14px;
   letter-spacing: .5px;
+  line-height: 31px;
   margin-top: 25px; }
 
+.beers-background {
+  background-color: #c6db8b; }
+
 .beer-info-detail-page {
-  border: 1px solid #cacfd2;
   border-radius: 5px;
+  background-color: white;
   padding-top: 15px;
   padding-left: 15px;
   padding-right: 15px;
   padding-bottom: 25px;
   text-align: center;
-  margin-bottom: 25px; }
+  margin-bottom: 25px;
+  margin-top: 150px;
+  font-family: "Montserrat"; }
 
 .beer-label {
   width: 100px;
   height: 100px;
-  margin-bottom: 30px; }
+  vertical-align: middle; }
 
 .beer-name {
+  font-family: "Montserrat";
   font-size: 30px;
   font-weight: lighter;
   margin-right: 20px;
@@ -6149,19 +6199,22 @@ img {
   text-align: center; }
 
 .beer-abv {
+  font-family: "Montserrat";
   margin-top: 15px;
   font-size: 10px;
   letter-spacing: .5px; }
 
 .beer-description {
+  font-family: "Montserrat";
   margin-top: 25px;
   margin-right: 70px;
   margin-bottom: 50px;
   letter-spacing: .5px;
   font-size: 10px;
-  line-height: 21px; }
+  line-height: 28px; }
 
 .drinkup-button {
+  font-family: "Montserrat";
   margin-bottom: 25px; }
 
 /*# sourceMappingURL=app.css.map */

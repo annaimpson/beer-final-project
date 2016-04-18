@@ -9,11 +9,13 @@ require('backbone-react-component');
 
 var BeerDetail = React.createClass({
   getInitialState(){
+    console.log(this.props.beer.attributes);
     return {label:'Drink Up!'}
   },
   setImage: function(){
     localStorage.setItem('labels', this.props.labels)
   },
+
   handleDrinkUp(beer, e){
     e.preventDefault();
     console.log();

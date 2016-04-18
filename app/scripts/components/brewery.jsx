@@ -28,23 +28,25 @@ var BreweryDetail = React.createClass({
             </div>
           </div>
         </div>
-        <div className="container brewery-body">
-          <div className="row">
-            <div className="col-md-6">
-              <img className="brewery-icon-detail-page" src={localStorage.getItem('image')} alt="beer is good!!"/>
-            </div>
-            <div className="col-md-6">
-              <div className="brewery-info">
-                <div className="brewery-name-page">{this.props.model.get("name")}</div>
-                <div className="brewery-established-page">{this.props.model.get("established")}</div>
-                <p className="brewery-description-page">{this.props.model.get("description")}</p>
+        <div className="brewery-body">
+          <div className="container">
+            <div className="row">
+              <div className="col-md-12">
+                <div className="brewery-info">
+                  <div className="brewery-name-page">{this.props.model.get("name")}</div>
+                  <div className="brewery-established-page">{this.props.model.get("established")}</div>
+                  <p className="brewery-description-page">{this.props.model.get("description")}</p>
+                </div>
+                <img className="brewery-icon-detail-page" src={localStorage.getItem('image')} alt="beer is good!!"/>
               </div>
             </div>
           </div>
         </div>
-        <div className="container brewery-beers">
-          <div className="row">
-            {beerList}
+        <div className="beers-background">
+          <div className="container">
+            <div className="row">
+              {beerList}
+            </div>
           </div>
         </div>
       </div>

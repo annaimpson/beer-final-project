@@ -16,16 +16,14 @@ var FavoriteBeer = Parse.Object.extend('FavoriteBeer', {
 
 });
 
-var ProfilePicModel = Backbone.Model.extend('ProfilePicModel');
-
-var ProfilePicCollection = Backbone.Collection.extend({
-  model: ProfilePicModel,
+var User = Parse.Object.extend('User');
+var UserCollection = Backbone.Collection.extend({
+  model: User,
   url: Host,
   parse: function(data){
     return data;
   }
 });
-
 
 var BeerCollection = Backbone.Collection.extend({
   urlRoot: Host + '/brewery/',
@@ -71,7 +69,6 @@ var BreweryCollection = Backbone.Collection.extend({
   }
 });
 
-
 var SearchModel = Backbone.Model.extend({
   url: Host + '/search/',
   parse: function(data){
@@ -81,9 +78,13 @@ var SearchModel = Backbone.Model.extend({
 
 var SearchCollection = Backbone.Collection.extend({
   model: Backbone.Model.extend({}),
+  initialize: function(something, opts){
+    this.searchTerm = opts.searchTerm;
+  },
   url: function(){
-    var searchUrl = Host + '/search/';
-    return searchUrl + '?' + $.param({type: this.breweryPage});
+    var searchedItem = this.searchTerm;
+    var searchUrl = `${Host}/search/?q=${searchedItem}`;
+    return searchUrl;
   },
   getNewBreweryPage: function(breweryPage){
     this.breweryPage = breweryPage;
@@ -103,9 +104,9 @@ var SearchCollection = Backbone.Collection.extend({
 });
 
 module.exports = {
+  'User': User,
+  'UserCollection': UserCollection,
   'FavoriteBeer': FavoriteBeer,
-  'ProfilePicModel': ProfilePicModel,
-  'ProfilePicCollection': ProfilePicCollection,
   'BreweryModel': BreweryModel,
   'BreweryCollection': BreweryCollection,
   'SearchModel': SearchModel,
