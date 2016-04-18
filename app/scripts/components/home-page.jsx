@@ -4,6 +4,7 @@ var Backbone = require('backbone');
 var $ = require('jquery');
 var Parse = require('parse');
 var Mixin = require('backbone-react-component');
+var SearchModel = require('../models/models.js').SearchModel;
 var Header = require('./header.jsx');
 
 
@@ -13,10 +14,25 @@ var PageLink= React.createClass({
     this.props.getNewPage(this.props.index);
     console.log(this);
   },
+  getNewBreweryPage: function(breweryPage){
+    var searchedBeer = new SearchModel();
+    searchedBeer.set('name', beer.get('name'));
+    Backbone.history.navigate('searchResults', {trigger: true});
+    searchedBeer.save(null, {
+      success: function(search){
+        console.log(search);
+      },
+      error: function(error){
+        console.log(error);
+      }
+    });
+  },
   render: function(){
     return (
       <li>
-        <a href={this.props.index} onClick={this.getNewPage}>{this.props.index}</a>
+        <a href={this.props.index} onClick={this.getNewPage}>
+          {this.props.index}
+        </a>
       </li>
     );
   }
@@ -27,10 +43,10 @@ var searchAndNav = React.createClass({
     var BreweryList = this.props.collection.map(function(model){
     var image;
     if(!model.get("images")){
-      image = "././images/beer-icon.png";
+      image = "././images/pint.png";
     }else{
       if (!model.get("images").icon){
-        image = "././images/beer-icon.png";
+        image = "././images/pint.png";
       }
       else {
         image = model.get("images").icon

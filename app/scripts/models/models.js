@@ -12,6 +12,9 @@ var Host = 'http://localhost:3000';
 //     return
 //   }
 // });
+var FavoriteBeer = Parse.Object.extend('FavoriteBeer', {
+
+});
 
 var ProfilePicModel = Backbone.Model.extend('ProfilePicModel');
 
@@ -23,12 +26,6 @@ var ProfilePicCollection = Backbone.Collection.extend({
   }
 });
 
-var BreweryModel = Backbone.Model.extend({
-  urlRoot: Host + '/brewery/',
-  parse: function(data){
-    return data.data;
-  }
-});
 
 var BeerCollection = Backbone.Collection.extend({
   urlRoot: Host + '/brewery/',
@@ -43,6 +40,13 @@ var BeerCollection = Backbone.Collection.extend({
   }
 });
 
+
+var BreweryModel = Backbone.Model.extend({
+  urlRoot: Host + '/brewery/',
+  parse: function(data){
+    return data.data;
+  }
+});
 
 var BreweryCollection = Backbone.Collection.extend({
   model: Backbone.Model.extend({}),
@@ -69,31 +73,37 @@ var BreweryCollection = Backbone.Collection.extend({
 
 
 var SearchModel = Backbone.Model.extend({
-  searchUrl: Host + '/search/',
+  url: Host + '/search/',
   parse: function(data){
     return data.data;
   }
 });
 
 var SearchCollection = Backbone.Collection.extend({
-  model: SearchModel,
-  searchUrl: function(){
+  model: Backbone.Model.extend({}),
+  url: function(){
     var searchUrl = Host + '/search/';
-    return searchUrl + '?' + $.param({type: this.searchBreweriesS});
+    return searchUrl + '?' + $.param({type: this.breweryPage});
   },
   getNewBreweryPage: function(breweryPage){
-    this.searchUrl = searchUrl;
-
+    this.breweryPage = breweryPage;
     this.fetch().then(function(data){
       console.log(data);
     }, function(error){
       console.log(error);
     });
     return this;
+  },
+  getBeerResults: function(beerResults){
+    this.beerResults = beerResults;
+  },
+  parse: function(data){
+    return data.data;
   }
 });
 
 module.exports = {
+  'FavoriteBeer': FavoriteBeer,
   'ProfilePicModel': ProfilePicModel,
   'ProfilePicCollection': ProfilePicCollection,
   'BreweryModel': BreweryModel,

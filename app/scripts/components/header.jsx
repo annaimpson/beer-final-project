@@ -16,31 +16,11 @@ var Header = React.createClass({
     url += "&q="+searchBeer;
     url += '&type=beer&withLocations=Y';
 
-    console.log(url);
 
-    fetchJSONP(url, logData);
+    localStorage.setItem('searchUrl', url);
 
-    function fetchJSONP(url, callback) {
-             var callbackName = 'jsonp_callback_' + Math.round(100000 * Math.random());
-             var script = document.createElement('script');
-             window[callbackName] = function(data) {
-                 delete window[callbackName];
-                 document.body.removeChild(script);
-                 callback(data);
-             };
-             script.src = url + (url.indexOf('?') >= 0 ? '&' : '?') + 'callback=' + callbackName;
-             document.body.appendChild(script);
-         }
-     function logData(data){
-       console.log('data is: ', data);
-       var arrayData = data.results;
-       console.log('arrayData is: ', arrayData);
-     }
-     Backbone.history.navigate('searchResults', {trigger: true});
-     this.props.collection.create({
-       beer: searchBeer,
-       zipcode: searchLocation
-     });
+    Backbone.history.navigate('searchResults', {trigger: true});
+
   },
   handleToggle: function(e){
     e.preventDefault();
@@ -70,7 +50,7 @@ var Header = React.createClass({
               <div className="row">
                 <div className="col-md-8">
                   <form>
-                    <input type="text" className="form-control search-input" placeholder="Search"/>
+                    <input type="text" className="form-control search-input" placeholder="Search" value={this.filterText}/>
                   </form>
                   <button onClick={this.handleSearch} type="button" className="btn btn-primary submit-button-homepage">Submit</button>
                 </div>

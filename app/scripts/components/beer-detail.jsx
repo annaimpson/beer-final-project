@@ -4,17 +4,35 @@ var Backbone = require('backbone');
 var $ = require('jquery');
 var Parse = require('parse');
 var Header = require('./header.jsx');
+var FavoriteBeer = require('../models/models.js').FavoriteBeer;
 require('backbone-react-component');
 
 var BeerDetail = React.createClass({
   getInitialState(){
     return {label:'Drink Up!'}
   },
-  handleDrinkUp(e){
+  setImage: function(){
+    localStorage.setItem('labels', this.props.labels)
+  },
+  handleDrinkUp(beer, e){
     e.preventDefault();
+    console.log();
+    var favoriteBeer = new FavoriteBeer();
     var user = Parse.User.current();
+    favoriteBeer.set('User', user);
+    favoriteBeer.set('name', beer.get('name'));
+    favoriteBeer.set('description', beer.get('style').description);
+    favoriteBeer.set('icon', beer.get('labels').icon);
+    favoriteBeer.set('abvMin', beer.get('style').abvMin);
+    favoriteBeer.save(null, {
+      success: function(favorite){
+        console.log(favorite);
+      },
+      error: function(error){
+        console.log(error);
+      }
+    });
     this.setState({label: 'On Your Drink List'});
-    console.log(Parse.User.current());
   },
   render(){
     var beerDescription;
@@ -43,10 +61,10 @@ var BeerDetail = React.createClass({
 
     var beerLabel;
     if(!this.props.beer.get("labels")){
-      beerLabel = "././images/beer-icon.png";
+      beerLabel = "././images/pint.png";
     }else{
       if (!this.props.beer.get("labels").icon){
-        beerLabel = "././images/beer-icon.png";
+        beerLabel = "././images/pint.png";
       }
       else {
         beerLabel = this.props.beer.get("labels").icon
@@ -66,7 +84,7 @@ var BeerDetail = React.createClass({
         </div>
         <div className="row">
           <div className="col-md-12">
-            <button onClick={this.handleDrinkUp} className="btn btn-default drinkup-button">{this.state.label}</button>
+            <button onClick={this.handleDrinkUp.bind(this, this.props.beer)} className="btn btn-default drinkup-button">{this.state.label}</button>
           </div>
         </div>
       </div>

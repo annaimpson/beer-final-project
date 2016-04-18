@@ -11,7 +11,13 @@ require('backbone-react-component');
 var ProfilePage = React.createClass({
   mixins: [LinkedStateMixin],
   getInitialState: function(){
-    return {images: []};
+    return {
+      favorites: [],
+      icon: ['icon'],
+      name: 'name',
+      description: 'description',
+      abvMin: 'abvMin'
+    };
   },
 
   handleFile: function(e) {
@@ -47,9 +53,51 @@ var ProfilePage = React.createClass({
     var user = Parse.User.current();
 
   },
+  componentDidMount: function(){
+    var BeerFavorite = Parse.Object.extend('FavoriteBeer');
+    var self = this;
+      var beerquery = new Parse.Query(BeerFavorite);
+      beerquery.equalTo("User", Parse.User.current());
+      beerquery.find({
+        success: function(results) {
+          self.setState({
+            favorites: results
+          });
+        },
+        error: function(error) {
+          console.log(error);
+        }
+      });
+  },
   render: function(){
     var Username = Parse.User.current().getUsername();
     var Email = Parse.User.current().getEmail();
+
+    var favoritesList;
+    if (this.state.favorites.length == 0){
+      favoritesList = "";
+    }else{
+      var favoritesList = this.state.favorites.map(function(eachbeer){
+        var beer = eachbeer.attributes;
+        return(
+          <div className="favorite-beer-info">
+            <div className="row">
+              <div className="col-md-6">
+                <img className="brewery-icon-detail-page" src={localStorage.getItem('labels')} alt="beer is good!!"/>
+                <p className="favorite-beer-name">{beer.name}</p>
+                <h6 className="favorite-beer-abvMin">{beer.abvMin}</h6>
+              </div>
+              <div className="col-md-6">
+                <p className="favorite-beer-description">{beer.description}</p>
+              </div>
+            </div>
+          </div>
+        )
+      });
+    };
+
+
+
     return(
       <div>
         <div className="container-fluid header">
@@ -78,8 +126,10 @@ var ProfilePage = React.createClass({
         </div>
         <div className="container profile-beers">
           <div className="row">
+
             <div className="col-md-12">
               <div className="favorites-list">
+                {favoritesList}
               </div>
             </div>
           </div>

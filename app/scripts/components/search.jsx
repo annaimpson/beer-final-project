@@ -6,47 +6,35 @@ var Header = require('./header.jsx');
 var Parse = require('parse');
 var Mixin = require('backbone-react-component');
 
-var SearchBrewsListing = React.createClass({
-  mixins: [Backbone.React.Component.mixin],
-  getNewBreweryPage: function(breweryPage){
-    searchedBeer.set('breweryPage', breweryPage);
-    Backbone.history.navigate('searchResults', {trigger: true})
-  },
+var Search = React.createClass({
   render: function(){
-    console.log(this);
-    var BrewList = this.props.BrewList.collection.map(function(model){
+    console.log(localStorage.getItem('searchUrl'));
+    var BrewSearchList = this.props.BrewSearchList.models.map(function(beerSearch){
       return (
-        <SearchBrews
-          established={model.established}
-          name={model.name}
-          key={model.id}
-          image={image}
-        />
-      )
+        <div>
+          <p>{beerSearch.established}</p>
+          <p>{beerSearch.name}</p>
+        </div>
+      );
     });
     return (
-      <div className="row">
-        {BrewList}
-      </div>
-    );
-  }
-});
-
-var SearchBrews = React.createClass({
-  mixins: [Backbone.React.Component.mixin],
-  render: function(){
-    console.log(this.props.model);
-    return(
       <div>
-        <div className = "col-md-4">
-          <p>{this.props.model.get("established")} alt="beer is good!!"</p>
-          <p>{this.props.model.get("name")}</p>
+        <div className="container-fluid header">
+          <div className="row">
+            <div className="col-md-12">
+              <Header/>
+            </div>
+          </div>
+        </div>
+        <div className="row">
+          <div className = "col-md-4">
+            <p>{this.props.model.get("established")}</p>
+            <p>{this.props.model.get("name")}</p>
+          </div>
         </div>
       </div>
     );
   }
 });
 
-
-
-module.exports = SearchBrewsListing;
+module.exports = Search;
