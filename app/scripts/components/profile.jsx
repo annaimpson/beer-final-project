@@ -88,13 +88,11 @@ var ProfilePage = React.createClass({
         return(
           <div className="favorite-beer-info">
             <div className="row">
-              <div className="col-md-6">
-                <img className="brewery-icon-detail-page" src={image} alt="beer is good!!"/>
+              <div className="col-md-12">
                 <p className="favorite-beer-name">{beer.name}</p>
                 <h6 className="favorite-beer-abvMin">{beer.abvMin}</h6>
-              </div>
-              <div className="col-md-6">
                 <p className="favorite-beer-description">{beer.description}</p>
+                <img className="favorite-brewery-icon" src={image} alt="beer is good!!"/>
               </div>
             </div>
           </div>
@@ -110,11 +108,12 @@ var ProfilePage = React.createClass({
             </div>
           </div>
         </div>
+
         <div className="container profile-body">
           <div className="row">
             <div className="col-md-6">
               <div className="picture">
-                <img className="empty-profile-pic" src={this.state.images} alt=""/>
+                <img className="profile-pic" src={this.state.images} alt=""/>
                   <input type="file" onChange={this.handleUploadProfilePicture} className="btn btn-default add-button"/>
                   <button type="button" onClick={this.handleSubmit} type="submit" className="btn btn-default submit-picture-button"><a href="#createproduct">Submit</a></button>
               </div>
@@ -127,12 +126,14 @@ var ProfilePage = React.createClass({
             </div>
           </div>
         </div>
-        <div className="container profile-beers">
-          <div className="row">
-
-            <div className="col-md-12">
-              <div className="favorites-list">
-                {favoritesList}
+        <div className="favorites-background">
+          <div className="container profile-beers">
+            <div className="row">
+              <div className="col-md-12">
+                <div className="favorites-list">
+                  <h1 className="my-drinks">My Drinks</h1>
+                    {favoritesList}
+                </div>
               </div>
             </div>
           </div>

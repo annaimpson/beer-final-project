@@ -77,13 +77,11 @@ var BeerDetail = React.createClass({displayName: "BeerDetail",
     return(
       React.createElement("div", {className: "beer-info-detail-page"}, 
         React.createElement("div", {className: "row"}, 
-          React.createElement("div", {className: "col-md-6"}, 
-            React.createElement("img", {className: "beer-label", src: beerLabel, alt: "beer is good!!"}), 
+          React.createElement("div", {className: "col-md-12"}, 
             React.createElement("h1", {className: "beer-name"}, this.props.beer.get("name")), 
-            React.createElement("h6", {className: "beer-abv"}, "abv: ", beerAbv)
-          ), 
-          React.createElement("div", {className: "col-md-6"}, 
-            React.createElement("p", {className: "truncate beer-description"}, beerDescription)
+            React.createElement("h6", {className: "beer-abv"}, "abv: ", beerAbv), 
+            React.createElement("p", {className: "truncate beer-description"}, beerDescription), 
+            React.createElement("img", {className: "beer-label", src: beerLabel, alt: "beer is good!!"})
           )
         ), 
         React.createElement("div", {className: "row"}, 
@@ -666,13 +664,11 @@ var ProfilePage = React.createClass({displayName: "ProfilePage",
         return(
           React.createElement("div", {className: "favorite-beer-info"}, 
             React.createElement("div", {className: "row"}, 
-              React.createElement("div", {className: "col-md-6"}, 
-                React.createElement("img", {className: "brewery-icon-detail-page", src: image, alt: "beer is good!!"}), 
+              React.createElement("div", {className: "col-md-12"}, 
                 React.createElement("p", {className: "favorite-beer-name"}, beer.name), 
-                React.createElement("h6", {className: "favorite-beer-abvMin"}, beer.abvMin)
-              ), 
-              React.createElement("div", {className: "col-md-6"}, 
-                React.createElement("p", {className: "favorite-beer-description"}, beer.description)
+                React.createElement("h6", {className: "favorite-beer-abvMin"}, beer.abvMin), 
+                React.createElement("p", {className: "favorite-beer-description"}, beer.description), 
+                React.createElement("img", {className: "favorite-brewery-icon", src: image, alt: "beer is good!!"})
               )
             )
           )
@@ -688,11 +684,12 @@ var ProfilePage = React.createClass({displayName: "ProfilePage",
             )
           )
         ), 
+
         React.createElement("div", {className: "container profile-body"}, 
           React.createElement("div", {className: "row"}, 
             React.createElement("div", {className: "col-md-6"}, 
               React.createElement("div", {className: "picture"}, 
-                React.createElement("img", {className: "empty-profile-pic", src: this.state.images, alt: ""}), 
+                React.createElement("img", {className: "profile-pic", src: this.state.images, alt: ""}), 
                   React.createElement("input", {type: "file", onChange: this.handleUploadProfilePicture, className: "btn btn-default add-button"}), 
                   React.createElement("button", {type: "button", onClick: this.handleSubmit, type: "submit", className: "btn btn-default submit-picture-button"}, React.createElement("a", {href: "#createproduct"}, "Submit"))
               )
@@ -705,12 +702,14 @@ var ProfilePage = React.createClass({displayName: "ProfilePage",
             )
           )
         ), 
-        React.createElement("div", {className: "container profile-beers"}, 
-          React.createElement("div", {className: "row"}, 
-
-            React.createElement("div", {className: "col-md-12"}, 
-              React.createElement("div", {className: "favorites-list"}, 
-                favoritesList
+        React.createElement("div", {className: "favorites-background"}, 
+          React.createElement("div", {className: "container profile-beers"}, 
+            React.createElement("div", {className: "row"}, 
+              React.createElement("div", {className: "col-md-12"}, 
+                React.createElement("div", {className: "favorites-list"}, 
+                  React.createElement("h1", {className: "my-drinks"}, "My Drinks"), 
+                    favoritesList
+                )
               )
             )
           )

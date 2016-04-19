@@ -75,13 +75,11 @@ var BeerDetail = React.createClass({
     return(
       <div className="beer-info-detail-page">
         <div className="row">
-          <div className="col-md-6">
-            <img className="beer-label" src={beerLabel} alt="beer is good!!"/>
+          <div className="col-md-12">
             <h1 className="beer-name">{this.props.beer.get("name")}</h1>
             <h6 className="beer-abv">abv: {beerAbv}</h6>
-          </div>
-          <div className="col-md-6">
             <p className="truncate beer-description">{beerDescription}</p>
+            <img className="beer-label" src={beerLabel} alt="beer is good!!"/>
           </div>
         </div>
         <div className="row">

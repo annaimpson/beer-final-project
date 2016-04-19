@@ -122,7 +122,7 @@ img {
 .barley-photo{
   border: 1px solid rgba(102, 94, 87, 1);
   border-radius: 50%;
-  margin-right: -36px;
+  margin-right: -42px;
   width: 200px;
 }
 .yeast-title,
@@ -134,7 +134,7 @@ img {
   font-size: 15px;
   letter-spacing: 7px;
   margin-top: 40px;
-  margin-left: 50px;
+  margin-left: 57px;
   text-align: center;
 }
 .yeast-info,
@@ -274,45 +274,99 @@ img {
 
 
 // Work on the profile page
-
-.empty-profile-pic,
-.empty-beer-pic{
+.profile-body{
+  height: 900px;
+}
+.profile-pic{
   width: 300px;
   height: 300px;
   border-radius: 50%;
-  margin-top: 100px;
+  margin-top: 200px;
+}
+.add-button{
+  display: inline-block;
+  margin-top: 50px;
+  width: 215px;
+  height: 45px;
+  border: none;
+}
+.submit-picture-button{
+  display: inline-block;
+  margin-left: 230px;
+  margin-top: -76px;
 }
 .user-info{
   margin-top: 200px;
 }
 .username{
-  font-size: 50px;
-  font-weight: lighter;
+  font-family: "Montserrat";
+  font-weight: bold;
+  text-transform: uppercase;
+  color: rgba(102, 94, 87, 1);
+  font-size: 70px;
+  letter-spacing: 3px;
+  margin-left: 200px;
+  margin-top: 315px;
 }
 .email{
+  font-family: "Montserrat";
   font-size: 15px;
+  letter-spacing: 1px;
+  line-height: 20px;
+  color: rgba(102, 94, 87, 1);
+  margin-left: 200px;
+}
+.favorites-background{
+  background-color: rgba(254, 222, 113, 1);
+}
+.my-drinks{
+  font-family: "Montserrat";
+  font-size: 80px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  text-align: center;
+  color: rgba(102, 94, 87, 1);
+  margin-top: 100px;
 }
 .favorite-beer-info{
-  border: 1px solid rgba(202, 207, 210, 1);
-  border-radius: 5px;
+  background-color: rgba(204, 200, 196, 1);
+  border-radius: 7px;
   padding-top: 15px;
   padding-left: 15px;
   padding-right: 15px;
   padding-bottom: 25px;
   text-align: center;
   margin-bottom: 25px;
+  margin-top: 100px;
+}
+.favorite-brewery-icon{
+  width: 80px;
+  height: 80px;
+  margin-top: 15px;
+  margin-bottom: 25px;
 }
 .beer-label{
-
+  margin-top: 50px;
 }
 .favorite-beer-name{
-
+  font-family: "Montserrat";
+  font-size: 25px;
+  text-transform: uppercase;
+  margin-top: 80px;
 }
 .favorite-beer-description{
-
+  font-family: "Montserrat";
+  color: rgba(102, 94, 87, 1);
+  margin-top: 25px;
+  margin-bottom: 50px;
+  margin-right: 50px;
+  margin-left: 50px;
+  letter-spacing: .5px;
+  font-size: 12px;
+  line-height: 28px;
 }
-.favorite-beer-abvMin{
-
+.favoritesList{
+  margin-bottom: 130px;
 }
 // The end of the profile page
 
@@ -395,6 +449,7 @@ img {
   font-size: 50px;
   font-family: "Montserrat";
   font-weight: bold;
+  color: rgba(102, 94, 87, 1);
   letter-spacing: 7px;
   text-transform: uppercase;
   text-align: center;
@@ -402,12 +457,14 @@ img {
 .brewery-established-page{
   font-family: "Montserrat";
   font-size: 17px;
+  color: rgba(102, 94, 87, 1);
   text-align: center;
   margin-top: 30px;
 }
 .brewery-description-page{
   font-family: "Montserrat";
   font-size: 14px;
+  color: rgba(102, 94, 87, 1);
   letter-spacing: .5px;
   line-height: 31px;
   margin-top: 25px;
@@ -423,44 +480,54 @@ img {
   padding-right: 15px;
   padding-bottom: 25px;
   text-align: center;
-  margin-bottom: 25px;
+  margin-bottom: 130px;
   margin-top: 150px;
   font-family: "Montserrat";
+  color: rgba(102, 94, 87, 1);
 }
 .beer-label{
-  width: 100px;
-  height: 100px;
+  width: 80px;
+  height: 80px;
   vertical-align: middle;
 }
 .beer-name{
   font-family: "Montserrat";
+  color: rgba(102, 94, 87, 1);
+  text-transform: uppercase;
   font-size: 30px;
   font-weight: lighter;
   margin-right: 20px;
+  margin-top: 75px;
   text-align: center;
 }
 .beer-label{
-  margin-top: 25px;
+  margin-top: -30px;
   text-align: center;
 }
 .beer-abv{
   font-family: "Montserrat";
+  color: rgba(102, 94, 87, 1);
   margin-top: 15px;
-  font-size: 10px;
+  font-size: 13px;
   letter-spacing: .5px;
 }
 .beer-description{
   font-family: "Montserrat";
+  color: rgba(102, 94, 87, 1);
   margin-top: 25px;
-  margin-right: 70px;
   margin-bottom: 50px;
+  margin-right: 50px;
+  margin-left: 50px;
   letter-spacing: .5px;
-  font-size: 10px;
+  font-size: 12px;
   line-height: 28px;
 }
 .drinkup-button{
   font-family: "Montserrat";
-  margin-bottom: 25px;
+  color: rgba(102, 94, 87, 1);
+  margin-top: 20px;
+  margin-bottom: 30px;
+  border: 1px solid rgba(255, 170, 98, 1);
 }
 
 //End of detail view
