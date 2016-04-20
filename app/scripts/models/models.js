@@ -2,7 +2,7 @@ var Backbone = require('backbone');
 var $ = require('jquery');
 var Parse = require('parse');
 var Host = 'http://finalprojectbeer.herokuapp.com';
-var Host = 'http://localhost:3000';
+// var Host = 'http://localhost:3000';
 
 
 // var SelectedBreweryCollection = Backbone.Collection.extend({
