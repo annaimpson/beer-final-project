@@ -9,7 +9,6 @@ require('backbone-react-component');
 
 var BeerDetail = React.createClass({
   getInitialState(){
-    console.log(this.props.beer.attributes);
     return {label:'Drink Up!'}
   },
   setImage: function(){
@@ -18,9 +17,11 @@ var BeerDetail = React.createClass({
 
   handleDrinkUp(beer, e){
     e.preventDefault();
+
     var favoriteBeer = new FavoriteBeer();
     var user = Parse.User.current();
     favoriteBeer.set('User', user);
+    favoriteBeer.set('beerId', beer.id);
     favoriteBeer.set('name', beer.get('name'));
 
     if(!beer.get('style')){
@@ -47,6 +48,7 @@ var BeerDetail = React.createClass({
       favoriteBeer.set('icon', beer.get('labels').icon);
     };
 
+
     favoriteBeer.save(null, {
       success: function(favorite){
         console.log(favorite);
@@ -59,6 +61,7 @@ var BeerDetail = React.createClass({
   },
   render(){
     var beerDescription;
+
     if(!this.props.beer.get("style")){
       beerDescription = "";
     }else{
@@ -93,6 +96,10 @@ var BeerDetail = React.createClass({
         beerLabel = this.props.beer.get("labels").icon
       }
     };
+    var buttonLabel = this.state.label;
+    if (this.props.favorited){
+      buttonLabel = 'On Your Drink List';
+    }
     return(
       <div className="beer-info-detail-page">
         <div className="row">
@@ -105,7 +112,7 @@ var BeerDetail = React.createClass({
         </div>
         <div className="row">
           <div className="col-md-12">
-            <button onClick={this.handleDrinkUp.bind(this, this.props.beer)} className="btn btn-default drinkup-button-detail">{this.state.label}</button>
+            <button onClick={this.handleDrinkUp.bind(this, this.props.beer)} className="btn btn-default drinkup-button-detail">{buttonLabel}</button>
           </div>
         </div>
       </div>

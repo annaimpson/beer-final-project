@@ -11,7 +11,6 @@ require('backbone-react-component');
 
 var BeerDetail = React.createClass({displayName: "BeerDetail",
   getInitialState(){
-    console.log(this.props.beer.attributes);
     return {label:'Drink Up!'}
   },
   setImage: function(){
@@ -20,9 +19,11 @@ var BeerDetail = React.createClass({displayName: "BeerDetail",
 
   handleDrinkUp(beer, e){
     e.preventDefault();
+
     var favoriteBeer = new FavoriteBeer();
     var user = Parse.User.current();
     favoriteBeer.set('User', user);
+    favoriteBeer.set('beerId', beer.id);
     favoriteBeer.set('name', beer.get('name'));
 
     if(!beer.get('style')){
@@ -49,6 +50,7 @@ var BeerDetail = React.createClass({displayName: "BeerDetail",
       favoriteBeer.set('icon', beer.get('labels').icon);
     };
 
+
     favoriteBeer.save(null, {
       success: function(favorite){
         console.log(favorite);
@@ -61,6 +63,7 @@ var BeerDetail = React.createClass({displayName: "BeerDetail",
   },
   render(){
     var beerDescription;
+
     if(!this.props.beer.get("style")){
       beerDescription = "";
     }else{
@@ -95,6 +98,10 @@ var BeerDetail = React.createClass({displayName: "BeerDetail",
         beerLabel = this.props.beer.get("labels").icon
       }
     };
+    var buttonLabel = this.state.label;
+    if (this.props.favorited){
+      buttonLabel = 'On Your Drink List';
+    }
     return(
       React.createElement("div", {className: "beer-info-detail-page"}, 
         React.createElement("div", {className: "row"}, 
@@ -107,7 +114,7 @@ var BeerDetail = React.createClass({displayName: "BeerDetail",
         ), 
         React.createElement("div", {className: "row"}, 
           React.createElement("div", {className: "col-md-12"}, 
-            React.createElement("button", {onClick: this.handleDrinkUp.bind(this, this.props.beer), className: "btn btn-default drinkup-button-detail"}, this.state.label)
+            React.createElement("button", {onClick: this.handleDrinkUp.bind(this, this.props.beer), className: "btn btn-default drinkup-button-detail"}, buttonLabel)
           )
         )
       )
@@ -123,20 +130,42 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 var Backbone = require('backbone');
 var $ = require('jquery');
+var _ = require('underscore');
 var Parse = require('parse');
 var Header = require('./header.jsx');
 var BeerDetail = require('./beer-detail.jsx');
+var FavoriteBeer = require('../models/models.js').FavoriteBeer;
+
 require('backbone-react-component');
 
 var BreweryDetail = React.createClass({displayName: "BreweryDetail",
-
+  getInitialState: function(){
+    return {favorites: []}
+  },
+  componentWillMount: function() {
+    var self = this;
+    var favoriteSearch = new Parse.Query(FavoriteBeer);
+    favoriteSearch.equalTo("User", Parse.User.current());
+    favoriteSearch.find({
+      success: function(results){
+        var ids = [];
+        results.forEach(function(result){
+          ids.push(result.get("beerId"))
+        })
+        self.setState({favorites: ids});
+      }
+    })
+  },
   render: function(){
+
     var that = this;
     var beerList = this.props.beerList.models.map(function(beer){
+      var favorited = _.contains(that.state.favorites, beer.id);
       return (
         React.createElement(BeerDetail, {
           key: beer.id, 
-          beer: beer}
+          beer: beer, 
+          favorited: favorited}
         )
       )
     });
@@ -177,7 +206,7 @@ var BreweryDetail = React.createClass({displayName: "BreweryDetail",
 
 module.exports = BreweryDetail;
 
-},{"./beer-detail.jsx":1,"./header.jsx":3,"backbone":30,"backbone-react-component":29,"jquery":163,"parse":234,"react":524,"react-dom":368}],3:[function(require,module,exports){
+},{"../models/models.js":9,"./beer-detail.jsx":1,"./header.jsx":3,"backbone":30,"backbone-react-component":29,"jquery":163,"parse":234,"react":524,"react-dom":368,"underscore":528}],3:[function(require,module,exports){
 "use strict";
 var React = require('react');
 var ReactDOM = require('react-dom');
@@ -655,7 +684,6 @@ var ProfilePage = React.createClass({displayName: "ProfilePage",
       beerquery.equalTo("User", Parse.User.current());
       beerquery.find({
         success: function(results) {
-          console.log(results);
           self.setState({
             favorites: results
           });
@@ -699,7 +727,14 @@ var ProfilePage = React.createClass({displayName: "ProfilePage",
       error: function(error) {
         console.log(error);
       }
-    })
+    });
+    var filterFavs = this.state.favorites.filter(function(item){
+      console.log(item.id);
+     return (item.id !== object);
+   })
+   this.setState({
+     favorites: filterFavs
+   });
   },
 
   render: function(){

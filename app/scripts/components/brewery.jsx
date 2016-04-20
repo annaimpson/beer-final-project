@@ -2,20 +2,42 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 var Backbone = require('backbone');
 var $ = require('jquery');
+var _ = require('underscore');
 var Parse = require('parse');
 var Header = require('./header.jsx');
 var BeerDetail = require('./beer-detail.jsx');
+var FavoriteBeer = require('../models/models.js').FavoriteBeer;
+
 require('backbone-react-component');
 
 var BreweryDetail = React.createClass({
-
+  getInitialState: function(){
+    return {favorites: []}
+  },
+  componentWillMount: function() {
+    var self = this;
+    var favoriteSearch = new Parse.Query(FavoriteBeer);
+    favoriteSearch.equalTo("User", Parse.User.current());
+    favoriteSearch.find({
+      success: function(results){
+        var ids = [];
+        results.forEach(function(result){
+          ids.push(result.get("beerId"))
+        })
+        self.setState({favorites: ids});
+      }
+    })
+  },
   render: function(){
+
     var that = this;
     var beerList = this.props.beerList.models.map(function(beer){
+      var favorited = _.contains(that.state.favorites, beer.id);
       return (
         <BeerDetail
           key={beer.id}
           beer={beer}
+          favorited={favorited}
         />
       )
     });

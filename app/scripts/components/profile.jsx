@@ -33,7 +33,6 @@ var ProfilePage = React.createClass({
       beerquery.equalTo("User", Parse.User.current());
       beerquery.find({
         success: function(results) {
-          console.log(results);
           self.setState({
             favorites: results
           });
@@ -77,7 +76,14 @@ var ProfilePage = React.createClass({
       error: function(error) {
         console.log(error);
       }
-    })
+    });
+    var filterFavs = this.state.favorites.filter(function(item){
+      console.log(item.id);
+     return (item.id !== object);
+   })
+   this.setState({
+     favorites: filterFavs
+   });
   },
 
   render: function(){
