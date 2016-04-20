@@ -63,7 +63,6 @@ var BeerDetail = React.createClass({displayName: "BeerDetail",
   },
   render(){
     var beerDescription;
-
     if(!this.props.beer.get("style")){
       beerDescription = "";
     }else{
@@ -497,97 +496,95 @@ var LandingPageBody = React.createClass({displayName: "LandingPageBody",
   render: function(){
     return(
       React.createElement("div", null, 
-        React.createElement("div", {clasName: "container-fluid"}, 
-          React.createElement("div", {className: "row"}, 
-            React.createElement("div", {className: "col-xs-12"}, 
-              React.createElement("div", {className: "carousel-spot"}, 
-                React.createElement(Carousel, {className: "landing-page-carousel"}, 
-                  React.createElement(Carousel.Item, {className: "logo-page"}, 
-                    React.createElement("div", {className: "row"}, 
-                      React.createElement("img", {className: "goblet-icon-logo", width: 400, height: 400, alt: "", src: "images/goblet.png"}), 
-                      React.createElement("img", {className: "pint-icon-logo", width: 400, height: 400, alt: "", src: "images/pint.png"}), 
-                      React.createElement("img", {className: "tulip-icon-logo", width: 400, height: 400, alt: "", src: "images/tulip.png"}), 
-                      React.createElement("img", {className: "pilsner-icon-logo", width: 400, height: 400, alt: "", src: "images/pilsner.png"})
+        React.createElement("div", {className: "row"}, 
+          React.createElement("div", {className: "col-xs-12"}, 
+            React.createElement("div", {className: "carousel-spot"}, 
+              React.createElement(Carousel, {className: "landing-page-carousel"}, 
+                React.createElement(Carousel.Item, {className: "logo-page"}, 
+                  React.createElement("div", {className: "row"}, 
+                    React.createElement("img", {className: "goblet-icon-logo", width: 400, height: 400, alt: "", src: "images/goblet.png"}), 
+                    React.createElement("img", {className: "pint-icon-logo", width: 400, height: 400, alt: "", src: "images/pint.png"}), 
+                    React.createElement("img", {className: "tulip-icon-logo", width: 400, height: 400, alt: "", src: "images/tulip.png"}), 
+                    React.createElement("img", {className: "pilsner-icon-logo", width: 400, height: 400, alt: "", src: "images/pilsner.png"})
+                  ), 
+                  React.createElement("div", {className: "row"}, 
+                    React.createElement("h2", {className: "landing-page-name"}, "Drink Up")
+                  )
+                ), 
+                React.createElement(Carousel.Item, {className: "goblet-page"}, 
+                  React.createElement("div", {className: "row"}, 
+                    React.createElement("div", {className: "col-md-6"}, 
+                      React.createElement("img", {className: "goblet-icon", width: 400, height: 400, alt: "", src: "images/goblet.png"})
                     ), 
-                    React.createElement("div", {className: "row"}, 
-                      React.createElement("h2", {className: "landing-page-name"}, "Drink Up")
+                    React.createElement("div", {className: "col-md-6"}, 
+                      React.createElement("h1", {className: "goblet-title"}, "The Goblet"), 
+                      React.createElement("p", {className: "goblet-detail"}, "The majestic goblet glasses are best used for enjoying Belgian ales, German bocks, and other big sipping beers.")
                     )
-                  ), 
-                  React.createElement(Carousel.Item, {className: "goblet-page"}, 
-                    React.createElement("div", {className: "row"}, 
-                      React.createElement("div", {className: "col-md-6"}, 
-                        React.createElement("img", {className: "goblet-icon", width: 400, height: 400, alt: "", src: "images/goblet.png"})
-                      ), 
-                      React.createElement("div", {className: "col-md-6"}, 
-                        React.createElement("h1", {className: "goblet-title"}, "The Goblet"), 
-                        React.createElement("p", {className: "goblet-detail"}, "The majestic goblet glasses are best used for enjoying Belgian ales, German bocks, and other big sipping beers.")
-                      )
+                  )
+                ), 
+                React.createElement(Carousel.Item, {className: "pilsner-page"}, 
+                  React.createElement("div", {className: "row"}, 
+                    React.createElement("div", {className: "col-md-6"}, 
+                      React.createElement("img", {className: "pilsner-icon", width: 400, height: 400, alt: "", src: "images/pilsner.png"})
+                    ), 
+                    React.createElement("div", {className: "col-md-6"}, 
+                      React.createElement("h1", {className: "pilsner-title"}, "The Pilsner"), 
+                      React.createElement("p", {className: "pilsner-detail"}, "As the name would suggest, the Pilsner glass is great for serving Pilsners — as well as pale lagers. Its tapered edge is meant to capture the carbonation and maintain a beer head.")
                     )
-                  ), 
-                  React.createElement(Carousel.Item, {className: "pilsner-page"}, 
-                    React.createElement("div", {className: "row"}, 
-                      React.createElement("div", {className: "col-md-6"}, 
-                        React.createElement("img", {className: "pilsner-icon", width: 400, height: 400, alt: "", src: "images/pilsner.png"})
-                      ), 
-                      React.createElement("div", {className: "col-md-6"}, 
-                        React.createElement("h1", {className: "pilsner-title"}, "The Pilsner"), 
-                        React.createElement("p", {className: "pilsner-detail"}, "As the name would suggest, the Pilsner glass is great for serving Pilsners — as well as pale lagers. Its tapered edge is meant to capture the carbonation and maintain a beer head.")
-                      )
+                  )
+                ), 
+                React.createElement(Carousel.Item, {className: "pint-page"}, 
+                  React.createElement("div", {className: "row"}, 
+                    React.createElement("div", {className: "col-md-6"}, 
+                      React.createElement("img", {className: "pint-icon", width: 400, height: 400, alt: "", src: "images/pint.png"})
+                    ), 
+                    React.createElement("div", {className: "col-md-6"}, 
+                      React.createElement("h1", {className: "pint-title"}, "The Pint"), 
+                      React.createElement("p", {className: "pint-detail"}, "When it doubt, go with the pint.The pint glass is what you can expect to be served a beer in at a bar. Pretty much every kind of beer has ended up in one of these glasses.")
                     )
-                  ), 
-                  React.createElement(Carousel.Item, {className: "pint-page"}, 
-                    React.createElement("div", {className: "row"}, 
-                      React.createElement("div", {className: "col-md-6"}, 
-                        React.createElement("img", {className: "pint-icon", width: 400, height: 400, alt: "", src: "images/pint.png"})
-                      ), 
-                      React.createElement("div", {className: "col-md-6"}, 
-                        React.createElement("h1", {className: "pint-title"}, "The Pint"), 
-                        React.createElement("p", {className: "pint-detail"}, "When it doubt, go with the pint.The pint glass is what you can expect to be served a beer in at a bar. Pretty much every kind of beer has ended up in one of these glasses.")
-                      )
+                  )
+                ), 
+                React.createElement(Carousel.Item, {className: "snifter-page"}, 
+                  React.createElement("div", {className: "row"}, 
+                    React.createElement("div", {className: "col-md-6"}, 
+                      React.createElement("img", {className: "snifter-icon", width: 400, height: 400, alt: "", src: "images/snifter.png"})
+                    ), 
+                    React.createElement("div", {className: "col-md-6"}, 
+                      React.createElement("h1", {className: "snifter-title"}, "The Snifter"), 
+                      React.createElement("p", {className: "snifter-detail"}, "The snifter is typically used to serve brandy or cognac, but it’s also ideal for capturing the flavors of aromatic beers such as Imperial IPAs and Belgian ales.")
                     )
-                  ), 
-                  React.createElement(Carousel.Item, {className: "snifter-page"}, 
-                    React.createElement("div", {className: "row"}, 
-                      React.createElement("div", {className: "col-md-6"}, 
-                        React.createElement("img", {className: "snifter-icon", width: 400, height: 400, alt: "", src: "images/snifter.png"})
-                      ), 
-                      React.createElement("div", {className: "col-md-6"}, 
-                        React.createElement("h1", {className: "snifter-title"}, "The Snifter"), 
-                        React.createElement("p", {className: "snifter-detail"}, "The snifter is typically used to serve brandy or cognac, but it’s also ideal for capturing the flavors of aromatic beers such as Imperial IPAs and Belgian ales.")
-                      )
+                  )
+                ), 
+                React.createElement(Carousel.Item, {className: "stange-page"}, 
+                  React.createElement("div", {className: "row"}, 
+                    React.createElement("div", {className: "col-md-6"}, 
+                      React.createElement("img", {className: "stange-icon", width: 400, height: 400, alt: "", src: "images/stange.png"})
+                    ), 
+                    React.createElement("div", {className: "col-md-6"}, 
+                      React.createElement("h1", {className: "stange-title"}, "The Stange"), 
+                      React.createElement("p", {className: "stange-detail"}, "This tall, narrow glass is best used to serve Kölsch, a specialty German beer brewed in Cologne.")
                     )
-                  ), 
-                  React.createElement(Carousel.Item, {className: "stange-page"}, 
-                    React.createElement("div", {className: "row"}, 
-                      React.createElement("div", {className: "col-md-6"}, 
-                        React.createElement("img", {className: "stange-icon", width: 400, height: 400, alt: "", src: "images/stange.png"})
-                      ), 
-                      React.createElement("div", {className: "col-md-6"}, 
-                        React.createElement("h1", {className: "stange-title"}, "The Stange"), 
-                        React.createElement("p", {className: "stange-detail"}, "This tall, narrow glass is best used to serve Kölsch, a specialty German beer brewed in Cologne.")
-                      )
+                  )
+                ), 
+                React.createElement(Carousel.Item, {className: "tulip-page"}, 
+                  React.createElement("div", {className: "row"}, 
+                    React.createElement("div", {className: "col-md-6"}, 
+                      React.createElement("img", {className: "tulip-icon", width: 400, height: 400, alt: "", src: "images/tulip.png"})
+                    ), 
+                    React.createElement("div", {className: "col-md-6"}, 
+                      React.createElement("h1", {className: "tulip-title"}, "The Tulip"), 
+                      React.createElement("p", {className: "tulip-detail"}, "A tulip glass is designed to trap flavors of Scottish ales, American double/imperial IPAs, and Belgian ales. It’s designed to allow for maximum head retention.")
                     )
-                  ), 
-                  React.createElement(Carousel.Item, {className: "tulip-page"}, 
-                    React.createElement("div", {className: "row"}, 
-                      React.createElement("div", {className: "col-md-6"}, 
-                        React.createElement("img", {className: "tulip-icon", width: 400, height: 400, alt: "", src: "images/tulip.png"})
-                      ), 
-                      React.createElement("div", {className: "col-md-6"}, 
-                        React.createElement("h1", {className: "tulip-title"}, "The Tulip"), 
-                        React.createElement("p", {className: "tulip-detail"}, "A tulip glass is designed to trap flavors of Scottish ales, American double/imperial IPAs, and Belgian ales. It’s designed to allow for maximum head retention.")
-                      )
-                    )
-                  ), 
-                  React.createElement(Carousel.Item, {className: "weizen-page"}, 
-                    React.createElement("div", {className: "row"}, 
-                      React.createElement("div", {className: "col-md-6"}, 
-                        React.createElement("img", {className: "weizen-icon", width: 400, height: 400, alt: "", src: "images/weizen-03.png"})
-                      ), 
-                      React.createElement("div", {className: "col-md-6"}, 
-                        React.createElement("h1", {className: "weizen-title"}, "The Weizen"), 
-                        React.createElement("p", {className: "weizen-detail"}, "The weizen glass is best used to serve wheat beer. It’s a German glass that’s narrow at the bottom and wider at top.")
-                      )
+                  )
+                ), 
+                React.createElement(Carousel.Item, {className: "weizen-page"}, 
+                  React.createElement("div", {className: "row"}, 
+                    React.createElement("div", {className: "col-md-6"}, 
+                      React.createElement("img", {className: "weizen-icon", width: 400, height: 400, alt: "", src: "images/weizen-03.png"})
+                    ), 
+                    React.createElement("div", {className: "col-md-6"}, 
+                      React.createElement("h1", {className: "weizen-title"}, "The Weizen"), 
+                      React.createElement("p", {className: "weizen-detail"}, "The weizen glass is best used to serve wheat beer. It’s a German glass that’s narrow at the bottom and wider at top.")
                     )
                   )
                 )

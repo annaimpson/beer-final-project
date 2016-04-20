@@ -61,7 +61,6 @@ var BeerDetail = React.createClass({
   },
   render(){
     var beerDescription;
-
     if(!this.props.beer.get("style")){
       beerDescription = "";
     }else{
