@@ -9,10 +9,9 @@ var Header = require('./header.jsx');
 
 
 var PageLink= React.createClass({
-  getNewPage: function(e){
+  getNewPage: function(e, index){
     e.preventDefault();
     this.props.getNewPage(this.props.index);
-    console.log(this);
   },
   getNewBreweryPage: function(breweryPage){
     var searchedBeer = new SearchModel();
@@ -39,8 +38,20 @@ var PageLink= React.createClass({
 });
 
 var searchAndNav = React.createClass({
+  getInitialState: function(){
+    return {
+      collection: this.props.collection,
+      currentPage: this.props.currentPage
+    }
+  },
+  getNewPage: function(pageNumber){
+    var self = this;
+    this.state.collection.getPage(pageNumber).then(function(data){
+      self.setState({collection: self.state.collection, currentPage: pageNumber})
+    });
+  },
   render: function(){
-    var BreweryList = this.props.collection.map(function(model){
+    var BreweryList = this.state.collection.map(function(model){
     var image;
     if(!model.get("images")){
       image = "././images/pint.png";
@@ -62,9 +73,14 @@ var searchAndNav = React.createClass({
         />
       )
     });
+    var currentPage = this.state.currentPage;
+    var offset = currentPage > 5 ? 0 : -5;
     var pageLinks = [];
-    var numpages = 5;
-    for (var i=1; i<numpages; i++){
+    var previous = currentPage - 1;
+    var next = currentPage + 1;
+    var first = currentPage == 1;
+    var numpages = this.props.numberOfPages;
+    for (var i = currentPage  ; i < currentPage + 5 ; i++){
       pageLinks.push(
         <PageLink
           index={i}
@@ -73,8 +89,7 @@ var searchAndNav = React.createClass({
         />
       )
     }
-
-    return(
+    return (
       <div>
         <div className="container-fluid header">
           <div className="row">
@@ -92,14 +107,24 @@ var searchAndNav = React.createClass({
               <nav>
                 <ul className="pagination pagination-buttons">
                   <li>
+                    <a href="#" aria-label="First">
+                      <span aria-hidden="true">&laquo;&laquo;</span>
+                    </a>
+                  </li>
+                  <li>
                     <a href="#" aria-label="Previous">
-                      <span aria-hidden="true">&laquo;</span>
+                      <span aria-hidden="true">&laquo; Prev</span>
                     </a>
                   </li>
                   {pageLinks}
                   <li>
                     <a href="#" aria-label="Next">
-                      <span aria-hidden="true">&raquo;</span>
+                      <span aria-hidden="true">Next &raquo;</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" aria-label="Last">
+                      <span aria-hidden="true">&raquo;&raquo;</span>
                     </a>
                   </li>
                 </ul>

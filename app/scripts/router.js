@@ -41,9 +41,9 @@ var LoginRouter = Backbone.Router.extend({
     ReactDOM.unmountComponentAtNode(appContainer);
     apiHomePage();
     var breweries = new BreweryCollection();
-    breweries.fetch().then(function(){
+    breweries.fetch().then(function(breweryResult){
       ReactDOM.render(
-        React.createElement(HomePage, {collection: breweries}), document.getElementById('app')
+        React.createElement(HomePage, {collection: breweries, numberOfPages: breweryResult.numberOfPages, currentPage: breweryResult.currentPage}), document.getElementById('app')
       );
     });
   },

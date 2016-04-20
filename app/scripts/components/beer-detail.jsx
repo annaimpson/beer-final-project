@@ -18,7 +18,6 @@ var BeerDetail = React.createClass({
 
   handleDrinkUp(beer, e){
     e.preventDefault();
-    console.log();
     var favoriteBeer = new FavoriteBeer();
     var user = Parse.User.current();
     favoriteBeer.set('User', user);
@@ -84,7 +83,7 @@ var BeerDetail = React.createClass({
         </div>
         <div className="row">
           <div className="col-md-12">
-            <button onClick={this.handleDrinkUp.bind(this, this.props.beer)} className="btn btn-default drinkup-button">{this.state.label}</button>
+            <button onClick={this.handleDrinkUp.bind(this, this.props.beer)} className="btn btn-default drinkup-button-detail">{this.state.label}</button>
           </div>
         </div>
       </div>

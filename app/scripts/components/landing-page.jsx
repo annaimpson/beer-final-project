@@ -45,7 +45,7 @@ var LandingPageBody = React.createClass({
       <div>
         <div clasName="container-fluid">
           <div className="row">
-            <div className="col-md-12">
+            <div className="col-xs-12">
               <div className='carousel-spot'>
                 <Carousel className="landing-page-carousel">
                   <Carousel.Item className="logo-page">

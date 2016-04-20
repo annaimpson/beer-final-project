@@ -14,7 +14,7 @@ var ProfilePage = React.createClass({
     return {
       favorites: [],
       icon: ['icon'],
-      name: 'name',
+      nameDisplay: 'nameDisplay',
       description: 'description',
       abvMin: 'abvMin',
       file: '',
@@ -24,8 +24,8 @@ var ProfilePage = React.createClass({
 
   handleFavorite: function(){
     var user = Parse.User.current();
-
   },
+
   componentDidMount: function(){
     var BeerFavorite = Parse.Object.extend('FavoriteBeer');
     var self = this;
@@ -33,6 +33,7 @@ var ProfilePage = React.createClass({
       beerquery.equalTo("User", Parse.User.current());
       beerquery.find({
         success: function(results) {
+          console.log(results);
           self.setState({
             favorites: results
           });
@@ -64,9 +65,28 @@ var ProfilePage = React.createClass({
   handleSubmit: function(e){
     e.preventDefault();
   },
+
+  handleRemove:function(beer){
+    console.log(beer.id);
+    console.log('Clicked!');
+    var object = beer.id
+    var collection = Parse.Object.extend("FavoriteBeer");
+    var query = new Parse.Query(collection);
+    query.get(object, {
+      success: function(object){
+        object.destroy({});
+        console.log('model destroyed');
+      },
+      error: function(error) {
+        console.log(error);
+      }
+    })
+  },
+
   render: function(){
     var Username = Parse.User.current().getUsername();
     var Email = Parse.User.current().getEmail();
+    var self = this;
 
     var favoritesList;
     if (this.state.favorites.length == 0){
@@ -84,15 +104,23 @@ var ProfilePage = React.createClass({
             image = eachbeer.get("labels").icon
           }
         };
+
         var beer = eachbeer.attributes;
+        console.log(eachbeer.get('description'));
+        var beerID = eachbeer.id
         return(
-          <div className="favorite-beer-info">
-            <div className="row">
-              <div className="col-md-12">
-                <p className="favorite-beer-name">{beer.name}</p>
-                <h6 className="favorite-beer-abvMin">{beer.abvMin}</h6>
-                <p className="favorite-beer-description">{beer.description}</p>
-                <img className="favorite-brewery-icon" src={image} alt="beer is good!!"/>
+          <div key={beerID}>
+            <div className="favorite-beer-info">
+              <div className="row">
+                <div className="col-md-12">
+                  <button className="remove-button" onClick={self.handleRemove.bind(self, eachbeer)}>
+                    <span className="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                  </button>
+                  <p className="favorite-beer-name">{beer.name}</p>
+                  <h6 className="favorite-beer-abvMin">abv: {beer.abvMin}</h6>
+                  <p className="favorite-beer-description">{beer.description}</p>
+                  <img className="favorite-brewery-icon" src={image} alt="beer is good!!"/>
+                </div>
               </div>
             </div>
           </div>

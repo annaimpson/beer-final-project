@@ -120,6 +120,7 @@ img {
 .yeast-photo,
 .hops-photo,
 .barley-photo{
+  display: inline-block;
   border: 1px solid rgba(102, 94, 87, 1);
   border-radius: 50%;
   margin-right: -42px;
@@ -134,7 +135,7 @@ img {
   font-size: 15px;
   letter-spacing: 7px;
   margin-top: 40px;
-  margin-left: 57px;
+  margin-left: 53px;
   text-align: center;
 }
 .yeast-info,
@@ -329,7 +330,7 @@ img {
   margin-top: 100px;
 }
 .favorite-beer-info{
-  background-color: rgba(204, 200, 196, 1);
+  background-color: white;
   border-radius: 7px;
   padding-top: 15px;
   padding-left: 15px;
@@ -338,6 +339,11 @@ img {
   text-align: center;
   margin-bottom: 25px;
   margin-top: 100px;
+}
+.remove-button{
+  float: right;
+  background-color: white;
+  border: none;
 }
 .favorite-brewery-icon{
   width: 80px;
@@ -350,6 +356,7 @@ img {
 }
 .favorite-beer-name{
   font-family: "Montserrat";
+  color: rgba(102, 94, 87, 1);
   font-size: 25px;
   text-transform: uppercase;
   margin-top: 80px;
@@ -522,7 +529,7 @@ img {
   font-size: 12px;
   line-height: 28px;
 }
-.drinkup-button{
+.drinkup-button-detail{
   font-family: "Montserrat";
   color: rgba(102, 94, 87, 1);
   margin-top: 20px;
@@ -531,3 +538,67 @@ img {
 }
 
 //End of detail view
+
+
+
+//Search results
+.brew-search-background{
+  background-color:rgba(198, 219, 139, 1);
+  margin-top: -100px;
+}
+.searched-beer{
+  display: inline-block;
+  background-color: white;
+  border-radius: 7px;
+  width: 520px;
+  height: 500px;
+  padding-top: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-bottom: 25px;
+  margin-right: 25px;
+  margin-bottom: 17px;
+  margin-top: 20px;
+}
+.brew-search-container{
+  background-color:rgba(198, 219, 139, 1);
+  margin-top:100px;
+}
+.beer-search-label{
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-left: 201px;
+  margin-top: 33px;
+}
+.beer-search-name{
+  font-family: "Montserrat";
+  font-weight: bold;
+  color: rgba(102, 94, 87, 1);
+  font-size: 15px;
+  letter-spacing: 2px;
+  text-align: center;
+}
+.beer-search-abv{
+  font-family: "Montserrat";
+  color: rgba(102, 94, 87, 1);
+  margin-top: 15px;
+  font-size: 13px;
+  letter-spacing: .5px;
+  text-align: center;
+}
+.beer-search-description{
+  font-family: "Montserrat";
+  font-size: 10px;
+  text-align: center;
+  line-height: 23px;
+}
+.drinkup-button-search{
+  font-family: "Montserrat";
+  color: rgba(102, 94, 87, 1);
+  border: 1px solid rgba(255, 170, 98, 1);
+  margin-left: 200px;
+  margin-top: 20px;
+}
+
+//End of search results

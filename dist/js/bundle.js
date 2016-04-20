@@ -20,7 +20,6 @@ var BeerDetail = React.createClass({displayName: "BeerDetail",
 
   handleDrinkUp(beer, e){
     e.preventDefault();
-    console.log();
     var favoriteBeer = new FavoriteBeer();
     var user = Parse.User.current();
     favoriteBeer.set('User', user);
@@ -86,7 +85,7 @@ var BeerDetail = React.createClass({displayName: "BeerDetail",
         ), 
         React.createElement("div", {className: "row"}, 
           React.createElement("div", {className: "col-md-12"}, 
-            React.createElement("button", {onClick: this.handleDrinkUp.bind(this, this.props.beer), className: "btn btn-default drinkup-button"}, this.state.label)
+            React.createElement("button", {onClick: this.handleDrinkUp.bind(this, this.props.beer), className: "btn btn-default drinkup-button-detail"}, this.state.label)
           )
         )
       )
@@ -245,10 +244,9 @@ var Header = require('./header.jsx');
 
 
 var PageLink= React.createClass({displayName: "PageLink",
-  getNewPage: function(e){
+  getNewPage: function(e, index){
     e.preventDefault();
     this.props.getNewPage(this.props.index);
-    console.log(this);
   },
   getNewBreweryPage: function(breweryPage){
     var searchedBeer = new SearchModel();
@@ -275,8 +273,20 @@ var PageLink= React.createClass({displayName: "PageLink",
 });
 
 var searchAndNav = React.createClass({displayName: "searchAndNav",
+  getInitialState: function(){
+    return {
+      collection: this.props.collection,
+      currentPage: this.props.currentPage
+    }
+  },
+  getNewPage: function(pageNumber){
+    var self = this;
+    this.state.collection.getPage(pageNumber).then(function(data){
+      self.setState({collection: self.state.collection, currentPage: pageNumber})
+    });
+  },
   render: function(){
-    var BreweryList = this.props.collection.map(function(model){
+    var BreweryList = this.state.collection.map(function(model){
     var image;
     if(!model.get("images")){
       image = "././images/pint.png";
@@ -298,9 +308,14 @@ var searchAndNav = React.createClass({displayName: "searchAndNav",
         )
       )
     });
+    var currentPage = this.state.currentPage;
+    var offset = currentPage > 5 ? 0 : -5;
     var pageLinks = [];
-    var numpages = 5;
-    for (var i=1; i<numpages; i++){
+    var previous = currentPage - 1;
+    var next = currentPage + 1;
+    var first = currentPage == 1;
+    var numpages = this.props.numberOfPages;
+    for (var i = currentPage  ; i < currentPage + 5 ; i++){
       pageLinks.push(
         React.createElement(PageLink, {
           index: i, 
@@ -309,8 +324,7 @@ var searchAndNav = React.createClass({displayName: "searchAndNav",
         )
       )
     }
-
-    return(
+    return (
       React.createElement("div", null, 
         React.createElement("div", {className: "container-fluid header"}, 
           React.createElement("div", {className: "row"}, 
@@ -328,14 +342,24 @@ var searchAndNav = React.createClass({displayName: "searchAndNav",
               React.createElement("nav", null, 
                 React.createElement("ul", {className: "pagination pagination-buttons"}, 
                   React.createElement("li", null, 
+                    React.createElement("a", {href: "#", "aria-label": "First"}, 
+                      React.createElement("span", {"aria-hidden": "true"}, "««")
+                    )
+                  ), 
+                  React.createElement("li", null, 
                     React.createElement("a", {href: "#", "aria-label": "Previous"}, 
-                      React.createElement("span", {"aria-hidden": "true"}, "«")
+                      React.createElement("span", {"aria-hidden": "true"}, "« Prev")
                     )
                   ), 
                   pageLinks, 
                   React.createElement("li", null, 
                     React.createElement("a", {href: "#", "aria-label": "Next"}, 
-                      React.createElement("span", {"aria-hidden": "true"}, "»")
+                      React.createElement("span", {"aria-hidden": "true"}, "Next »")
+                    )
+                  ), 
+                  React.createElement("li", null, 
+                    React.createElement("a", {href: "#", "aria-label": "Last"}, 
+                      React.createElement("span", {"aria-hidden": "true"}, "»»")
                     )
                   )
                 )
@@ -424,7 +448,7 @@ var LandingPageBody = React.createClass({displayName: "LandingPageBody",
       React.createElement("div", null, 
         React.createElement("div", {clasName: "container-fluid"}, 
           React.createElement("div", {className: "row"}, 
-            React.createElement("div", {className: "col-md-12"}, 
+            React.createElement("div", {className: "col-xs-12"}, 
               React.createElement("div", {className: "carousel-spot"}, 
                 React.createElement(Carousel, {className: "landing-page-carousel"}, 
                   React.createElement(Carousel.Item, {className: "logo-page"}, 
@@ -590,7 +614,7 @@ var ProfilePage = React.createClass({displayName: "ProfilePage",
     return {
       favorites: [],
       icon: ['icon'],
-      name: 'name',
+      nameDisplay: 'nameDisplay',
       description: 'description',
       abvMin: 'abvMin',
       file: '',
@@ -600,8 +624,8 @@ var ProfilePage = React.createClass({displayName: "ProfilePage",
 
   handleFavorite: function(){
     var user = Parse.User.current();
-
   },
+
   componentDidMount: function(){
     var BeerFavorite = Parse.Object.extend('FavoriteBeer');
     var self = this;
@@ -609,6 +633,7 @@ var ProfilePage = React.createClass({displayName: "ProfilePage",
       beerquery.equalTo("User", Parse.User.current());
       beerquery.find({
         success: function(results) {
+          console.log(results);
           self.setState({
             favorites: results
           });
@@ -640,9 +665,28 @@ var ProfilePage = React.createClass({displayName: "ProfilePage",
   handleSubmit: function(e){
     e.preventDefault();
   },
+
+  handleRemove:function(beer){
+    console.log(beer.id);
+    console.log('Clicked!');
+    var object = beer.id
+    var collection = Parse.Object.extend("FavoriteBeer");
+    var query = new Parse.Query(collection);
+    query.get(object, {
+      success: function(object){
+        object.destroy({});
+        console.log('model destroyed');
+      },
+      error: function(error) {
+        console.log(error);
+      }
+    })
+  },
+
   render: function(){
     var Username = Parse.User.current().getUsername();
     var Email = Parse.User.current().getEmail();
+    var self = this;
 
     var favoritesList;
     if (this.state.favorites.length == 0){
@@ -660,15 +704,23 @@ var ProfilePage = React.createClass({displayName: "ProfilePage",
             image = eachbeer.get("labels").icon
           }
         };
+
         var beer = eachbeer.attributes;
+        console.log(eachbeer.get('description'));
+        var beerID = eachbeer.id
         return(
-          React.createElement("div", {className: "favorite-beer-info"}, 
-            React.createElement("div", {className: "row"}, 
-              React.createElement("div", {className: "col-md-12"}, 
-                React.createElement("p", {className: "favorite-beer-name"}, beer.name), 
-                React.createElement("h6", {className: "favorite-beer-abvMin"}, beer.abvMin), 
-                React.createElement("p", {className: "favorite-beer-description"}, beer.description), 
-                React.createElement("img", {className: "favorite-brewery-icon", src: image, alt: "beer is good!!"})
+          React.createElement("div", {key: beerID}, 
+            React.createElement("div", {className: "favorite-beer-info"}, 
+              React.createElement("div", {className: "row"}, 
+                React.createElement("div", {className: "col-md-12"}, 
+                  React.createElement("button", {className: "remove-button", onClick: self.handleRemove.bind(self, eachbeer)}, 
+                    React.createElement("span", {className: "glyphicon glyphicon-remove", "aria-hidden": "true"})
+                  ), 
+                  React.createElement("p", {className: "favorite-beer-name"}, beer.name), 
+                  React.createElement("h6", {className: "favorite-beer-abvMin"}, "abv: ", beer.abvMin), 
+                  React.createElement("p", {className: "favorite-beer-description"}, beer.description), 
+                  React.createElement("img", {className: "favorite-brewery-icon", src: image, alt: "beer is good!!"})
+                )
               )
             )
           )
@@ -740,43 +792,142 @@ var ReactDOM = require('react-dom');
 var Backbone = require('backbone');
 var $ = require('jquery');
 var Header = require('./header.jsx');
+var FavoriteBeer = require('../models/models.js').FavoriteBeer;
 var Parse = require('parse');
 var Mixin = require('backbone-react-component');
 
+
+var PageLink= React.createClass({displayName: "PageLink",
+  getNewPage: function(e, index){
+    e.preventDefault();
+    this.props.getNewPage(this.props.index);
+  },
+  getNewBreweryPage: function(breweryPage){
+    var searchedBeer = new SearchModel();
+    searchedBeer.set('name', beer.get('name'));
+    Backbone.history.navigate('searchResults', {trigger: true});
+    searchedBeer.save(null, {
+      success: function(search){
+        console.log(search);
+      },
+      error: function(error){
+        console.log(error);
+      }
+    });
+  },
+  render: function(){
+    return (
+      React.createElement("li", null, 
+        React.createElement("a", {href: this.props.index, onClick: this.getNewPage}, 
+          this.props.index
+        )
+      )
+    );
+  }
+});
 var Search = React.createClass({displayName: "Search",
   mixins: [Backbone.React.Component.Mixin],
+  getInitialState(){
+    return {
+      label:'Drink Up!',
+      collection: this.props.collection,
+      currentPage: this.props.currentPage
+    }
+  },
+  getNewPage: function(pageNumber){
+    var self = this;
+    this.state.collection.getPage(pageNumber).then(function(data){
+      self.setState({collection: self.state.collection, currentPage: pageNumber})
+    });
+  },
+  handleFavorite: function(beerSearch){
+    var favoriteBeer = new FavoriteBeer();
+    var user = Parse.User.current();
+    favoriteBeer.set('User', user);
+    favoriteBeer.set('name', beerSearch.get('nameDisplay'));
+    favoriteBeer.set('description', beerSearch.get('description'));
+    favoriteBeer.set('icon', beerSearch.get('labels').icon);
+    favoriteBeer.set('abvMin', beerSearch.get('style').abvMin);
+    favoriteBeer.save(null, {
+      success: function(favorite){
+        console.log('favorite', favorite);
+      },
+      error: function(error){
+        console.log(error);
+      }
+    });
+    this.setState({label: 'On Your Drink List'});
+  },
+
   render: function(){
-    console.log(this.props.collection);
+    var self = this;
     var BrewSearchList = this.props.collection.map(function(beerSearch){
       var name;
-      if(!beerSearch.get("style")){
+      if(!beerSearch.get("nameDisplay")){
         name = "";
-      }else{
-        if (!beerSearch.get("style").name){
-          name = "";
-        }
-        else {
-          name = beerSearch.get("style").name
-        }
-      };
+      } else {
+          name = beerSearch.get("nameDisplay")
+      }
+
       var description;
-      if(!beerSearch.get("attributes")){
+      if(!beerSearch.get("description")){
         description = "";
+      } else {
+          description = beerSearch.get("description")
+      }
+
+      var abvMin;
+      if(!beerSearch.get("style")){
+        abvMin = "";
       }else{
-        if (!beerSearch.get("attributes").description){
-          description = "";
+        if (!beerSearch.get("style").abvMin){
+          abvMin = "";
         }
         else {
-          description = beerSearch.get("attributes").description
+          abvMin = beerSearch.get("style").abvMin
         }
       };
+      var icon;
+      if(!beerSearch.get("labels")){
+        icon = "././images/pint.png";
+      }else{
+        if (!beerSearch.get("labels").icon){
+          icon = "././images/pint.png";
+        }
+        else {
+          icon = beerSearch.get("labels").icon
+        }
+      };
+      console.log(beerSearch);
       return (
         React.createElement("div", {key: beerSearch.id}, 
-          description, 
-          name
+          React.createElement("div", {className: "beer-search-info"}, 
+            React.createElement("div", {className: "col-md-6 searched-beer"}, 
+              React.createElement("img", {className: "beer-search-label", src: icon, alt: "beer is good!!"}), 
+              React.createElement("h1", {className: "beer-search-name"}, name), 
+              React.createElement("h6", {className: "beer-search-abv"}, "abv: ", abvMin), 
+              React.createElement("p", {className: "beer-search-description"}, description), 
+              React.createElement("button", {className: "btn btn-default drinkup-button-search", onClick: self.handleFavorite.bind(self, beerSearch)}, self.state.label)
+            )
+          )
         )
-      ) ;
+      );
     });
+    var currentPage = this.state.currentPage;
+    var offset = currentPage > 5 ? 0 : -5;
+    var pageLinks = [];
+    var previous = currentPage - 1;
+    var next = currentPage + 1;
+    var first = currentPage == 1;
+    for (var i = currentPage  ; i < currentPage + 5 ; i++){
+      pageLinks.push(
+        React.createElement(PageLink, {
+          index: i, 
+          key: i, 
+          getNewPage: this.getNewPage}
+        )
+      )
+    }
     return (
       React.createElement("div", null, 
         React.createElement("div", {className: "container-fluid header"}, 
@@ -786,9 +937,40 @@ var Search = React.createClass({displayName: "Search",
             )
           )
         ), 
-        React.createElement("div", {className: "row"}, 
-          React.createElement("div", {className: "col-md-4"}, 
-            BrewSearchList
+        React.createElement("div", {className: "brew-search-background"}, 
+          React.createElement("div", {className: "container brew-search-container"}, 
+            React.createElement("div", {className: "row"}, 
+              React.createElement("div", {className: "col-md-12 brew-search-container"}, 
+                BrewSearchList
+              )
+            ), 
+            React.createElement("div", {className: "row"}, 
+              React.createElement("nav", null, 
+                React.createElement("ul", {className: "pagination pagination-buttons"}, 
+                  React.createElement("li", null, 
+                    React.createElement("a", {href: "#", "aria-label": "First"}, 
+                      React.createElement("span", {"aria-hidden": "true"}, "««")
+                    )
+                  ), 
+                  React.createElement("li", null, 
+                    React.createElement("a", {href: "#", "aria-label": "Previous"}, 
+                      React.createElement("span", {"aria-hidden": "true"}, "« Prev")
+                    )
+                  ), 
+                  pageLinks, 
+                  React.createElement("li", null, 
+                    React.createElement("a", {href: "#", "aria-label": "Next"}, 
+                      React.createElement("span", {"aria-hidden": "true"}, "Next »")
+                    )
+                  ), 
+                  React.createElement("li", null, 
+                    React.createElement("a", {href: "#", "aria-label": "Last"}, 
+                      React.createElement("span", {"aria-hidden": "true"}, "»»")
+                    )
+                  )
+                )
+              )
+            )
           )
         )
       )
@@ -798,7 +980,7 @@ var Search = React.createClass({displayName: "Search",
 
 module.exports = Search;
 
-},{"./header.jsx":3,"backbone":30,"backbone-react-component":29,"jquery":163,"parse":234,"react":524,"react-dom":368,"underscore":528}],8:[function(require,module,exports){
+},{"../models/models.js":9,"./header.jsx":3,"backbone":30,"backbone-react-component":29,"jquery":163,"parse":234,"react":524,"react-dom":368,"underscore":528}],8:[function(require,module,exports){
 "use strict";
 var Backbone = require('backbone');
 var $ = require('jquery');
@@ -827,8 +1009,9 @@ var Host = 'http://localhost:3000';
 //   }
 // });
 var FavoriteBeer = Parse.Object.extend('FavoriteBeer', {
-
 });
+
+
 
 var User = Parse.Object.extend('User');
 var UserCollection = Backbone.Collection.extend({
@@ -838,6 +1021,8 @@ var UserCollection = Backbone.Collection.extend({
     return data;
   }
 });
+
+
 
 var BeerCollection = Backbone.Collection.extend({
   urlRoot: Host + '/brewery/',
@@ -853,13 +1038,13 @@ var BeerCollection = Backbone.Collection.extend({
 });
 
 
+
 var BreweryModel = Backbone.Model.extend({
   urlRoot: Host + '/brewery/',
   parse: function(data){
     return data.data;
   }
 });
-
 var BreweryCollection = Backbone.Collection.extend({
   model: Backbone.Model.extend({}),
   url: function(){
@@ -868,7 +1053,7 @@ var BreweryCollection = Backbone.Collection.extend({
   },
   getPage: function(pageNum){
     this.pageNum = pageNum;
-    this.fetch().then(function(data){
+    return this.fetch().then(function(data){
       console.log(data);
     }, function(error){
       console.log(error);
@@ -883,13 +1068,15 @@ var BreweryCollection = Backbone.Collection.extend({
   }
 });
 
+
+
+
 var SearchModel = Backbone.Model.extend({
   url: Host + '/search/',
   parse: function(data){
     return data.data;
   }
 });
-
 var SearchCollection = Backbone.Collection.extend({
   model: Backbone.Model.extend({}),
   initialize: function(something, opts){
@@ -900,8 +1087,8 @@ var SearchCollection = Backbone.Collection.extend({
     var searchUrl = `${Host}/search/?q=${searchedItem}`;
     return searchUrl;
   },
-  getNewBreweryPage: function(breweryPage){
-    this.breweryPage = breweryPage;
+  getPage: function(pageNum){
+    this.pageNum = pageNum;
     this.fetch().then(function(data){
       console.log(data);
     }, function(error){
@@ -973,9 +1160,9 @@ var LoginRouter = Backbone.Router.extend({
     ReactDOM.unmountComponentAtNode(appContainer);
     apiHomePage();
     var breweries = new BreweryCollection();
-    breweries.fetch().then(function(){
+    breweries.fetch().then(function(breweryResult){
       ReactDOM.render(
-        React.createElement(HomePage, {collection: breweries}), document.getElementById('app')
+        React.createElement(HomePage, {collection: breweries, numberOfPages: breweryResult.numberOfPages, currentPage: breweryResult.currentPage}), document.getElementById('app')
       );
     });
   },

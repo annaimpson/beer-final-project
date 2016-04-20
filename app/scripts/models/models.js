@@ -13,8 +13,9 @@ var Host = 'http://localhost:3000';
 //   }
 // });
 var FavoriteBeer = Parse.Object.extend('FavoriteBeer', {
-
 });
+
+
 
 var User = Parse.Object.extend('User');
 var UserCollection = Backbone.Collection.extend({
@@ -24,6 +25,8 @@ var UserCollection = Backbone.Collection.extend({
     return data;
   }
 });
+
+
 
 var BeerCollection = Backbone.Collection.extend({
   urlRoot: Host + '/brewery/',
@@ -39,13 +42,13 @@ var BeerCollection = Backbone.Collection.extend({
 });
 
 
+
 var BreweryModel = Backbone.Model.extend({
   urlRoot: Host + '/brewery/',
   parse: function(data){
     return data.data;
   }
 });
-
 var BreweryCollection = Backbone.Collection.extend({
   model: Backbone.Model.extend({}),
   url: function(){
@@ -54,7 +57,7 @@ var BreweryCollection = Backbone.Collection.extend({
   },
   getPage: function(pageNum){
     this.pageNum = pageNum;
-    this.fetch().then(function(data){
+    return this.fetch().then(function(data){
       console.log(data);
     }, function(error){
       console.log(error);
@@ -69,13 +72,15 @@ var BreweryCollection = Backbone.Collection.extend({
   }
 });
 
+
+
+
 var SearchModel = Backbone.Model.extend({
   url: Host + '/search/',
   parse: function(data){
     return data.data;
   }
 });
-
 var SearchCollection = Backbone.Collection.extend({
   model: Backbone.Model.extend({}),
   initialize: function(something, opts){
@@ -86,8 +91,8 @@ var SearchCollection = Backbone.Collection.extend({
     var searchUrl = `${Host}/search/?q=${searchedItem}`;
     return searchUrl;
   },
-  getNewBreweryPage: function(breweryPage){
-    this.breweryPage = breweryPage;
+  getPage: function(pageNum){
+    this.pageNum = pageNum;
     this.fetch().then(function(data){
       console.log(data);
     }, function(error){
