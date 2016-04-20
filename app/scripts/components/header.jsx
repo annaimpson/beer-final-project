@@ -62,9 +62,9 @@ var Header = React.createClass({
           </div>
         </div>
         <div className="nav-toggle" style={{"display": "none"}}>
-            <button onClick={this.handleProfile} className="nav-button1"><h4 className="profile-toggle">Profile</h4></button>
-            <button onClick={this.handleHomePage} className="nav-button2"><h4 className="home-toggle">Home Page</h4></button>
-            <button onClick={this.handleLogout} className="nav-button4"><h4 className="logout-toggle">Logout</h4></button>
+          <a className="nav-button1" onClick={this.handleProfile} href={"#profile"}><h4 className="profile-toggle">Profile</h4></a>
+          <a className="nav-button1" onClick={this.handleHomePage} href={"#homePage"}><h4 className="home-toggle">Home Page</h4></a>
+          <a className="nav-button1" onClick={this.handleLogout} href={"#"}><h4 className="logout-toggle">Logout</h4></a>
         </div>
       </div>
     );

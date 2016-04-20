@@ -13,12 +13,12 @@ var ProfilePage = React.createClass({
   getInitialState: function(){
     return {
       favorites: [],
-      icon: ['icon'],
+      beerLabel: 'beerLabel',
       nameDisplay: 'nameDisplay',
       description: 'description',
       abvMin: 'abvMin',
       file: '',
-      images: null,
+      images: null
     };
   },
 
@@ -51,26 +51,23 @@ var ProfilePage = React.createClass({
   handleUploadProfilePicture: function(e){
     var self = this;
     var file = e.target.files[0];
-    this.setState({'Images': file});
-    console.log('file', file);
     var name = file.name;
+
     var parseFile = new Parse.File(name, file);
     parseFile.save().then(function(result){
+      self.setState({images: result._url});
       var user = Parse.User.current();
       user.set('Images', result);
       user.save();
-    });
-  },
 
-  handleSubmit: function(e){
-    e.preventDefault();
+    })
   },
 
   handleRemove:function(beer){
-    console.log(beer.id);
-    console.log('Clicked!');
+    var self = this;
     var object = beer.id
     var collection = Parse.Object.extend("FavoriteBeer");
+
     var query = new Parse.Query(collection);
     query.get(object, {
       success: function(object){
@@ -106,7 +103,6 @@ var ProfilePage = React.createClass({
         };
 
         var beer = eachbeer.attributes;
-        console.log(eachbeer.get('description'));
         var beerID = eachbeer.id
         return(
           <div key={beerID}>
@@ -143,7 +139,6 @@ var ProfilePage = React.createClass({
               <div className="picture">
                 <img className="profile-pic" src={this.state.images} alt=""/>
                   <input type="file" onChange={this.handleUploadProfilePicture} className="btn btn-default add-button"/>
-                  <button type="button" onClick={this.handleSubmit} type="submit" className="btn btn-default submit-picture-button"><a href="#createproduct">Submit</a></button>
               </div>
             </div>
             <div className="col-md-6">

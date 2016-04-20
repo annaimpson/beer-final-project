@@ -22,9 +22,31 @@ var BeerDetail = React.createClass({
     var user = Parse.User.current();
     favoriteBeer.set('User', user);
     favoriteBeer.set('name', beer.get('name'));
-    favoriteBeer.set('description', beer.get('style').description);
-    favoriteBeer.set('icon', beer.get('labels').icon);
-    favoriteBeer.set('abvMin', beer.get('style').abvMin);
+
+    if(!beer.get('style')){
+      favoriteBeer.set('description', '');
+    } else if(!beer.get('style').description){
+      favoriteBeer.set('description', '');
+    } else{
+      favoriteBeer.set('description', beer.get('style').description);
+    };
+
+    if(!beer.get('style')){
+      favoriteBeer.set('abvMin', '');
+    } else if(!beer.get('style').abvMin){
+      favoriteBeer.set('abvMin', '');
+    } else{
+      favoriteBeer.set('abvMin', beer.get('style').abvMin);
+    };
+
+    if(!beer.get('labels')){
+      favoriteBeer.set('icon', '');
+    } else if(!beer.get('labels').icon){
+      favoriteBeer.set('icon', '');
+    } else{
+      favoriteBeer.set('icon', beer.get('labels').icon);
+    };
+
     favoriteBeer.save(null, {
       success: function(favorite){
         console.log(favorite);

@@ -24,9 +24,31 @@ var BeerDetail = React.createClass({displayName: "BeerDetail",
     var user = Parse.User.current();
     favoriteBeer.set('User', user);
     favoriteBeer.set('name', beer.get('name'));
-    favoriteBeer.set('description', beer.get('style').description);
-    favoriteBeer.set('icon', beer.get('labels').icon);
-    favoriteBeer.set('abvMin', beer.get('style').abvMin);
+
+    if(!beer.get('style')){
+      favoriteBeer.set('description', '');
+    } else if(!beer.get('style').description){
+      favoriteBeer.set('description', '');
+    } else{
+      favoriteBeer.set('description', beer.get('style').description);
+    };
+
+    if(!beer.get('style')){
+      favoriteBeer.set('abvMin', '');
+    } else if(!beer.get('style').abvMin){
+      favoriteBeer.set('abvMin', '');
+    } else{
+      favoriteBeer.set('abvMin', beer.get('style').abvMin);
+    };
+
+    if(!beer.get('labels')){
+      favoriteBeer.set('icon', '');
+    } else if(!beer.get('labels').icon){
+      favoriteBeer.set('icon', '');
+    } else{
+      favoriteBeer.set('icon', beer.get('labels').icon);
+    };
+
     favoriteBeer.save(null, {
       success: function(favorite){
         console.log(favorite);
@@ -221,9 +243,9 @@ var Header = React.createClass({displayName: "Header",
           )
         ), 
         React.createElement("div", {className: "nav-toggle", style: {"display": "none"}}, 
-            React.createElement("button", {onClick: this.handleProfile, className: "nav-button1"}, React.createElement("h4", {className: "profile-toggle"}, "Profile")), 
-            React.createElement("button", {onClick: this.handleHomePage, className: "nav-button2"}, React.createElement("h4", {className: "home-toggle"}, "Home Page")), 
-            React.createElement("button", {onClick: this.handleLogout, className: "nav-button4"}, React.createElement("h4", {className: "logout-toggle"}, "Logout"))
+          React.createElement("a", {className: "nav-button1", onClick: this.handleProfile, href: "#profile"}, React.createElement("h4", {className: "profile-toggle"}, "Profile")), 
+          React.createElement("a", {className: "nav-button1", onClick: this.handleHomePage, href: "#homePage"}, React.createElement("h4", {className: "home-toggle"}, "Home Page")), 
+          React.createElement("a", {className: "nav-button1", onClick: this.handleLogout, href: "#"}, React.createElement("h4", {className: "logout-toggle"}, "Logout"))
         )
       )
     );
@@ -613,12 +635,12 @@ var ProfilePage = React.createClass({displayName: "ProfilePage",
   getInitialState: function(){
     return {
       favorites: [],
-      icon: ['icon'],
+      beerLabel: 'beerLabel',
       nameDisplay: 'nameDisplay',
       description: 'description',
       abvMin: 'abvMin',
       file: '',
-      images: null,
+      images: null
     };
   },
 
@@ -651,26 +673,23 @@ var ProfilePage = React.createClass({displayName: "ProfilePage",
   handleUploadProfilePicture: function(e){
     var self = this;
     var file = e.target.files[0];
-    this.setState({'Images': file});
-    console.log('file', file);
     var name = file.name;
+
     var parseFile = new Parse.File(name, file);
     parseFile.save().then(function(result){
+      self.setState({images: result._url});
       var user = Parse.User.current();
       user.set('Images', result);
       user.save();
-    });
-  },
 
-  handleSubmit: function(e){
-    e.preventDefault();
+    })
   },
 
   handleRemove:function(beer){
-    console.log(beer.id);
-    console.log('Clicked!');
+    var self = this;
     var object = beer.id
     var collection = Parse.Object.extend("FavoriteBeer");
+
     var query = new Parse.Query(collection);
     query.get(object, {
       success: function(object){
@@ -706,7 +725,6 @@ var ProfilePage = React.createClass({displayName: "ProfilePage",
         };
 
         var beer = eachbeer.attributes;
-        console.log(eachbeer.get('description'));
         var beerID = eachbeer.id
         return(
           React.createElement("div", {key: beerID}, 
@@ -742,8 +760,7 @@ var ProfilePage = React.createClass({displayName: "ProfilePage",
             React.createElement("div", {className: "col-md-6"}, 
               React.createElement("div", {className: "picture"}, 
                 React.createElement("img", {className: "profile-pic", src: this.state.images, alt: ""}), 
-                  React.createElement("input", {type: "file", onChange: this.handleUploadProfilePicture, className: "btn btn-default add-button"}), 
-                  React.createElement("button", {type: "button", onClick: this.handleSubmit, type: "submit", className: "btn btn-default submit-picture-button"}, React.createElement("a", {href: "#createproduct"}, "Submit"))
+                  React.createElement("input", {type: "file", onChange: this.handleUploadProfilePicture, className: "btn btn-default add-button"})
               )
             ), 
             React.createElement("div", {className: "col-md-6"}, 
