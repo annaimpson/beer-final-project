@@ -44,13 +44,13 @@ var Header = React.createClass({
           <div className="row">
             <div className="search-bar">
               <div className="row">
-                <div className="col-md-8">
+                <div className="col-xs-6 col-md-8">
                   <form>
                     <input id="searched-item" type="text" className="form-control search-input" placeholder="Search" value={this.filterText}/>
                   </form>
                   <button onClick={this.handleSearch} type="button" className="btn btn-primary submit-button-homepage">Submit</button>
                 </div>
-                <div className="col-md-4">
+                <div className="col-xs-6 col-md-4">
                   <div className="mainNavDropDown clearfix">
                     <button onClick={this.handleToggle} type="button" className="btn btn-default btn-lg nav-button">
                       <span className="glyphicon glyphicon-align-justify hamburger" aria-hidden="true"></span>

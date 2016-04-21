@@ -16,17 +16,18 @@ img {
   max-width: 100%;
 }
 // Begin the work on the landing page
-.landing-page-carousel{
-  height: 1000px;
-}
+
 .carousel-control.left,
 .carousel-control.right{
   background-image: none;
 }
 .logo-page{
   display: inline-block;
+  height: 700px;
   background-color: rgba(254, 222, 113, 1);
-  height: 1000px;
+}
+.goblet-icon-logo{
+  margin-left: 300px;
 }
 .goblet-icon-logo,
 .pint-icon-logo,
@@ -34,20 +35,18 @@ img {
 .pilsner-icon-logo,
 .landing-page-name{
   display: inline-block;
+  text-align: center;
   margin-top: 150px;
-  margin-left: 350px;
-  margin-right: -450px;
 }
 .landing-page-name{
   display: block;
-  margin-top: 30px;
-  margin-left: 740px;
   font-family: "Montserrat";
   font-weight: bold;
   text-transform: uppercase;
-  font-size: 75px;
+  font-size: 55px;
   letter-spacing: 10px;
   color: rgba(102, 94, 86, 1);
+  margin-top: 25px;
 }
 .goblet-icon,
 .pilsner-icon,
@@ -56,8 +55,9 @@ img {
 .stange-icon,
 .tulip-icon,
 .weizen-icon{
-  margin-top: 200px;
-  margin-left: 440px;
+  text-align: center;
+  margin-left: 200px;
+  margin-top: 100px;
 }
 .goblet-title,
 .pilsner-title,
@@ -66,8 +66,9 @@ img {
 .stange-title,
 .tulip-title,
 .weizen-title{
-  margin-top: 320px;
+  margin-top: 200px;
   font-family: "Montserrat";
+  color: rgba(102, 94, 86, 1);
   font-weight: bold;
   text-transform: uppercase;
   font-size: 45px;
@@ -82,7 +83,7 @@ img {
 .weizen-detail{
   margin-top: 25px;
   font-family: "Montserrat";
-  font-size: 13px;
+  font-size: 10px;
   letter-spacing: .5px;
   width: 384px;
   line-height: 30px;
@@ -91,40 +92,38 @@ img {
 .pint-page,
 .stange-page,
 .weizen-page{
+  height: 700px;
   background-color: rgba(204, 200, 196, 1);
-  height: 1000px;
 }
 .pilsner-page{
+  height: 700px;
   background-color: rgba(198, 219, 139, 1);
-  height: 1000px;
 }
 .snifter-page{
+  height: 700px;
   background-color: rgba(255, 170, 98, 1);
-  height: 1000px;
 }
 .tulip-page{
+  height: 700px;
   background-color: rgba(255, 239, 182, 1);
-  height: 1000px;
 }
 .beer-info{
   text-align: center;
   margin-top: 100px;
 }
-.yeast{
-  margin-left: -11px;
-  margin-right: 126px;
-}
-.hops{
-  margin-right: 126px;
-}
+// .yeast{
+//   margin-left: -11px;
+//   margin-right: 126px;
+// }
+// .hops{
+//   margin-right: 126px;
+// }
 .yeast-photo,
 .hops-photo,
 .barley-photo{
-  display: inline-block;
   border: 1px solid rgba(102, 94, 87, 1);
   border-radius: 50%;
-  margin-right: -42px;
-  width: 200px;
+  width: 110px;
 }
 .yeast-title,
 .hops-title,
@@ -135,7 +134,6 @@ img {
   font-size: 15px;
   letter-spacing: 7px;
   margin-top: 40px;
-  margin-left: 53px;
   text-align: center;
 }
 .yeast-info,
@@ -143,12 +141,10 @@ img {
 .barley-info{
   line-height: 33px;
   margin-top: 40px;
-  margin-right: -53px;
   margin-bottom: 75px;
-  font-size: 14px;
+  font-size: 10px;
   font-family: "Montserrat";
   letter-spacing: .25px;
-  width: 334px;
 }
 .users{
   margin-top: 100px;
@@ -163,35 +159,40 @@ img {
   margin-top: 100px;
   font-family: "Montserrat";
   font-weight: bold;
-  font-size: 25px;
+  font-size: 20px;
   color: rgba(102, 94, 87, 1);
   letter-spacing: 5px;
 }
 .signin-username{
   margin-bottom: 20px;
-  width: 300px;
-  height: 45px;
+  width: 250px;
+  height: 25px;
 }
 .signin-password{
-  width: 300px;
-  height: 45px;
+  width: 250px;
+  height: 25px;
 }
 .signin-button,
 .submit-button{
+  width: 55px;
   margin-top: 20px;
   margin-bottom: 200px;
+  border: none;
+  font-family: "Montserrat";
+  font-size: 9px;
+  color: rgba(102, 94, 87, 1);
 }
 .signup-name,
 .signup-email{
   margin-bottom: 20px;
   width: 200px;
-  height: 45px;
+  height: 25px;
   display: inline-block;
 }
 .signup-username,
 .signup-password{
   width: 200px;
-  height: 45px;
+  height: 25px;
   display: inline-block;
 }
 .signup-email,
@@ -210,8 +211,8 @@ img {
 .search-input{
   margin-top: 25px;
   margin-left: 110px;
-  width: 300px;
-  height: 50px;
+  width: 200px;
+  height: 30px;
   display: inline-block;
   border: none;
   background-color: rgba(255, 239, 182, 1);
@@ -223,8 +224,8 @@ img {
 }
 .submit-button-homepage{
   display: inline-block;
-  margin-left: 430px;
-  margin-top: -72px;
+  margin-left: 327px;
+  margin-top: -45px;
   background-color: rgba(204, 200, 196, 1);
   border: none;
   font-family: "Montserrat";
@@ -242,8 +243,8 @@ img {
 }
 .nav-toggle{
   background-color: rgba(204, 200, 196, 1);
-  width: 300px;
-  height: 1200px;
+  width: 200px;
+  height: 3000px;
   margin-top: -120px;
   position: fixed;
   right: 0;
@@ -257,7 +258,8 @@ img {
   font-weight: bold;
   text-transform: uppercase;
   border-bottom: 1px solid rgba(255, 170, 98, 1);
-  padding-bottom: 75px;
+  padding-bottom: 45px;
+  text-align: center;
 }
 .nav-button1,
 .nav-button2,
@@ -395,6 +397,9 @@ img {
 
 
 //Home page render of breweries
+.brewery-list-row{
+  text-align: center;
+}
 .home-page-background{
   background-color: rgba(255, 239, 182, 1);
   margin-top: -200px;
@@ -402,38 +407,31 @@ img {
 .latest-brewery-info{
   border-radius: 7px;
   background-color: rgba(255, 170, 98, 1);
-  padding-top: 15px;
-  padding-left: 15px;
-  padding-right: 15px;
-  padding-bottom: 25px;
-  width: 350px;
-  height: 300px;
+  width: 275px;
+  height: 200px;
   margin-right: 25px;
   margin-bottom: 17px;
   margin-top: 20px;
 }
 .brewery-icon{
   border-radius: 50%;
-  width: 100px;
-  height: 100px;
-  margin-top: 50px;
-  margin-bottom: 25px;
-  margin-left: 107px;
+  width: 75px;
+  height: 75px;
+  margin-top: 30px;
 }
 .latest-brewery-name{
   font-family: "Montserrat";
   font-weight: bold;
   color: rgba(102, 94, 87, 1);
-  font-size: 15px;
+  font-size: 12px;
   letter-spacing: 2px;
-  text-align: center;
+  margin-top: 15px;
 }
 .latest-brewery-established{
   font-family: "Montserrat";
-  font-size: 12px;
+  font-size: 10px;
   color: rgba(102, 94, 87, 1);
   letter-spacing: 1.5px;
-  text-align: center;
 }
 
 //End of home page render of breweries
