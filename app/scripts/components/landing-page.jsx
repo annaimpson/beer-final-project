@@ -37,6 +37,7 @@ var LandingPageBody = React.createClass({
         error: function(user, error) {
         }
       });
+      //doing stuff!
     console.log(Parse.User.current());
   },
 
