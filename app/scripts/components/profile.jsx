@@ -131,23 +131,25 @@ var ProfilePage = React.createClass({
     };
     return(
       <div>
+
+
         <div className="container-fluid header">
           <div className="row">
-            <div className="col-md-12">
+
               <Header/>
-            </div>
+
           </div>
         </div>
 
         <div className="container profile-body">
           <div className="row">
-            <div className="col-xs-12 col-md-6">
+            <div className="col-xs-12 col-md-offset-1 col-md-4">
               <div className="picture">
                 <img className="profile-pic" src={this.state.images} alt=""/>
                   <input type="file" onChange={this.handleUploadProfilePicture} className="btn btn-default add-button"/>
               </div>
             </div>
-            <div className="col-xs-12 col-md-6">
+            <div className="col-xs-12 col-md-offset-1 col-md-6">
               <div className="user-info">
                 <div className="username">{Username}</div>
                 <div className="email">{Email}</div>

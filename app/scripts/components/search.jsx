@@ -53,7 +53,8 @@ var Search = React.createClass({
       self.setState({collection: self.state.collection, currentPage: pageNumber})
     });
   },
-  handleFavorite: function(beerSearch){
+  handleFavorite: function(beerSearch, event){
+    event.target.innerHTML = 'On Your Drink List';
     console.log('beer Search', beerSearch);
     var favoriteBeer = new FavoriteBeer();
     var user = Parse.User.current();
@@ -76,7 +77,7 @@ var Search = React.createClass({
         console.log(error);
       }
     });
-    this.setState({label: 'On Your Drink List'});
+
   },
 
   render: function(){

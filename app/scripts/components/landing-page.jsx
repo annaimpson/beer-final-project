@@ -50,10 +50,12 @@ var LandingPageBody = React.createClass({
               <Carousel className="landing-page-carousel">
                 <Carousel.Item className="logo-page">
                   <div className="row landing-page-carousel">
-                    <img className="goblet-icon-logo" width={200} height={200} alt="" src="images/goblet.png"/>
-                    <img className="pint-icon-logo" width={200} height={200} alt="" src="images/pint.png"/>
-                    <img className="tulip-icon-logo" width={200} height={200} alt="" src="images/tulip.png"/>
-                    <img className="pilsner-icon-logo" width={200} height={200} alt="" src="images/pilsner.png"/>
+                    <div className="col-xs-12 col-md-offset-2 col-md-12">
+                      <img className="goblet-icon-logo" width={200} height={200} alt="" src="images/goblet.png"/>
+                      <img className="pint-icon-logo" width={200} height={200} alt="" src="images/pint.png"/>
+                      <img className="tulip-icon-logo" width={200} height={200} alt="" src="images/tulip.png"/>
+                      <img className="pilsner-icon-logo" width={200} height={200} alt="" src="images/pilsner.png"/>
+                    </div>
                   </div>
                   <div className="row">
                     <h2 className="landing-page-name">Drink Up</h2>
@@ -61,10 +63,10 @@ var LandingPageBody = React.createClass({
                 </Carousel.Item>
                 <Carousel.Item className="goblet-page">
                   <div className="row">
-                    <div className="col-xs-12 col-md-6">
+                    <div className="col-xs-4 col-xs-offset-1 col-md-offset-2 col-md-4">
                       <img className="goblet-icon" width={400} height={400} alt="" src="images/goblet.png"/>
                     </div>
-                    <div className="col-xs-12 col-md-6">
+                    <div className="col-xs-2 col-xs-pull-1 col-md-pull-1 col-md-4">
                       <h1 className="goblet-title">The Goblet</h1>
                       <p className="goblet-detail">The majestic goblet glasses are best used for enjoying Belgian ales, German bocks, and other big sipping beers.</p>
                     </div>
@@ -72,10 +74,10 @@ var LandingPageBody = React.createClass({
                 </Carousel.Item>
                 <Carousel.Item className="pilsner-page">
                   <div className="row">
-                    <div className=" col-xs-12 col-md-6">
+                    <div className=" col-xs-4 col-xs-offset-1 col-md-offset-2 col-md-4">
                       <img className="pilsner-icon" width={400} height={400} alt="" src="images/pilsner.png"/>
                     </div>
-                    <div className="col-xs-12 col-md-6">
+                    <div className="col-xs-2 col-xs-pull-1 col-md-pull-1 col-md-4">
                       <h1 className="pilsner-title">The Pilsner</h1>
                       <p className="pilsner-detail">As the name would suggest, the Pilsner glass is great for serving Pilsners — as well as pale lagers. Its tapered edge is meant to capture the carbonation and maintain a beer head.</p>
                     </div>
@@ -83,10 +85,10 @@ var LandingPageBody = React.createClass({
                 </Carousel.Item>
                 <Carousel.Item className="pint-page">
                   <div className="row">
-                    <div className="col-xs-12 col-md-6">
+                    <div className="col-xs-4 col-xs-offset-1 col-md-offset-2 col-md-4">
                       <img className="pint-icon" width={400} height={400} alt="" src="images/pint.png"/>
                     </div>
-                    <div className="col-xs-12 col-md-6">
+                    <div className="col-xs-2 col-xs-pull-1 col-md-pull-1 col-md-4">
                       <h1 className="pint-title">The Pint</h1>
                       <p className="pint-detail">When it doubt, go with the pint.The pint glass is what you can expect to be served a beer in at a bar. Pretty much every kind of beer has ended up in one of these glasses.</p>
                     </div>
@@ -94,10 +96,10 @@ var LandingPageBody = React.createClass({
                 </Carousel.Item>
                 <Carousel.Item className="snifter-page">
                   <div className="row">
-                    <div className="col-xs-12 col-md-6">
+                    <div className="col-xs-4 col-xs-offset-1 col-md-offset-2 col-md-4">
                       <img className="snifter-icon" width={400} height={400} alt="" src="images/snifter.png"/>
                     </div>
-                    <div className="col-xs-12 col-md-6">
+                    <div className="col-xs-2 col-xs-pull-1 col-md-pull-1 col-md-4">
                       <h1 className="snifter-title">The Snifter</h1>
                       <p className="snifter-detail">The snifter is typically used to serve brandy or cognac, but it’s also ideal for capturing the flavors of aromatic beers such as Imperial IPAs and Belgian ales.</p>
                     </div>
@@ -105,10 +107,10 @@ var LandingPageBody = React.createClass({
                 </Carousel.Item>
                 <Carousel.Item className="stange-page">
                   <div className="row">
-                    <div className="col-xs-12 col-md-6">
+                    <div className="col-xs-4 col-xs-offset-1 col-md-offset-2 col-md-4">
                       <img className="stange-icon" width={400} height={400} alt="" src="images/stange.png"/>
                     </div>
-                    <div className="col-xs-12 col-md-6">
+                    <div className="col-xs-2 col-xs-pull-1 col-md-pull-1 col-md-4">
                       <h1 className="stange-title">The Stange</h1>
                       <p className="stange-detail">This tall, narrow glass is best used to serve Kölsch, a specialty German beer brewed in Cologne.</p>
                     </div>
@@ -116,10 +118,10 @@ var LandingPageBody = React.createClass({
                 </Carousel.Item>
                 <Carousel.Item className="tulip-page">
                   <div className="row">
-                    <div className="col-xs-12 col-md-6">
+                    <div className="col-xs-4 col-xs-offset-1 col-md-offset-2 col-md-4">
                       <img className="tulip-icon" width={400} height={400} alt="" src="images/tulip.png"/>
                     </div>
-                    <div className="col-xs-12 col-md-6">
+                    <div className="col-xs-2 col-xs-pull-1 col-md-pull-1 col-md-4">
                       <h1 className="tulip-title">The Tulip</h1>
                       <p className="tulip-detail">A tulip glass is designed to trap flavors of Scottish ales, American double/imperial IPAs, and Belgian ales. It’s designed to allow for maximum head retention.</p>
                     </div>
@@ -127,10 +129,10 @@ var LandingPageBody = React.createClass({
                 </Carousel.Item>
                 <Carousel.Item className="weizen-page">
                   <div className="row">
-                    <div className="col-xs-12 col-md-6">
+                    <div className="col-xs-4 col-xs-offset-1 col-md-offset-2  col-md-4">
                       <img className="weizen-icon" width={400} height={400} alt="" src="images/weizen-03.png"/>
                     </div>
-                    <div className="col-xs-12 col-md-6">
+                    <div className="col-xs-2 col-xs-pull-1 col-md-pull-1 col-md-4">
                       <h1 className="weizen-title">The Weizen</h1>
                       <p className="weizen-detail">The weizen glass is best used to serve wheat beer. It’s a German glass that’s narrow at the bottom and wider at top.</p>
                     </div>

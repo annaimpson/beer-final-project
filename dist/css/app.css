@@ -5826,9 +5826,6 @@ img {
   height: 700px;
   background-color: #fede71; }
 
-.goblet-icon-logo {
-  margin-left: 300px; }
-
 .goblet-icon-logo,
 .pint-icon-logo,
 .tulip-icon-logo,
@@ -5856,7 +5853,6 @@ img {
 .tulip-icon,
 .weizen-icon {
   text-align: center;
-  margin-left: 200px;
   margin-top: 100px; }
 
 .goblet-title,
@@ -5998,7 +5994,6 @@ img {
 
 .search-input {
   margin-top: 25px;
-  margin-left: 110px;
   width: 200px;
   height: 30px;
   display: inline-block;
@@ -6021,7 +6016,6 @@ img {
 
 .nav-button {
   margin-top: 15px;
-  margin-right: 200px;
   color: #665e57;
   background-color: #ffefb6;
   display: inline-block;
@@ -6038,7 +6032,7 @@ img {
 .profile-toggle,
 .home-toggle,
 .logout-toggle {
-  margin-top: 50px;
+  margin-top: 100px;
   color: #665e57;
   font-family: "Montserrat";
   font-weight: bold;
@@ -6063,15 +6057,11 @@ img {
 .add-button {
   display: inline-block;
   margin-top: 25px;
-  margin-left: 55px;
+  margin-left: 50px;
   margin-bottom: 75px;
   width: 215px;
   height: 45px;
   border: none; }
-
-.submit-picture-button {
-  display: inline-block;
-  text-align: center; }
 
 .user-info {
   margin-top: 200px; }
@@ -6083,7 +6073,7 @@ img {
   color: #665e57;
   font-size: 70px;
   letter-spacing: 3px;
-  margin-left: 175px; }
+  text-align: center; }
 
 .email {
   font-family: "Montserrat";

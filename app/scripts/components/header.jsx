@@ -40,27 +40,23 @@ var Header = React.createClass({
   render: function(){
     return(
       <div>
-        <div className="container-fluid search-header">
-          <div className="row">
-            <div className="col-xs-3">
-              <form>
-                <input id="searched-item" type="text" className="form-control search-input" placeholder="Search" value={this.filterText}/>
-              </form>
-            </div>
-            <div className="col-xs-2">
-              <button onClick={this.handleSearch} type="button" className="btn btn-primary submit-button-homepage">Submit</button>
-            </div>
-            <div className="col-xs-7">
-              <div className="mainNavDropDown clearfix">
-                <button onClick={this.handleToggle} type="button" className="btn btn-default btn-lg nav-button">
-                  <span className="glyphicon glyphicon-align-justify hamburger" aria-hidden="true"></span>
-                </button>
-                <div className="nav-toggle" style={{"display": "none"}}>
-                  <a className="nav-button1" onClick={this.handleProfile} href={"#profile"}><h4 className="profile-toggle">Profile</h4></a>
-                  <a className="nav-button1" onClick={this.handleHomePage} href={"#homePage"}><h4 className="home-toggle">Home Page</h4></a>
-                  <a className="nav-button1" onClick={this.handleLogout} href={"#"}><h4 className="logout-toggle">Logout</h4></a>
-                </div>
-              </div>
+        <div className="col-xs-offset-1 col-xs-4 col-md-offset-2 col-md-4">
+          <form>
+            <input id="searched-item" type="text" className="form-control search-input" placeholder="Search" value={this.filterText}/>
+          </form>
+        </div>
+        <div className="col-xs-4 col-md-pull-2 col-md-4">
+          <button onClick={this.handleSearch} type="button" className="btn btn-primary submit-button-homepage">Submit</button>
+        </div>
+        <div className="col-xs-2 col-md-pull-2 col-md-2">
+          <div className="mainNavDropDown clearfix">
+            <button onClick={this.handleToggle} type="button" className="btn btn-default btn-lg nav-button">
+              <span className="glyphicon glyphicon-align-justify hamburger" aria-hidden="true"></span>
+            </button>
+            <div className="nav-toggle" style={{"display": "none"}}>
+              <a className="nav-button1" onClick={this.handleProfile} href={"#profile"}><h4 className="profile-toggle">Profile</h4></a>
+              <a className="nav-button1" onClick={this.handleHomePage} href={"#homePage"}><h4 className="home-toggle">Home Page</h4></a>
+              <a className="nav-button1" onClick={this.handleLogout} href={"#"}><h4 className="logout-toggle">Logout</h4></a>
             </div>
           </div>
         </div>
