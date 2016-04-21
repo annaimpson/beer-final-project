@@ -180,13 +180,13 @@ var BreweryDetail = React.createClass({displayName: "BreweryDetail",
         React.createElement("div", {className: "brewery-body"}, 
           React.createElement("div", {className: "container"}, 
             React.createElement("div", {className: "row"}, 
-              React.createElement("div", {className: "col-md-12"}, 
+              React.createElement("div", {className: "col-xs-6 col-sm-12 hide-md detail-brewery-info"}, 
                 React.createElement("div", {className: "brewery-info"}, 
                   React.createElement("div", {className: "brewery-name-page"}, this.props.model.get("name")), 
                   React.createElement("div", {className: "brewery-established-page"}, this.props.model.get("established")), 
-                  React.createElement("p", {className: "brewery-description-page"}, this.props.model.get("description"))
-                ), 
-                React.createElement("img", {className: "brewery-icon-detail-page", src: localStorage.getItem('image'), alt: "beer is good!!"})
+                  React.createElement("p", {className: "brewery-description-page"}, this.props.model.get("description")), 
+                  React.createElement("img", {className: "brewery-icon-detail-page", src: localStorage.getItem('image'), alt: "beer is good!!"})
+                )
               )
             )
           )
@@ -251,29 +251,27 @@ var Header = React.createClass({displayName: "Header",
       React.createElement("div", null, 
         React.createElement("div", {className: "container-fluid search-header"}, 
           React.createElement("div", {className: "row"}, 
-            React.createElement("div", {className: "search-bar"}, 
-              React.createElement("div", {className: "row"}, 
-                React.createElement("div", {className: "col-xs-6 col-md-8"}, 
-                  React.createElement("form", null, 
-                    React.createElement("input", {id: "searched-item", type: "text", className: "form-control search-input", placeholder: "Search", value: this.filterText})
-                  ), 
-                  React.createElement("button", {onClick: this.handleSearch, type: "button", className: "btn btn-primary submit-button-homepage"}, "Submit")
+            React.createElement("div", {className: "col-xs-3"}, 
+              React.createElement("form", null, 
+                React.createElement("input", {id: "searched-item", type: "text", className: "form-control search-input", placeholder: "Search", value: this.filterText})
+              )
+            ), 
+            React.createElement("div", {className: "col-xs-2"}, 
+              React.createElement("button", {onClick: this.handleSearch, type: "button", className: "btn btn-primary submit-button-homepage"}, "Submit")
+            ), 
+            React.createElement("div", {className: "col-xs-7"}, 
+              React.createElement("div", {className: "mainNavDropDown clearfix"}, 
+                React.createElement("button", {onClick: this.handleToggle, type: "button", className: "btn btn-default btn-lg nav-button"}, 
+                  React.createElement("span", {className: "glyphicon glyphicon-align-justify hamburger", "aria-hidden": "true"})
                 ), 
-                React.createElement("div", {className: "col-xs-6 col-md-4"}, 
-                  React.createElement("div", {className: "mainNavDropDown clearfix"}, 
-                    React.createElement("button", {onClick: this.handleToggle, type: "button", className: "btn btn-default btn-lg nav-button"}, 
-                      React.createElement("span", {className: "glyphicon glyphicon-align-justify hamburger", "aria-hidden": "true"})
-                    )
-                  )
+                React.createElement("div", {className: "nav-toggle", style: {"display": "none"}}, 
+                  React.createElement("a", {className: "nav-button1", onClick: this.handleProfile, href: "#profile"}, React.createElement("h4", {className: "profile-toggle"}, "Profile")), 
+                  React.createElement("a", {className: "nav-button1", onClick: this.handleHomePage, href: "#homePage"}, React.createElement("h4", {className: "home-toggle"}, "Home Page")), 
+                  React.createElement("a", {className: "nav-button1", onClick: this.handleLogout, href: "#"}, React.createElement("h4", {className: "logout-toggle"}, "Logout"))
                 )
               )
             )
           )
-        ), 
-        React.createElement("div", {className: "nav-toggle", style: {"display": "none"}}, 
-          React.createElement("a", {className: "nav-button1", onClick: this.handleProfile, href: "#profile"}, React.createElement("h4", {className: "profile-toggle"}, "Profile")), 
-          React.createElement("a", {className: "nav-button1", onClick: this.handleHomePage, href: "#homePage"}, React.createElement("h4", {className: "home-toggle"}, "Home Page")), 
-          React.createElement("a", {className: "nav-button1", onClick: this.handleLogout, href: "#"}, React.createElement("h4", {className: "logout-toggle"}, "Logout"))
         )
       )
     );
@@ -386,7 +384,9 @@ var searchAndNav = React.createClass({displayName: "searchAndNav",
         React.createElement("div", {className: "home-page-background"}, 
           React.createElement("div", {className: "container latest-breweries-list"}, 
             React.createElement("div", {className: "row brewery-list-row"}, 
-              BreweryList
+              React.createElement("div", {className: "col-xs-6 col-sm-12 hide-md"}, 
+                BreweryList
+              )
             ), 
             React.createElement("div", {className: "row"}, 
               React.createElement("nav", null, 
@@ -525,7 +525,7 @@ var LandingPageBody = React.createClass({displayName: "LandingPageBody",
                 ), 
                 React.createElement(Carousel.Item, {className: "pilsner-page"}, 
                   React.createElement("div", {className: "row"}, 
-                    React.createElement("div", {className: " col-xs-12col-md-6"}, 
+                    React.createElement("div", {className: " col-xs-12 col-md-6"}, 
                       React.createElement("img", {className: "pilsner-icon", width: 400, height: 400, alt: "", src: "images/pilsner.png"})
                     ), 
                     React.createElement("div", {className: "col-xs-12 col-md-6"}, 
@@ -793,13 +793,13 @@ var ProfilePage = React.createClass({displayName: "ProfilePage",
 
         React.createElement("div", {className: "container profile-body"}, 
           React.createElement("div", {className: "row"}, 
-            React.createElement("div", {className: "col-md-6"}, 
+            React.createElement("div", {className: "col-xs-12 col-md-6"}, 
               React.createElement("div", {className: "picture"}, 
                 React.createElement("img", {className: "profile-pic", src: this.state.images, alt: ""}), 
                   React.createElement("input", {type: "file", onChange: this.handleUploadProfilePicture, className: "btn btn-default add-button"})
               )
             ), 
-            React.createElement("div", {className: "col-md-6"}, 
+            React.createElement("div", {className: "col-xs-12 col-md-6"}, 
               React.createElement("div", {className: "user-info"}, 
                 React.createElement("div", {className: "username"}, Username), 
                 React.createElement("div", {className: "email"}, Email)
@@ -884,7 +884,8 @@ var Search = React.createClass({displayName: "Search",
     return {
       label:'Drink Up!',
       collection: this.props.collection,
-      currentPage: this.props.currentPage
+      currentPage: this.props.currentPage,
+      favorited: ""
     }
   },
   getNewPage: function(pageNumber){
@@ -894,12 +895,19 @@ var Search = React.createClass({displayName: "Search",
     });
   },
   handleFavorite: function(beerSearch){
+    console.log('beer Search', beerSearch);
     var favoriteBeer = new FavoriteBeer();
     var user = Parse.User.current();
     favoriteBeer.set('User', user);
     favoriteBeer.set('name', beerSearch.get('nameDisplay'));
     favoriteBeer.set('description', beerSearch.get('description'));
-    favoriteBeer.set('icon', beerSearch.get('labels').icon);
+    if(!beerSearch.get('labels')){
+      favoriteBeer.set('icon', '');
+    } else if(!beerSearch.get('labels').icon){
+      favoriteBeer.set('icon', '');
+    } else{
+      favoriteBeer.set('icon', beerSearch.get('labels').icon);
+    };
     favoriteBeer.set('abvMin', beerSearch.get('style').abvMin);
     favoriteBeer.save(null, {
       success: function(favorite){
@@ -951,16 +959,17 @@ var Search = React.createClass({displayName: "Search",
           icon = beerSearch.get("labels").icon
         }
       };
-      console.log(beerSearch);
       return (
         React.createElement("div", {key: beerSearch.id}, 
           React.createElement("div", {className: "beer-search-info"}, 
-            React.createElement("div", {className: "col-md-6 searched-beer"}, 
-              React.createElement("img", {className: "beer-search-label", src: icon, alt: "beer is good!!"}), 
-              React.createElement("h1", {className: "beer-search-name"}, name), 
-              React.createElement("h6", {className: "beer-search-abv"}, "abv: ", abvMin), 
-              React.createElement("p", {className: "beer-search-description"}, description), 
-              React.createElement("button", {className: "btn btn-default drinkup-button-search", onClick: self.handleFavorite.bind(self, beerSearch)}, self.state.label)
+            React.createElement("div", {className: "col-md-6"}, 
+              React.createElement("div", {className: "searched-beer"}, 
+                React.createElement("img", {className: "beer-search-label", src: icon, alt: "beer is good!!"}), 
+                React.createElement("h1", {className: "beer-search-name"}, name), 
+                React.createElement("h6", {className: "beer-search-abv"}, "abv: ", abvMin), 
+                React.createElement("p", {className: "beer-search-description"}, description), 
+                React.createElement("button", {className: "btn btn-default drinkup-button-search", onClick: self.handleFavorite.bind(self, beerSearch)}, self.state.label)
+              )
             )
           )
         )
@@ -993,13 +1002,15 @@ var Search = React.createClass({displayName: "Search",
         React.createElement("div", {className: "brew-search-background"}, 
           React.createElement("div", {className: "container brew-search-container"}, 
             React.createElement("div", {className: "row"}, 
-              React.createElement("div", {className: "col-md-12 brew-search-container"}, 
-                BrewSearchList
+              React.createElement("div", {className: "col-xs-12 col-md-12"}, 
+                React.createElement("div", {className: "row"}, 
+                  BrewSearchList
+                )
               )
             ), 
-            React.createElement("div", {className: "row"}, 
+            React.createElement("div", {className: "row pagination-buttons-search"}, 
               React.createElement("nav", null, 
-                React.createElement("ul", {className: "pagination pagination-buttons"}, 
+                React.createElement("ul", {className: "pagination"}, 
                   React.createElement("li", null, 
                     React.createElement("a", {href: "#", "aria-label": "First"}, 
                       React.createElement("span", {"aria-hidden": "true"}, "««")

@@ -53,13 +53,13 @@ var BreweryDetail = React.createClass({
         <div className="brewery-body">
           <div className="container">
             <div className="row">
-              <div className="col-md-12">
+              <div className="col-xs-6 col-sm-12 hide-md detail-brewery-info">
                 <div className="brewery-info">
                   <div className="brewery-name-page">{this.props.model.get("name")}</div>
                   <div className="brewery-established-page">{this.props.model.get("established")}</div>
                   <p className="brewery-description-page">{this.props.model.get("description")}</p>
+                  <img className="brewery-icon-detail-page" src={localStorage.getItem('image')} alt="beer is good!!"/>
                 </div>
-                <img className="brewery-icon-detail-page" src={localStorage.getItem('image')} alt="beer is good!!"/>
               </div>
             </div>
           </div>

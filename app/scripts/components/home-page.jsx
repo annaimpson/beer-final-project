@@ -101,7 +101,9 @@ var searchAndNav = React.createClass({
         <div className="home-page-background">
           <div className="container latest-breweries-list">
             <div className="row brewery-list-row">
-              {BreweryList}
+              <div className="col-xs-6 col-sm-12 hide-md">
+                {BreweryList}
+              </div>
             </div>
             <div className="row">
               <nav>

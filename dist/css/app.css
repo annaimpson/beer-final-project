@@ -5993,7 +5993,8 @@ img {
   margin-left: 20px; }
 
 .header {
-  background-color: #ffefb6; }
+  background-color: #ffefb6;
+  height: 75px; }
 
 .search-input {
   margin-top: 25px;
@@ -6011,8 +6012,7 @@ img {
 
 .submit-button-homepage {
   display: inline-block;
-  margin-left: 327px;
-  margin-top: -45px;
+  margin-top: 25px;
   background-color: #ccc8c4;
   border: none;
   font-family: "Montserrat";
@@ -6020,8 +6020,8 @@ img {
   text-transform: uppercase; }
 
 .nav-button {
-  margin-top: 30px;
-  margin-right: 300px;
+  margin-top: 15px;
+  margin-right: 200px;
   color: #665e57;
   background-color: #ffefb6;
   display: inline-block;
@@ -6030,16 +6030,15 @@ img {
 
 .nav-toggle {
   background-color: #ccc8c4;
-  width: 200px;
+  width: 13%;
   height: 3000px;
-  margin-top: -120px;
   position: fixed;
   right: 0; }
 
 .profile-toggle,
 .home-toggle,
 .logout-toggle {
-  margin-top: 150px;
+  margin-top: 50px;
   color: #665e57;
   font-family: "Montserrat";
   font-weight: bold;
@@ -6053,30 +6052,26 @@ img {
 .nav-button3,
 .nav-button4 {
   border: none;
-  background-color: #ccc8c4;
-  width: 200px;
-  margin-left: 60px; }
-
-.profile-body {
-  height: 900px; }
+  background-color: #ccc8c4; }
 
 .profile-pic {
   width: 300px;
   height: 300px;
   border-radius: 50%;
-  margin-top: 200px; }
+  margin-top: 100px; }
 
 .add-button {
   display: inline-block;
-  margin-top: 50px;
+  margin-top: 25px;
+  margin-left: 55px;
+  margin-bottom: 75px;
   width: 215px;
   height: 45px;
   border: none; }
 
 .submit-picture-button {
   display: inline-block;
-  margin-left: 230px;
-  margin-top: -76px; }
+  text-align: center; }
 
 .user-info {
   margin-top: 200px; }
@@ -6088,8 +6083,7 @@ img {
   color: #665e57;
   font-size: 70px;
   letter-spacing: 3px;
-  margin-left: 200px;
-  margin-top: 315px; }
+  margin-left: 175px; }
 
 .email {
   font-family: "Montserrat";
@@ -6097,7 +6091,7 @@ img {
   letter-spacing: 1px;
   line-height: 20px;
   color: #665e57;
-  margin-left: 200px; }
+  text-align: center; }
 
 .favorites-background {
   background-color: #fede71; }
@@ -6157,19 +6151,15 @@ img {
 .favoritesList {
   margin-bottom: 130px; }
 
-.latest-breweries-list {
-  margin-top: 100px; }
-
 .pagination-buttons {
-  margin-top: 50px;
-  margin-left: 380px; }
+  margin-top: 50px; }
 
-.brewery-list-row {
+.latest-breweries-list {
+  width: 70%;
   text-align: center; }
 
 .home-page-background {
-  background-color: #ffefb6;
-  margin-top: -200px; }
+  background-color: #ffefb6; }
 
 .latest-brewery-info {
   border-radius: 7px;
@@ -6200,15 +6190,19 @@ img {
   color: #665e57;
   letter-spacing: 1.5px; }
 
+.detail-brewery-info {
+  width: 95%;
+  text-align: center; }
+
 .brewery-icon-detail-page {
   width: 80px;
   height: 80px;
-  margin-top: -600px;
-  margin-left: 520px; }
+  text-align: center;
+  margin-bottom: 100px; }
 
 .brewery-info {
   margin-top: 200px;
-  margin-bottom: 400px; }
+  text-align: center; }
 
 .brewery-name-page {
   font-size: 50px;
@@ -6294,33 +6288,28 @@ img {
   margin-bottom: 30px;
   border: 1px solid #ffaa62; }
 
+.brew-search-container {
+  width: 80%;
+  text-align: center; }
+
 .brew-search-background {
-  background-color: #c6db8b;
-  margin-top: -100px; }
+  background-color: #c6db8b; }
 
 .searched-beer {
   display: inline-block;
   background-color: white;
   border-radius: 7px;
-  width: 520px;
-  height: 500px;
-  padding-top: 15px;
-  padding-left: 15px;
-  padding-right: 15px;
-  padding-bottom: 25px;
-  margin-right: 25px;
-  margin-bottom: 17px;
-  margin-top: 20px; }
+  width: 75%;
+  height: 540px;
+  margin-top: 110px; }
 
 .brew-search-container {
-  background-color: #c6db8b;
-  margin-top: 100px; }
+  background-color: #c6db8b; }
 
 .beer-search-label {
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  margin-left: 201px;
   margin-top: 33px; }
 
 .beer-search-name {
@@ -6343,13 +6332,17 @@ img {
   font-family: "Montserrat";
   font-size: 10px;
   text-align: center;
-  line-height: 23px; }
+  line-height: 23px;
+  padding-left: 15px;
+  padding-right: 15px; }
 
 .drinkup-button-search {
   font-family: "Montserrat";
   color: #665e57;
   border: 1px solid #ffaa62;
-  margin-left: 200px;
   margin-top: 20px; }
+
+.pagination-buttons-search {
+  text-align: center; }
 
 /*# sourceMappingURL=app.css.map */

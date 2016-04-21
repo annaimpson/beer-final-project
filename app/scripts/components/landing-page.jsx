@@ -72,7 +72,7 @@ var LandingPageBody = React.createClass({
                 </Carousel.Item>
                 <Carousel.Item className="pilsner-page">
                   <div className="row">
-                    <div className=" col-xs-12col-md-6">
+                    <div className=" col-xs-12 col-md-6">
                       <img className="pilsner-icon" width={400} height={400} alt="" src="images/pilsner.png"/>
                     </div>
                     <div className="col-xs-12 col-md-6">

@@ -141,13 +141,13 @@ var ProfilePage = React.createClass({
 
         <div className="container profile-body">
           <div className="row">
-            <div className="col-md-6">
+            <div className="col-xs-12 col-md-6">
               <div className="picture">
                 <img className="profile-pic" src={this.state.images} alt=""/>
                   <input type="file" onChange={this.handleUploadProfilePicture} className="btn btn-default add-button"/>
               </div>
             </div>
-            <div className="col-md-6">
+            <div className="col-xs-12 col-md-6">
               <div className="user-info">
                 <div className="username">{Username}</div>
                 <div className="email">{Email}</div>

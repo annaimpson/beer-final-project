@@ -43,7 +43,8 @@ var Search = React.createClass({
     return {
       label:'Drink Up!',
       collection: this.props.collection,
-      currentPage: this.props.currentPage
+      currentPage: this.props.currentPage,
+      favorited: ""
     }
   },
   getNewPage: function(pageNumber){
@@ -53,12 +54,19 @@ var Search = React.createClass({
     });
   },
   handleFavorite: function(beerSearch){
+    console.log('beer Search', beerSearch);
     var favoriteBeer = new FavoriteBeer();
     var user = Parse.User.current();
     favoriteBeer.set('User', user);
     favoriteBeer.set('name', beerSearch.get('nameDisplay'));
     favoriteBeer.set('description', beerSearch.get('description'));
-    favoriteBeer.set('icon', beerSearch.get('labels').icon);
+    if(!beerSearch.get('labels')){
+      favoriteBeer.set('icon', '');
+    } else if(!beerSearch.get('labels').icon){
+      favoriteBeer.set('icon', '');
+    } else{
+      favoriteBeer.set('icon', beerSearch.get('labels').icon);
+    };
     favoriteBeer.set('abvMin', beerSearch.get('style').abvMin);
     favoriteBeer.save(null, {
       success: function(favorite){
@@ -110,16 +118,17 @@ var Search = React.createClass({
           icon = beerSearch.get("labels").icon
         }
       };
-      console.log(beerSearch);
       return (
         <div key={beerSearch.id}>
           <div className="beer-search-info">
-            <div className="col-md-6 searched-beer">
-              <img className="beer-search-label" src={icon} alt="beer is good!!"/>
-              <h1 className="beer-search-name">{name}</h1>
-              <h6 className="beer-search-abv">abv: {abvMin}</h6>
-              <p className="beer-search-description">{description}</p>
-              <button className="btn btn-default drinkup-button-search" onClick={self.handleFavorite.bind(self, beerSearch)}>{self.state.label}</button>
+            <div className="col-md-6">
+              <div className="searched-beer">
+                <img className="beer-search-label" src={icon} alt="beer is good!!"/>
+                <h1 className="beer-search-name">{name}</h1>
+                <h6 className="beer-search-abv">abv: {abvMin}</h6>
+                <p className="beer-search-description">{description}</p>
+                <button className="btn btn-default drinkup-button-search" onClick={self.handleFavorite.bind(self, beerSearch)}>{self.state.label}</button>
+              </div>
             </div>
           </div>
         </div>
@@ -152,13 +161,15 @@ var Search = React.createClass({
         <div className="brew-search-background">
           <div className="container brew-search-container">
             <div className="row">
-              <div className="col-md-12 brew-search-container">
-                {BrewSearchList}
+              <div className="col-xs-12 col-md-12">
+                <div className="row">
+                  {BrewSearchList}
+                </div>
               </div>
             </div>
-            <div className="row">
+            <div className="row pagination-buttons-search">
               <nav>
-                <ul className="pagination pagination-buttons">
+                <ul className="pagination">
                   <li>
                     <a href="#" aria-label="First">
                       <span aria-hidden="true">&laquo;&laquo;</span>
