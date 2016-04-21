@@ -253,13 +253,13 @@ var Header = React.createClass({displayName: "Header",
           React.createElement("div", {className: "row"}, 
             React.createElement("div", {className: "search-bar"}, 
               React.createElement("div", {className: "row"}, 
-                React.createElement("div", {className: "col-md-8"}, 
+                React.createElement("div", {className: "col-xs-6 col-md-8"}, 
                   React.createElement("form", null, 
                     React.createElement("input", {id: "searched-item", type: "text", className: "form-control search-input", placeholder: "Search", value: this.filterText})
                   ), 
                   React.createElement("button", {onClick: this.handleSearch, type: "button", className: "btn btn-primary submit-button-homepage"}, "Submit")
                 ), 
-                React.createElement("div", {className: "col-md-4"}, 
+                React.createElement("div", {className: "col-xs-6 col-md-4"}, 
                   React.createElement("div", {className: "mainNavDropDown clearfix"}, 
                     React.createElement("button", {onClick: this.handleToggle, type: "button", className: "btn btn-default btn-lg nav-button"}, 
                       React.createElement("span", {className: "glyphicon glyphicon-align-justify hamburger", "aria-hidden": "true"})
@@ -385,7 +385,7 @@ var searchAndNav = React.createClass({displayName: "searchAndNav",
         ), 
         React.createElement("div", {className: "home-page-background"}, 
           React.createElement("div", {className: "container latest-breweries-list"}, 
-            React.createElement("div", {className: "row"}, 
+            React.createElement("div", {className: "row brewery-list-row"}, 
               BreweryList
             ), 
             React.createElement("div", {className: "row"}, 
@@ -496,16 +496,28 @@ var LandingPageBody = React.createClass({displayName: "LandingPageBody",
   render: function(){
     return(
       React.createElement("div", null, 
+<<<<<<< HEAD
         React.createElement("div", {className: "row"}, 
+=======
+        React.createElement("div", {className: "row carousel-row"}, 
+>>>>>>> master
           React.createElement("div", {className: "col-xs-12"}, 
             React.createElement("div", {className: "carousel-spot"}, 
               React.createElement(Carousel, {className: "landing-page-carousel"}, 
                 React.createElement(Carousel.Item, {className: "logo-page"}, 
+<<<<<<< HEAD
                   React.createElement("div", {className: "row"}, 
                     React.createElement("img", {className: "goblet-icon-logo", width: 400, height: 400, alt: "", src: "images/goblet.png"}), 
                     React.createElement("img", {className: "pint-icon-logo", width: 400, height: 400, alt: "", src: "images/pint.png"}), 
                     React.createElement("img", {className: "tulip-icon-logo", width: 400, height: 400, alt: "", src: "images/tulip.png"}), 
                     React.createElement("img", {className: "pilsner-icon-logo", width: 400, height: 400, alt: "", src: "images/pilsner.png"})
+=======
+                  React.createElement("div", {className: "row landing-page-carousel"}, 
+                    React.createElement("img", {className: "goblet-icon-logo", width: 200, height: 200, alt: "", src: "images/goblet.png"}), 
+                    React.createElement("img", {className: "pint-icon-logo", width: 200, height: 200, alt: "", src: "images/pint.png"}), 
+                    React.createElement("img", {className: "tulip-icon-logo", width: 200, height: 200, alt: "", src: "images/tulip.png"}), 
+                    React.createElement("img", {className: "pilsner-icon-logo", width: 200, height: 200, alt: "", src: "images/pilsner.png"})
+>>>>>>> master
                   ), 
                   React.createElement("div", {className: "row"}, 
                     React.createElement("h2", {className: "landing-page-name"}, "Drink Up")
@@ -513,10 +525,17 @@ var LandingPageBody = React.createClass({displayName: "LandingPageBody",
                 ), 
                 React.createElement(Carousel.Item, {className: "goblet-page"}, 
                   React.createElement("div", {className: "row"}, 
+<<<<<<< HEAD
                     React.createElement("div", {className: "col-md-6"}, 
                       React.createElement("img", {className: "goblet-icon", width: 400, height: 400, alt: "", src: "images/goblet.png"})
                     ), 
                     React.createElement("div", {className: "col-md-6"}, 
+=======
+                    React.createElement("div", {className: "col-xs-12 col-md-6"}, 
+                      React.createElement("img", {className: "goblet-icon", width: 400, height: 400, alt: "", src: "images/goblet.png"})
+                    ), 
+                    React.createElement("div", {className: "col-xs-12 col-md-6"}, 
+>>>>>>> master
                       React.createElement("h1", {className: "goblet-title"}, "The Goblet"), 
                       React.createElement("p", {className: "goblet-detail"}, "The majestic goblet glasses are best used for enjoying Belgian ales, German bocks, and other big sipping beers.")
                     )
@@ -524,10 +543,17 @@ var LandingPageBody = React.createClass({displayName: "LandingPageBody",
                 ), 
                 React.createElement(Carousel.Item, {className: "pilsner-page"}, 
                   React.createElement("div", {className: "row"}, 
+<<<<<<< HEAD
                     React.createElement("div", {className: "col-md-6"}, 
                       React.createElement("img", {className: "pilsner-icon", width: 400, height: 400, alt: "", src: "images/pilsner.png"})
                     ), 
                     React.createElement("div", {className: "col-md-6"}, 
+=======
+                    React.createElement("div", {className: "col-xs-12 col-md-6"}, 
+                      React.createElement("img", {className: "pilsner-icon", width: 400, height: 400, alt: "", src: "images/pilsner.png"})
+                    ), 
+                    React.createElement("div", {className: "col-xs-12 col-md-6"}, 
+>>>>>>> master
                       React.createElement("h1", {className: "pilsner-title"}, "The Pilsner"), 
                       React.createElement("p", {className: "pilsner-detail"}, "As the name would suggest, the Pilsner glass is great for serving Pilsners — as well as pale lagers. Its tapered edge is meant to capture the carbonation and maintain a beer head.")
                     )
@@ -535,10 +561,17 @@ var LandingPageBody = React.createClass({displayName: "LandingPageBody",
                 ), 
                 React.createElement(Carousel.Item, {className: "pint-page"}, 
                   React.createElement("div", {className: "row"}, 
+<<<<<<< HEAD
                     React.createElement("div", {className: "col-md-6"}, 
                       React.createElement("img", {className: "pint-icon", width: 400, height: 400, alt: "", src: "images/pint.png"})
                     ), 
                     React.createElement("div", {className: "col-md-6"}, 
+=======
+                    React.createElement("div", {className: "col-xs-12 col-md-6"}, 
+                      React.createElement("img", {className: "pint-icon", width: 400, height: 400, alt: "", src: "images/pint.png"})
+                    ), 
+                    React.createElement("div", {className: "col-xs-12 col-md-6"}, 
+>>>>>>> master
                       React.createElement("h1", {className: "pint-title"}, "The Pint"), 
                       React.createElement("p", {className: "pint-detail"}, "When it doubt, go with the pint.The pint glass is what you can expect to be served a beer in at a bar. Pretty much every kind of beer has ended up in one of these glasses.")
                     )
@@ -546,10 +579,17 @@ var LandingPageBody = React.createClass({displayName: "LandingPageBody",
                 ), 
                 React.createElement(Carousel.Item, {className: "snifter-page"}, 
                   React.createElement("div", {className: "row"}, 
+<<<<<<< HEAD
                     React.createElement("div", {className: "col-md-6"}, 
                       React.createElement("img", {className: "snifter-icon", width: 400, height: 400, alt: "", src: "images/snifter.png"})
                     ), 
                     React.createElement("div", {className: "col-md-6"}, 
+=======
+                    React.createElement("div", {className: "col-xs-12 col-md-6"}, 
+                      React.createElement("img", {className: "snifter-icon", width: 400, height: 400, alt: "", src: "images/snifter.png"})
+                    ), 
+                    React.createElement("div", {className: "col-xs-12 col-md-6"}, 
+>>>>>>> master
                       React.createElement("h1", {className: "snifter-title"}, "The Snifter"), 
                       React.createElement("p", {className: "snifter-detail"}, "The snifter is typically used to serve brandy or cognac, but it’s also ideal for capturing the flavors of aromatic beers such as Imperial IPAs and Belgian ales.")
                     )
@@ -557,10 +597,17 @@ var LandingPageBody = React.createClass({displayName: "LandingPageBody",
                 ), 
                 React.createElement(Carousel.Item, {className: "stange-page"}, 
                   React.createElement("div", {className: "row"}, 
+<<<<<<< HEAD
                     React.createElement("div", {className: "col-md-6"}, 
                       React.createElement("img", {className: "stange-icon", width: 400, height: 400, alt: "", src: "images/stange.png"})
                     ), 
                     React.createElement("div", {className: "col-md-6"}, 
+=======
+                    React.createElement("div", {className: "col-xs-12 col-md-6"}, 
+                      React.createElement("img", {className: "stange-icon", width: 400, height: 400, alt: "", src: "images/stange.png"})
+                    ), 
+                    React.createElement("div", {className: "col-xs-12 col-md-6"}, 
+>>>>>>> master
                       React.createElement("h1", {className: "stange-title"}, "The Stange"), 
                       React.createElement("p", {className: "stange-detail"}, "This tall, narrow glass is best used to serve Kölsch, a specialty German beer brewed in Cologne.")
                     )
@@ -568,10 +615,17 @@ var LandingPageBody = React.createClass({displayName: "LandingPageBody",
                 ), 
                 React.createElement(Carousel.Item, {className: "tulip-page"}, 
                   React.createElement("div", {className: "row"}, 
+<<<<<<< HEAD
                     React.createElement("div", {className: "col-md-6"}, 
                       React.createElement("img", {className: "tulip-icon", width: 400, height: 400, alt: "", src: "images/tulip.png"})
                     ), 
                     React.createElement("div", {className: "col-md-6"}, 
+=======
+                    React.createElement("div", {className: "col-xs-12 col-md-6"}, 
+                      React.createElement("img", {className: "tulip-icon", width: 400, height: 400, alt: "", src: "images/tulip.png"})
+                    ), 
+                    React.createElement("div", {className: "col-xs-12 col-md-6"}, 
+>>>>>>> master
                       React.createElement("h1", {className: "tulip-title"}, "The Tulip"), 
                       React.createElement("p", {className: "tulip-detail"}, "A tulip glass is designed to trap flavors of Scottish ales, American double/imperial IPAs, and Belgian ales. It’s designed to allow for maximum head retention.")
                     )
@@ -579,10 +633,17 @@ var LandingPageBody = React.createClass({displayName: "LandingPageBody",
                 ), 
                 React.createElement(Carousel.Item, {className: "weizen-page"}, 
                   React.createElement("div", {className: "row"}, 
+<<<<<<< HEAD
                     React.createElement("div", {className: "col-md-6"}, 
                       React.createElement("img", {className: "weizen-icon", width: 400, height: 400, alt: "", src: "images/weizen-03.png"})
                     ), 
                     React.createElement("div", {className: "col-md-6"}, 
+=======
+                    React.createElement("div", {className: "col-xs-12 col-md-6"}, 
+                      React.createElement("img", {className: "weizen-icon", width: 400, height: 400, alt: "", src: "images/weizen-03.png"})
+                    ), 
+                    React.createElement("div", {className: "col-xs-12 col-md-6"}, 
+>>>>>>> master
                       React.createElement("h1", {className: "weizen-title"}, "The Weizen"), 
                       React.createElement("p", {className: "weizen-detail"}, "The weizen glass is best used to serve wheat beer. It’s a German glass that’s narrow at the bottom and wider at top.")
                     )
@@ -593,19 +654,20 @@ var LandingPageBody = React.createClass({displayName: "LandingPageBody",
           )
         ), 
 
+
         React.createElement("div", {className: "container beer-info"}, 
           React.createElement("div", {className: "row"}, 
-            React.createElement("div", {className: "col-md-3 yeast"}, 
+            React.createElement("div", {className: "col-xs-12 col-md-4 yeast"}, 
               React.createElement("img", {className: "yeast-photo", src: "images/yeast-11.png", alt: ""}), 
               React.createElement("h6", {className: "yeast-title"}, "Yeast"), 
               React.createElement("p", {className: "yeast-info"}, "Yeast is the magic ingredient of beer. Yeast eats at the sugars that were derived from the malt, and breaks them down into carbon dioxide and alcohol. This natural process is called fermentation and it is how all alcoholic liquor starts. Brewer’s yeasts can be divided into two main classes: ale yeast and lager yeast.")
             ), 
-            React.createElement("div", {className: "col-md-3 hops"}, 
+            React.createElement("div", {className: "col-xs-12 col-md-4 hops"}, 
               React.createElement("img", {className: "hops-photo", src: "images/hops.png", alt: ""}), 
               React.createElement("h6", {className: "hops-title"}, "Hops"), 
               React.createElement("p", {className: "hops-info"}, "Hops provide at least three benefits to beer; bitterness (flavor), aroma, and to a lesser extent, preservative qualities. Hops are used to impart a bitter flavor to the beer, which counteracts or balances the sweetness of the malted barley. The result is a well balanced product.")
             ), 
-            React.createElement("div", {className: "col-md-3 barley"}, 
+            React.createElement("div", {className: "col-xs-12 col-md-4 barley"}, 
               React.createElement("img", {className: "barley-photo", src: "images/barley.png", alt: ""}), 
               React.createElement("h6", {className: "barley-title"}, "Barley"), 
               React.createElement("p", {className: "barley-info"}, "Barley provides sugars that yeast will convert into carbon dioxide and alcohol. The standard barley used in making beer is pale malt, other types of barley are also used in the brewing process; we often refer to them as specialty grains. ")
@@ -627,10 +689,12 @@ var LandingPageBody = React.createClass({displayName: "LandingPageBody",
               React.createElement("div", {className: "col-md-6 signup"}, 
                 React.createElement("h1", {className: "signup-title"}, "Sign Up"), 
                 React.createElement("form", {id: "signup", className: "form-signup"}, 
-                  React.createElement("input", {id: "signup-name", type: "text", className: "form-control signup-name", placeholder: "name"}), 
-                  React.createElement("input", {id: "signup-email", type: "text", className: "form-control signup-email", placeholder: "email"}), 
-                  React.createElement("input", {id: "signup-username", type: "text", className: "form-control signup-username", placeholder: "username"}), 
-                  React.createElement("input", {id: "signup-password", type: "password", className: "form-control signup-password", placeholder: "password"})
+                  React.createElement("row", null, 
+                    React.createElement("input", {id: "signup-name", type: "text", className: "form-control signup-name", placeholder: "name"}), 
+                    React.createElement("input", {id: "signup-email", type: "text", className: "form-control signup-email", placeholder: "email"}), 
+                    React.createElement("input", {id: "signup-username", type: "text", className: "form-control signup-username", placeholder: "username"}), 
+                    React.createElement("input", {id: "signup-password", type: "password", className: "form-control signup-password", placeholder: "password"})
+                  )
                 ), 
                 React.createElement("button", {onClick: this.handleSignUp, type: "button", className: "btn btn-default submit-button"}, "Submit")
               )
