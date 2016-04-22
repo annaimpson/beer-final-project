@@ -5833,7 +5833,8 @@ img {
 .landing-page-name {
   display: inline-block;
   text-align: center;
-  margin-top: 150px; }
+  margin-top: 150px;
+  margin-left: 33px; }
 
 .landing-page-name {
   display: block;
@@ -5912,7 +5913,8 @@ img {
 .barley-photo {
   border: 1px solid #665e57;
   border-radius: 50%;
-  width: 110px; }
+  width: 110px;
+  margin-top: 30px; }
 
 .yeast-title,
 .hops-title,
